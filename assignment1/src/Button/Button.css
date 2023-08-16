@@ -1,0 +1,15 @@
+.button{
+    height: 50px;
+}
+.button>button{
+    height: 100%;
+    width: 30%;
+    border: 0;
+
+    border-radius: 3px;
+    background-color: #86e4e2;
+    color: white;
+    outline: 0;
+    font-size: 1rem;
+    font-weight: 900px;
+}
