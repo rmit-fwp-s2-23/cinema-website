@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./Login.css";
 import Button from "../Button/Button";
 import { verifyUser } from "../Account/Storage.js";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [errMessage, setErrMessage] = useState(null);
 
   function handleChange(event) {
