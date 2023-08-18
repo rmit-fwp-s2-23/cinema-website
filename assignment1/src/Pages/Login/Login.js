@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
 import Button from "../../components/nav/Button/Button";
-import { verifyUser } from "../../Account/Storage.js";
-// import { useNavigate } from "react-router-dom";
+import {verifyUser} from "../../Account/Storage.js";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
@@ -10,7 +10,7 @@ function Login() {
   const [errMessage, setErrMessage] = useState(null);
 
   function handleChange(event) {
-    const username = event.target.username;
+    const username = event.target.name;
     const value = event.target.value;
 
     const temp = { username: fields.username, password: fields.password };
@@ -21,7 +21,8 @@ function Login() {
   function handleSubmit(event) {
     event.preventDefault();
     if (verifyUser(fields.username, fields.password)) {
-      navigate("/");
+      // navigate("/");
+      alert("hi")
       return;
     }
 
