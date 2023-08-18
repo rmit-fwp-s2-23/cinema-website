@@ -1,5 +1,5 @@
 import "./MyProfile.css";
-import Button from "../Button/Button";
+import Button from "../../components/nav/Button/Button";
 
 function MyProfile(props) {
   return (
