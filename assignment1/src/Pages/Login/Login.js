@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Button from "../Button/Button";
-import { verifyUser } from "../Account/Storage.js";
+import Button from "../../components/nav/Button/Button";
+import { verifyUser } from "../../Account/Storage.js";
 // import { useNavigate } from "react-router-dom";
 
 function Login() {
