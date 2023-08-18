@@ -13,7 +13,7 @@ const Register = () => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [event.target.name]: event.target.value,
     }));
   };
 
