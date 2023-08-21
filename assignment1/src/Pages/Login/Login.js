@@ -3,7 +3,7 @@ import "./Login.css";
 import Button from "../../components/nav/Button/Button";
 import {verifyUser} from "../../Account/Storage.js";
 import { useNavigate } from "react-router-dom";
-
+import {getUser} from "../../Account/Storage.js";
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
   // const navigate = useNavigate();
@@ -22,7 +22,7 @@ function Login() {
     event.preventDefault();
     if (verifyUser(fields.username, fields.password)) {
       // navigate("/");
-      alert("hi")
+      alert({getUser})
       return;
     }
 

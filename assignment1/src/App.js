@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="" element={<Register />} />
           <Route path="login" element={<Login />} />
+          <Route path='myprofile' element={<MyProfile />} />
           {/* Add other routes here */}
         </Routes>
       </Router>
