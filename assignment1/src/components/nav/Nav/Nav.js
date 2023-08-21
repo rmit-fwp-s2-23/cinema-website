@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Nav.css'; // Import your CSS file
-import Home from '../../../Pages/Home/Home';
+import './Nav.css'; 
+
 
 const NavigationBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -19,9 +19,12 @@ const NavigationBar = () => {
           <div className={`line ${isMenuOpen ? 'open' : ''}`}></div>
         </div>
         <div className={`dropdown-content ${isMenuOpen ? 'open' : ''}`}>
-          <a href="#" className="dropdown-item">Home</a>
+          <a href="" className="dropdown-item">Home</a>
           <a href="#" className="dropdown-item">About</a>
           <a href="#" className="dropdown-item">Services</a>
+          <a href="login" className="dropdown-item">Login</a>
+          <a href="signup" className="dropdown-item">Sign Up</a>
+          
           {/* Add your dropdown content here */}
         </div>
       </div>
