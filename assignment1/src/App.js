@@ -5,9 +5,12 @@ import Register from "./Pages/register/Register";
 import Login from "./Pages/Login/Login";
 import MyProfile from './Pages/MyProfile/MyProfile';
 import Home from './Pages/Home/Home';
+
 function App() {
   return (
     <div className="App">
+     
+
       <Router>
         <Routes>
           <Route path="" element={<Home />} />
@@ -16,6 +19,7 @@ function App() {
           {/* Add other routes here */}
         </Routes>
       </Router>
+      
     </div>
   );
 }

@@ -21,7 +21,7 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Save form data to local storage
-    localStorage.setItem('registeredUser', JSON.stringify(formData));
+    localStorage.setItem('USERS_KEY', JSON.stringify(formData));
     console.log('Form submitted:', formData);
     window.location.href = '/Login';
   };

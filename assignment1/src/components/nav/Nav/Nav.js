@@ -3,6 +3,7 @@ import './Nav.css';
 import { Link } from 'react-router-dom';
 
 
+
 const NavigationBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
