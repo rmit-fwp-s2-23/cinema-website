@@ -4,9 +4,10 @@ import Button from "../../components/nav/Button/Button";
 import {verifyUser} from "../../Account/Storage.js";
 import { useNavigate } from "react-router-dom";
 import {getUser} from "../../Account/Storage.js";
+
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [errMessage, setErrMessage] = useState(null);
 
   function handleChange(event) {
@@ -24,6 +25,7 @@ function Login() {
       // navigate("/");
       alert({getUser})
       return;
+
     }
 
     const temp = { ...fields };
@@ -57,7 +59,7 @@ function Login() {
             ></input>
           </div>
           <div>
-            <Button type="Submit" />
+            <Button type="Submit" onClick={handleSubmit} />
           </div>
         </div>
       </form>

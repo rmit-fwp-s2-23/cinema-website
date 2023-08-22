@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { initUser } from './Account/Storage';
 
 initUser();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
