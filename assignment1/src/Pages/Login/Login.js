@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./Login.css";
 import Button from "../../components/nav/Button/Button";
 import {verifyUser} from "../../Account/Storage.js";
-import { useNavigate, Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {getUser} from "../../Account/Storage.js";
 
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
@@ -21,10 +22,10 @@ function Login() {
   function handleSubmit(event) {
     event.preventDefault();
     if (verifyUser(fields.username, fields.password)) {
-      navigate("/");
-      
-      alert("hi")
-      
+      // navigate("/");
+      alert({getUser})
+      return;
+
     }
 
     const temp = { ...fields };

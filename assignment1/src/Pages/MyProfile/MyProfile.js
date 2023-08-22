@@ -1,7 +1,8 @@
 import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
-
+import {getUser} from "../../Account/Storage.js";
 function MyProfile(props) {
+  const data = getUser();
   return (
     <div className="Myprofile">
       <h1>My Profile</h1>
@@ -13,12 +14,12 @@ function MyProfile(props) {
         <div className="Myprofile-detail">
           <div>
             <p>
-              <strong>Username:</strong>123{props.username}
+              <strong>Username:</strong>{data.username}
             </p>
           </div>
           <div>
             <p>
-              <strong>Password:</strong>123{props.password}
+              <strong>Password:</strong>{data.password}
             </p>
           </div>
           <div>
