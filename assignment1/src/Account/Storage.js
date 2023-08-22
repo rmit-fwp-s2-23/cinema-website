@@ -32,8 +32,8 @@ function verifyUser(username, password) {
       localStorage.setItem(USER_KEY, JSON.stringify(data));
       return true;
     }
-    return false;
   }
+  return false;
 }
 
 function getUser(){
