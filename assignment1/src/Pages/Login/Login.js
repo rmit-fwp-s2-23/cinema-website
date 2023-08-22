@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./Login.css";
 import Button from "../../components/nav/Button/Button";
 import {verifyUser} from "../../Account/Storage.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Redirect } from "react-router-dom";
 
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [errMessage, setErrMessage] = useState(null);
 
   function handleChange(event) {
@@ -21,9 +21,10 @@ function Login() {
   function handleSubmit(event) {
     event.preventDefault();
     if (verifyUser(fields.username, fields.password)) {
-      // navigate("/");
+      navigate("/");
+      
       alert("hi")
-      return;
+      
     }
 
     const temp = { ...fields };
@@ -57,7 +58,7 @@ function Login() {
             ></input>
           </div>
           <div>
-            <Button type="Submit" />
+            <Button type="Submit" onClick={handleSubmit} />
           </div>
         </div>
       </form>
