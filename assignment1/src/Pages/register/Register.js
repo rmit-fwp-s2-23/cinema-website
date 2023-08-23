@@ -1,6 +1,7 @@
 import './Register.css';
 import React, { useState } from 'react';
 import { Link as RouterLink , useHistory } from 'react-router-dom';
+import Button from '../../components/nav/Button/Button';
 
 const Register = () => {
   // const history = useHistory(); 
@@ -61,7 +62,7 @@ const Register = () => {
               required
             />
           </div>
-          <button type="submit">Register</button>
+          <Button type="Register">Register</Button>
         </form>
       </div>
     </div>

@@ -1,9 +1,24 @@
 import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
 import {getUser} from "../../Account/Storage.js";
+import { useNavigate } from "react-router-dom";
+import NavigationBar from "../../components/nav/Nav/Nav";
+
 function MyProfile(props) {
   const data = getUser();
+  const navigate = useNavigate();
+  
+
+  const handleUpdateClick = () => {
+    navigate("/editmyprofile");
+  };
+
+
+
   return (
+    <div>
+      <NavigationBar/>
+
     <div className="Myprofile">
       <h1>My Profile</h1>
       <div className="Myprofile-form">
@@ -29,9 +44,10 @@ function MyProfile(props) {
           </div>
         </div>
         <div className="Myprofile-button">
-          <Button type="Update" />
+           <Button onClick={handleUpdateClick}>Update</Button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
