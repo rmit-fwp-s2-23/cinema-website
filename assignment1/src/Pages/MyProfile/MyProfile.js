@@ -1,6 +1,6 @@
 import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
-import { getUser } from "../../Account/Storage.js";
+import { getUser } from "../../Account/Repository.js";
 import { useNavigate } from "react-router-dom";
 
 function MyProfile(props) {

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
 import Button from "../../components/nav/Button/Button";
-import { setUser, verifyUser } from "../../Account/Storage.js";
+import { setUser, verifyUser } from "../../Account/Repository.js";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../Account/Storage.js";
+import { getUser } from "../../Account/Repository.js";
 
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });

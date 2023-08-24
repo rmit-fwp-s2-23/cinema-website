@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
-import { getUser, setUser } from "../../Account/Storage.js";
+import { getUser, setUser } from "../../Account/Repository.js";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/nav/Nav/Nav";
 function EditMyProfile() {

@@ -2,7 +2,7 @@ import "./Register.css";
 import React, { useState } from "react";
 import { Link as RouterLink, useHistory, useNavigate } from "react-router-dom";
 import Button from "../../components/nav/Button/Button";
-import { createUser } from "../../Account/Storage";
+import { createUser } from "../../Account/Repository";
 
 const Register = () => {
   const navigate = useNavigate();

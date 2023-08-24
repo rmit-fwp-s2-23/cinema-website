@@ -7,7 +7,7 @@ import MyProfile from './Pages/MyProfile/MyProfile';
 import Home from './Pages/Home/Home';
 import EditMyProfile from './Pages/MyProfile/EditMyProfile';
 import NavigationBar from './components/nav/Nav/Nav';
-import { getUser } from './Account/Storage';
+import { getUser } from './Account/Repository';
 function App() {
   return (
     <div className="App">
