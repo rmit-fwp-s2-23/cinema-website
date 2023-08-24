@@ -1,14 +1,15 @@
-import './Register.css';
-import React, { useState } from 'react';
-import { Link as RouterLink , useHistory } from 'react-router-dom';
-import Button from '../../components/nav/Button/Button';
+import "./Register.css";
+import React, { useState } from "react";
+import { Link as RouterLink, useHistory, useNavigate } from "react-router-dom";
+import Button from "../../components/nav/Button/Button";
+import { createUser } from "../../Account/Storage";
 
 const Register = () => {
-  // const history = useHistory(); 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleInputChange = (event) => {
@@ -22,48 +23,56 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Save form data to local storage
-    localStorage.setItem('USERS_KEY', JSON.stringify(formData));
-    console.log('Form submitted:', formData);
-    window.location.href = '/Login';
+    if (localStorage.getItem(formData.username) === null) {
+      createUser(formData.username, formData);
+      alert("Register successfully !");
+      navigate("/login");
+      return;
+    }
+    alert("This username is already used. Please use another username !");
   };
 
   return (
-    <div className="register-container">
-      <div className="centered-form">
-        <h2>Register</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <Button type="Register">Register</Button>
-        </form>
+    <div>
+      <div className="register-container">
+        <div className="register-form">
+          <h1>Register</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="register-form-member">
+              <label>Username:</label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="register-form-member">
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="register-form-member">
+              <label>Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="register-form-member">
+            <Button type="Register">Register</Button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

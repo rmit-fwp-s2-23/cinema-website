@@ -1,33 +1,13 @@
-const USERS_KEY = "users";
 const USER_KEY = "user";
 
-
-function initUser() {
-  if(localStorage.getItem(USERS_KEY) !== null){
-    return;
-  }
-  const users = [
-    {
-      username: "Quang",
-      password: "quang123"
-    },
-    {
-      username: "Pengkim",
-      password: "pengkim123"
-    }
-  ];
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
-
-function getUsers(){
-  const data = localStorage.getItem(USERS_KEY);
-  return JSON.parse(data);
+function createUser(username, user) {
+  localStorage.setItem(username, JSON.stringify(user));
 }
 
 function verifyUser(username, password) {
-  const users = getUsers();
-  const data = {username, password}
-  for (const user of users) {
+  if (localStorage.getItem(username) !== null) {
+    const user = JSON.parse(localStorage.getItem(username));
+    const data = { username, password };
     if (username === user.username && password === user.password) {
       localStorage.setItem(USER_KEY, JSON.stringify(data));
       return true;
@@ -36,9 +16,18 @@ function verifyUser(username, password) {
   return false;
 }
 
-function getUser(){
+function getUser() {
   const data = localStorage.getItem(USER_KEY);
   return JSON.parse(data);
 }
 
-export { initUser, verifyUser, getUser };
+function setUser(data){
+  const user = JSON.parse(localStorage.getItem(USER_KEY));
+  localStorage.setItem(user.username, JSON.stringify(data));
+  localStorage.setItem(USER_KEY, JSON.stringify(data));
+}
+
+function removeUser(){
+  localStorage.removeItem(USER_KEY);
+}
+export { verifyUser, getUser, createUser, setUser, removeUser };

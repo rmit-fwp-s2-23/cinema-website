@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
 import Button from "../../components/nav/Button/Button";
-import {verifyUser} from "../../Account/Storage.js";
+import { setUser, verifyUser } from "../../Account/Storage.js";
 import { useNavigate } from "react-router-dom";
-import {getUser} from "../../Account/Storage.js";
+import { getUser } from "../../Account/Storage.js";
 
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
@@ -22,10 +22,8 @@ function Login() {
   function handleSubmit(event) {
     event.preventDefault();
     if (verifyUser(fields.username, fields.password)) {
-      // navigate("/");
-      alert({getUser})
+      navigate("/");
       return;
-
     }
 
     const temp = { ...fields };
@@ -35,34 +33,36 @@ function Login() {
   }
 
   return (
-    <div className="login">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <div>
+      <div className="login-container">
         <div className="login-form">
-          {errMessage !== null && <div>{errMessage}</div>}
-          <div>
-            <input
-              name="username"
-              id="username"
-              placeholder="Enter your username"
-              value={fields.username}
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={fields.password}
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div>
-            <Button onClick={handleSubmit}>Submit</Button>
-          </div>
+          <h1>Login</h1>
+          {errMessage !== null && <span>{errMessage}</span>}
+          <form onSubmit={handleSubmit}>
+            <div className="login-form-member">
+              <input
+                name="username"
+                id="username"
+                placeholder="Enter your username"
+                value={fields.username}
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="login-form-member">
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                value={fields.password}
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="login-form-member">
+              <Button onClick={handleSubmit}>Submit</Button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
