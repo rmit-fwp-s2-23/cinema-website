@@ -1,15 +1,15 @@
 const USER_KEY = "user";
 
-function createUser(username, user) {
+function createUser(username, user, joinedDate) {
+  user.date = joinedDate;
   localStorage.setItem(username, JSON.stringify(user));
 }
 
 function verifyUser(username, password) {
   if (localStorage.getItem(username) !== null) {
     const user = JSON.parse(localStorage.getItem(username));
-    const data = { username, password };
     if (username === user.username && password === user.password) {
-      localStorage.setItem(USER_KEY, JSON.stringify(data));
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
       return true;
     }
   }
@@ -21,13 +21,17 @@ function getUser() {
   return JSON.parse(data);
 }
 
-function setUser(data){
+function setUser(data) {
   const user = JSON.parse(localStorage.getItem(USER_KEY));
-  localStorage.setItem(user.username, JSON.stringify(data));
+  createUser(data.username, data, data.date);
+  deleteUser(user.username);
   localStorage.setItem(USER_KEY, JSON.stringify(data));
 }
 
-function removeUser(){
+function removeUser() {
   localStorage.removeItem(USER_KEY);
 }
-export { verifyUser, getUser, createUser, setUser, removeUser };
+function deleteUser(username) {
+  localStorage.removeItem(username);
+}
+export { verifyUser, getUser, createUser, setUser, removeUser, deleteUser };

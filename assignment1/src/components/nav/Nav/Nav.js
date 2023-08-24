@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Nav.css";
 import { Link } from "react-router-dom";
 import { getUser, removeUser } from "../../../Account/Repository";
-
+import MyProfile from "../../../Pages/MyProfile/MyProfile";
 const NavigationBar = () => {
   const data = getUser();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -37,6 +37,9 @@ const NavigationBar = () => {
           </a>
           {data !== null && (
             <React.Fragment>
+              <Link to="/MyProfile" className="dropdown-item">
+                Profile
+              </Link>
               <Link
                 to="/login"
                 className="dropdown-item"

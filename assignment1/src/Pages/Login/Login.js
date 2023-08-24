@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
 import Button from "../../components/nav/Button/Button";
-import { setUser, verifyUser } from "../../Account/Repository.js";
+import { verifyUser } from "../../Account/Repository.js";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../Account/Repository.js";
 
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
@@ -22,7 +21,7 @@ function Login() {
   function handleSubmit(event) {
     event.preventDefault();
     if (verifyUser(fields.username, fields.password)) {
-      navigate("/");
+      navigate("/MyProfile");
       return;
     }
 
@@ -58,7 +57,7 @@ function Login() {
               ></input>
             </div>
             <div className="login-form-member">
-              <Button onClick={handleSubmit}>Submit</Button>
+              <Button onClick={handleSubmit}>Login</Button>
             </div>
           </form>
         </div>

@@ -11,7 +11,7 @@ function EditMyProfile() {
     username: userData?.username || "", // Initialize with existing username
     password: userData?.password || "", // Initialize with existing password
     email: userData?.email || "", // Initialize with existing email
-    
+    date: userData.date
   });
 
   const handleInputChange = (event) => {
@@ -25,6 +25,7 @@ function EditMyProfile() {
   // Function to handle the update button click
   const handleUpdateClick = (event) => {
     event.preventDefault();
+    setUser(editedData);
     // You can implement the logic here to update the user data
     alert("Update successfully !");
     navigate("/myprofile");
@@ -60,7 +61,7 @@ function EditMyProfile() {
                 <p>
                   <strong>Password:</strong>
                   <input
-                    type="password"
+                    type="text"
                     name="password"
                     value={editedData.password}
                     onChange={handleInputChange}
@@ -82,7 +83,7 @@ function EditMyProfile() {
               </div>
             </div>
             <div className="myprofile-button">
-              <Button onClick={handleUpdateClick}>Update</Button>
+              <Button type="Submit" onClick={handleUpdateClick}>Update</Button>
             </div>
           </div>
         </div>

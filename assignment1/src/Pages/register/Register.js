@@ -11,7 +11,7 @@ const Register = () => {
     email: "",
     password: "",
   });
-
+  const [date, setDate] = useState("");
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -19,12 +19,16 @@ const Register = () => {
       [name]: value,
     }));
   };
-
+  
+  const handleButton = () => {
+    const date = new Date().toLocaleDateString();
+    setDate(date);
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     // Save form data to local storage
     if (localStorage.getItem(formData.username) === null) {
-      createUser(formData.username, formData);
+      createUser(formData.username, formData, date);
       alert("Register successfully !");
       navigate("/login");
       return;
@@ -69,7 +73,7 @@ const Register = () => {
               />
             </div>
             <div className="register-form-member">
-            <Button type="Register">Register</Button>
+            <Button type="Register" onClick={handleButton}>Register</Button>
             </div>
           </form>
         </div>
