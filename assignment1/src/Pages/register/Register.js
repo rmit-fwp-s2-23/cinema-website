@@ -2,7 +2,7 @@ import "./Register.css";
 import React, { useState } from "react";
 import { Link as RouterLink, useHistory, useNavigate } from "react-router-dom";
 import Button from "../../components/nav/Button/Button";
-import { createUser } from "../../Account/Repository";
+import { createUser, checkValidEmail } from "../../Account/Repository";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -19,21 +19,27 @@ const Register = () => {
       [name]: value,
     }));
   };
-  
+
   const handleButton = () => {
     const date = new Date().toLocaleDateString();
     setDate(date);
-  }
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // Save form data to local storage
-    if (localStorage.getItem(formData.username) === null) {
+    if (localStorage.getItem(formData.username) !== null) {
+      alert("This username is already used. Please use another username !");
+      return;
+    }
+    if (!checkValidEmail(formData.email)) {
+      alert("This email is already used. Please use another email !");
+      return;
+    } else {
       createUser(formData.username, formData, date);
       alert("Register successfully !");
       navigate("/login");
       return;
     }
-    alert("This username is already used. Please use another username !");
   };
 
   return (
@@ -73,7 +79,9 @@ const Register = () => {
               />
             </div>
             <div className="register-form-member">
-            <Button type="Register" onClick={handleButton}>Register</Button>
+              <Button type="Register" onClick={handleButton}>
+                Register
+              </Button>
             </div>
           </form>
         </div>

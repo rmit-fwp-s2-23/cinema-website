@@ -11,7 +11,7 @@ function EditMyProfile() {
     username: userData?.username || "", // Initialize with existing username
     password: userData?.password || "", // Initialize with existing password
     email: userData?.email || "", // Initialize with existing email
-    date: userData.date
+    date: userData.date,
   });
 
   const handleInputChange = (event) => {
@@ -36,57 +36,61 @@ function EditMyProfile() {
     <div>
       <div className="myprofile-container">
         <h1>My Profile</h1>
-        <div className="myprofile-data">
-          <div className="myprofile-avatar">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq2IU5Ms2W9aAfftphuUY9ISdst9nzyq3xW5RNu2IeJuMuOtYL-h3W5v7GfpWlxAc21ng&usqp=CAU"
-              alt="User Avatar"
-            />
-          </div>
-          <div className="myprofile-form">
-            <div className="myprofile-detail">
-              <div>
-                <p className="myprofile-form-member">
-                  <strong>Username:</strong>
-                  <input
-                    type="text"
-                    name="username"
-                    value={editedData.username}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </p>
+        <form onSubmit={handleUpdateClick}>
+          <div className="myprofile-data">
+            <div className="myprofile-avatar">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq2IU5Ms2W9aAfftphuUY9ISdst9nzyq3xW5RNu2IeJuMuOtYL-h3W5v7GfpWlxAc21ng&usqp=CAU"
+                alt="User Avatar"
+              />
+            </div>
+            <div className="myprofile-form">
+              <div className="myprofile-detail">
+                <div>
+                  <p className="myprofile-form-member">
+                    <strong>Username:</strong>
+                    <input
+                      type="text"
+                      name="username"
+                      value={editedData.username}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </p>
+                </div>
+                <div className="myprofile-form-member">
+                  <p>
+                    <strong>Password:</strong>
+                    <input
+                      type="text"
+                      name="password"
+                      value={editedData.password}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </p>
+                </div>
+                <div className="myprofile-form-member">
+                  <p>
+                    <strong>Email:</strong>
+                    <input
+                      type="email"
+                      name="email"
+                      value={editedData.email}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </p>
+                </div>
               </div>
-              <div className="myprofile-form-member">
-                <p>
-                  <strong>Password:</strong>
-                  <input
-                    type="text"
-                    name="password"
-                    value={editedData.password}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </p>
-              </div>
-              <div className="myprofile-form-member">
-                <p>
-                  <strong>Email:</strong>
-                  <input
-                    type="email"
-                    name="email"
-                    value={editedData.email}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </p>
+              <div className="myprofile-button">
+                <Button type="Submit" >
+                  Update
+                </Button>
               </div>
             </div>
-            <div className="myprofile-button">
-              <Button type="Submit" onClick={handleUpdateClick}>Update</Button>
-            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

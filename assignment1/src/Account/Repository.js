@@ -4,6 +4,15 @@ function createUser(username, user, joinedDate) {
   user.date = joinedDate;
   localStorage.setItem(username, JSON.stringify(user));
 }
+function checkValidEmail(email) {
+  for(let i=0; i<localStorage.length; i++){
+    const user = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if(email===user.email){
+      return false;
+    }
+  }
+  return true;
+}
 
 function verifyUser(username, password) {
   if (localStorage.getItem(username) !== null) {
@@ -34,4 +43,12 @@ function removeUser() {
 function deleteUser(username) {
   localStorage.removeItem(username);
 }
-export { verifyUser, getUser, createUser, setUser, removeUser, deleteUser };
+export {
+  verifyUser,
+  getUser,
+  createUser,
+  setUser,
+  removeUser,
+  deleteUser,
+  checkValidEmail,
+};
