@@ -1,60 +1,68 @@
+/* MyProfile.css */
 
+.myprofile-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
 
-.Myprofile {
-    background-color: #8cc9c8;
-    position: absolute;
-    width: 30%;
-    left: 10%;
-    height: 30%;
-    top: 20%;
-    box-shadow: 10px 10px 8px #888888;
-    color: white;
-    display: flex;
-    flex-direction: column;
+.myprofile-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.myprofile-data {
+  display: flex;
+  justify-content: space-around;
+}
+
+.myprofile-avatar {
+  flex: 1;
+}
+
+.myprofile-avatar img {
+  border-radius: 50%;
+}
+
+.myprofile-form {
+  flex: 2;
+  width: 50%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border: 5px solid rgba(59, 119, 139, 0.4);
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.myprofile-detail {
+  flex: 2;
+}
+
+.myprofile-form-member {
+  text-align: left;
+  font-size: 20px;
+}
+
+.myprofile-form-member input {
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  border: 0;
+  padding: 0;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+
+.myprofile-detail strong {
+  font-weight: bold;
+}
+
+.myprofile-button {
+  flex: 1;
+  text-align: center;
 
 }
 
-.Myprofile-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    flex-grow: 1;
-}
-
-.Myprofile-avatar {
-    flex-grow: 1fr;
-    margin-left: 10px;
-}
-.Myprofile-avatar img {
-    border-radius: 50%;
-    object-fit: contain;
-    height: 50%;
-    width: 100%;
-}
-.Myprofile>h1 {
-    font-size: 1.5rem;
-    text-align: left;
-    padding-left: 20px;
-    color: white;
-}
-
-
-
-.Myprofile-detail{
-    flex-grow: 1fr;
-    font-size: 15px;
-    margin-left: 10px;
-}
-
-.Myprofile-detail>div p {
-    margin: 0;
-}
-.Myprofile-detail>div strong {
-    margin-right: 5px;
-}
-.Myprofile-button {
-    flex-grow: 1fr;
-    position: absolute;
-    right: 0;
-    flex: 1;
-}
+/* You can define more specific styles for your Button component here */
