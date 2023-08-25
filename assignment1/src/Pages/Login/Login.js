@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Button from "../../components/nav/Button/Button";
+import Button from "../../components/button/Button";
 import {verifyUser} from "../../Account/Storage.js";
 import { useNavigate } from "react-router-dom";
 import {getUser} from "../../Account/Storage.js";

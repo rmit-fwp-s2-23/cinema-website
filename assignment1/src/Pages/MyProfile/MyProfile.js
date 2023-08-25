@@ -1,8 +1,8 @@
 import "./MyProfile.css";
-import Button from "../../components/nav/Button/Button";
+import Button from "../../components/button/Button";
 import {getUser} from "../../Account/Storage.js";
 import { useNavigate } from "react-router-dom";
-import NavigationBar from "../../components/nav/Nav/Nav";
+import NavigationBar from "../../components/nav/Nav";
 
 function MyProfile(props) {
   const data = getUser();

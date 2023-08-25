@@ -1,7 +1,7 @@
 import './Register.css';
 import React, { useState } from 'react';
 import { Link as RouterLink , useHistory } from 'react-router-dom';
-import Button from '../../components/nav/Button/Button';
+import Button from '../../components/button/Button';
 
 const Register = () => {
   // const history = useHistory(); 
