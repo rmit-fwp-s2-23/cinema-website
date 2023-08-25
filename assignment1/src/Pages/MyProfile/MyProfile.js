@@ -31,25 +31,25 @@ function MyProfile() {
             <div className="myprofile-detail">
               <div className="myprofile-form-member">
                 <p>
-                  <strong>Username</strong>
+                  <strong>Username: </strong>
                   <span>{data.username}</span>
                 </p>
               </div>
               <div className="myprofile-form-member">
                 <p>
-                  <strong>Password</strong>
+                  <strong>Password: </strong>
                   <span>{data.password}</span>
                 </p>
               </div>
               <div className="myprofile-form-member">
                 <p>
-                  <strong>Email</strong>
+                  <strong>Email: </strong>
                   <span>{data.email}</span>
                 </p>
               </div>
               <div className="myprofile-form-member">
                 <p>
-                  <strong>Joining Date</strong>
+                  <strong>Joining Date: </strong>
                   <span>{data.date}</span>
                 </p>
               </div>
