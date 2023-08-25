@@ -1,0 +1,42 @@
+.review-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-container h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+.review-film {
+    font-size: 2rem;
+}
+
+.review-info {
+    text-align: left;
+    margin-left: 30px;
+    font-size: 25px;
+}
+.review-info span {
+    text-decoration: underline;
+    color: blue;
+}
+.review-rating {
+    margin-bottom: 30px;
+}
+.review-content {
+    height: 30vh;
+}
+.review-content .review-content-textarea {
+    width: 70%;
+    height: 70%;
+}
+
+.review-buttons {
+    display: flex;
+    justify-content: right;
+}
+.review-buttons button {
+    margin-right: 30px;
+    width: 100px;
+}

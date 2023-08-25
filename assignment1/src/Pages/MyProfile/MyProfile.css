@@ -11,21 +11,7 @@
   margin-bottom: 20px;
 }
 
-.myprofile-data {
-  display: flex;
-  justify-content: space-around;
-}
-
-.myprofile-avatar {
-  flex: 1;
-}
-
-.myprofile-avatar img {
-  border-radius: 50%;
-}
-
 .myprofile-form {
-  flex: 2;
   width: 50%;
   border-radius: 8px;
   display: flex;
