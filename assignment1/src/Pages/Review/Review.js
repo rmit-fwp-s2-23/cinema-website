@@ -45,9 +45,9 @@ function Review() {
           index += 1;
           return (
             <button
-              type="button"
+              type="button" 
               name="rating"
-              value={rating}
+              value={fields.rating}
               className={index <= ((rating && hover) || hover) ? "on" : "off"}
               onClick={() => setRating(index)}
               onMouseEnter={() => setHover(index)}
@@ -66,6 +66,7 @@ function Review() {
       <div className="review-content">
         <textarea
           name="textarea"
+          value={fields.textarea}
           className="review-content-textarea"
           placeholder="Share details of your own experience watching this movie"
           onChange={handleChange}
