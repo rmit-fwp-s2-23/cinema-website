@@ -17,7 +17,7 @@ const NavigationBar = () => {
   return (
     <nav className="navigation-bar">
       <a href="/" className="logo">
-        77 Movies
+        Loop Cinemas
       </a>
       <div className="dropdown-menu">
         <div className="hamburger" onMouseOver={toggleMenu}>
