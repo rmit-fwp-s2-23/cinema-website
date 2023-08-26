@@ -1,67 +1,67 @@
-const FILMS = "films";
+const REVIEWS = "reviews";
 
 function initReview() {
-  if (localStorage.getItem(FILMS) === null) {
+  if (localStorage.getItem(REVIEWS) === null) {
     const data = [];
-    localStorage.setItem(FILMS, JSON.stringify(data));
+    localStorage.setItem(REVIEWS, JSON.stringify(data));
   }
 }
 
 function createReview(data) {
   data.content = data.content.replace(/\n/g, "___LINE_BREAK___");
-  if (localStorage.getItem(FILMS) === null) {
-    const lsFilm = new Array();
-    lsFilm.push(data);
-    localStorage.setItem(FILMS, JSON.stringify(lsFilm));
+  if (localStorage.getItem(REVIEWS) === null) {
+    const reviews = new Array();
+    reviews.push(data);
+    localStorage.setItem(REVIEWS, JSON.stringify(reviews));
     return;
   }
-  const lsFilm = JSON.parse(localStorage.getItem(FILMS));
-  lsFilm.push(data);
-  localStorage.setItem(FILMS, JSON.stringify(lsFilm));
+  const reviews = JSON.parse(localStorage.getItem(REVIEWS));
+  reviews.push(data);
+  localStorage.setItem(REVIEWS, JSON.stringify(reviews));
 }
 
 function deleteReview(username) {
-  const films = JSON.parse(localStorage.getItem(FILMS));
-  if (films !== null) {
-    let filtered_films = films.filter((film) => {
-      if (username != film.writter) {
-        return film;
+  const reviews = JSON.parse(localStorage.getItem(REVIEWS));
+  if (REVIEWS !== null) {
+    let filtered_reviews = reviews.filter((review) => {
+      if (username != review.writter) {
+        return review;
       }
     });
-    localStorage.setItem(FILMS, JSON.stringify(filtered_films));
+    localStorage.setItem(REVIEWS, JSON.stringify(filtered_reviews));
   }
 }
 
 function getReviewsByWritter(username) {
-  const films = JSON.parse(localStorage.getItem(FILMS));
-  if (films !== null) {
-    let filtered_films = films.filter((film) => {
-      if (username === film.writter) {
-        film.content = film.content.replace(/___LINE_BREAK___/g, "\n");
-        return film;
+  const reviews = JSON.parse(localStorage.getItem(REVIEWS));
+  if (reviews !== null) {
+    let filtered_reviews = reviews.filter((review) => {
+      if (username === review.writer) {
+        review.content = review.content.replace(/___LINE_BREAK___/g, "\n");
+        return review;
       }
     });
-    return filtered_films;
+    return filtered_reviews;
   }
-  return films;
+  return reviews;
 }
 
 function getReviewsByTitle(title) {
-  const films = JSON.parse(localStorage.getItem(FILMS));
-  let filtered_films = films.filter((film) => {
-    film.content = film.content.replace(/___LINE_BREAK___/g, "\n");
-    if (title === film.filmTitle) {
-      return film;
+  const reviews = JSON.parse(localStorage.getItem(REVIEWS));
+  let filtered_reviews = reviews.filter((review) => {
+    review.content = review.content.replace(/___LINE_BREAK___/g, "\n");
+    if (title === review.title) {
+      return review;
     }
   });
-  return filtered_films;
+  return filtered_reviews;
 }
 
 function changeReview(id, data) {
-  const films = JSON.parse(localStorage.getItem(FILMS));
-  films[id].content = data.content;
-  films[id].rating = data.rating;
-  localStorage.setItem(FILMS, JSON.stringify(films));
+  const reviews = JSON.parse(localStorage.getItem(REVIEWS));
+  reviews[id].content = data.content;
+  reviews[id].rating = data.rating;
+  localStorage.setItem(REVIEWS, JSON.stringify(reviews));
 }
 export {
   createReview,

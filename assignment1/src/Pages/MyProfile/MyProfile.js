@@ -39,7 +39,7 @@ function MyProfile() {
               reviews.map((review, key) => (
                 <div>
                   <Post
-                    title={review.filmTitle}
+                    title={review.title}
                     rating={review.rating}
                     content={review.content.replace(
                       /___LINE_BREAK___/g,
@@ -50,7 +50,7 @@ function MyProfile() {
                   <Button
                     onClick={() =>
                       handleUpdateReviewClick(
-                        review.filmTitle,
+                        review.title,
                         review.rating,
                         review.content,
                         key

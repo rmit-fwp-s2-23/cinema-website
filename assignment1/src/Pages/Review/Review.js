@@ -130,7 +130,7 @@ function Review() {
         ) : (
           reviews.map((review, key) => (
             <Post
-              title={review.filmTitle}
+              title={review.title}
               rating={review.rating}
               content={review.content}
               id={key}
