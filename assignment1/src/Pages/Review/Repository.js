@@ -22,14 +22,12 @@ function createReview(data) {
 
 function deleteReview(username) {
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
-  if (REVIEWS !== null) {
-    let filtered_reviews = reviews.filter((review) => {
-      if (username != review.writter) {
-        return review;
-      }
-    });
-    localStorage.setItem(REVIEWS, JSON.stringify(filtered_reviews));
-  }
+  let filtered_reviews = reviews.filter((review) => {
+    if (username != review.writer) {
+      return review;
+    }
+  });
+  localStorage.setItem(REVIEWS, JSON.stringify(filtered_reviews));
 }
 
 function getReviewsByWritter(username) {

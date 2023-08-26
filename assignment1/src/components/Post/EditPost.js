@@ -40,7 +40,7 @@ function EditPost() {
         <div className="editpost-title">
           <h1>{post.title}</h1>
         </div>
-        <form onSubmit={handleUpdateClick}>
+        <form>
           <div className="editpost-rating">
             {[...Array(5)].map((star, index) => {
               index += 1;
@@ -78,12 +78,14 @@ function EditPost() {
             </textarea>
           </div>
           {errorMessage !== null && (
-                <div className="form-group">
-                  <span style={{ color: "red" }}>{errorMessage}</span>
-                </div>
-              )}
+            <div className="form-group">
+              <span style={{ color: "red" }}>{errorMessage}</span>
+            </div>
+          )}
           <div className="myprofile-button">
-            <Button type="Submit">Update</Button>
+            <Button type="Submit" onClick={handleUpdateClick}>
+              Update
+            </Button>
             <Button
               style={{ backgroundColor: "grey" }}
               onClick={() => {
