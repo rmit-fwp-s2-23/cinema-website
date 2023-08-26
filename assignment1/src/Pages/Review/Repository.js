@@ -7,9 +7,7 @@ function initReview() {
   }
 }
 
-function createReview(filmTitle, data, username) {
-  data.filmTitle = filmTitle;
-  data.writter = username;
+function createReview(data) {
   data.content = data.content.replace(/\n/g, "___LINE_BREAK___");
   if (localStorage.getItem(FILMS) === null) {
     const lsFilm = new Array();
@@ -24,29 +22,34 @@ function createReview(filmTitle, data, username) {
 
 function deleteReview(username) {
   const films = JSON.parse(localStorage.getItem(FILMS));
-  let filtered_films = films.filter((film) => {
-    if (username != film.writter) {
-      return film;
-    }
-  });
-  localStorage.setItem(FILMS, JSON.stringify(filtered_films));
+  if (films !== null) {
+    let filtered_films = films.filter((film) => {
+      if (username != film.writter) {
+        return film;
+      }
+    });
+    localStorage.setItem(FILMS, JSON.stringify(filtered_films));
+  }
 }
 
 function getReviewsByWritter(username) {
   const films = JSON.parse(localStorage.getItem(FILMS));
-  let filtered_films = films.filter((film) => {
-    if (username === film.writter) {
-      film.content = film.content.replace(/___LINE_BREAK___/g, "<br>");
-      return film;
-    }
-  });
-  return filtered_films;
+  if (films !== null) {
+    let filtered_films = films.filter((film) => {
+      if (username === film.writter) {
+        film.content = film.content.replace(/___LINE_BREAK___/g, "\n");
+        return film;
+      }
+    });
+    return filtered_films;
+  }
+  return films;
 }
 
 function getReviewsByTitle(title) {
   const films = JSON.parse(localStorage.getItem(FILMS));
   let filtered_films = films.filter((film) => {
-    film.content = film.content.replace(/___LINE_BREAK___/g, "<br>");
+    film.content = film.content.replace(/___LINE_BREAK___/g, "\n");
     if (title === film.filmTitle) {
       return film;
     }
@@ -54,9 +57,10 @@ function getReviewsByTitle(title) {
   return filtered_films;
 }
 
-function changeReview(id, data){
+function changeReview(id, data) {
   const films = JSON.parse(localStorage.getItem(FILMS));
-  films[id] = data;
+  films[id].content = data.content;
+  films[id].rating = data.rating;
   localStorage.setItem(FILMS, JSON.stringify(films));
 }
 export {
@@ -65,5 +69,5 @@ export {
   getReviewsByWritter,
   getReviewsByTitle,
   initReview,
-  changeReview
+  changeReview,
 };

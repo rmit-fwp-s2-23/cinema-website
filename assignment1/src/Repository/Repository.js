@@ -6,9 +6,9 @@ function createUser(username, user, joinedDate) {
   localStorage.setItem(username, JSON.stringify(user));
 }
 function checkValidEmail(email) {
-  for(let i=0; i<localStorage.length; i++){
+  for (let i = 0; i < localStorage.length; i++) {
     const user = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if(email===user.email){
+    if (email === user.email) {
       return false;
     }
   }

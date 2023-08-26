@@ -11,9 +11,10 @@ function Review() {
   const title = useLocation().state;
   const user = getUser();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(null);
   const [reviews, setReviews] = useState(getReviewsByTitle(title));
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0);
+  const [rating, setRating] = useState(1);
+  const [hover, setHover] = useState(1);
   const [post, setPost] = useState("");
   function handleChange(event) {
     setPost(event.target.value);
@@ -21,10 +22,17 @@ function Review() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const data = { content: post, rating: rating };
-    if (user !== null) {
-      createReview(title, data, user.username);
+    const postTrimmed = post.trim();
+    if (postTrimmed === "") {
+      setErrorMessage("A post cannot be empty.");
+      return;
     }
+    if (postTrimmed.length > 250) {
+      setErrorMessage("A post cannot exceed 250 words.");
+      return;
+    }
+    const data = {title: title, content: post, rating: rating, writer: user.username };
+    createReview( data);
     setReviews(getReviewsByTitle(title));
     setPost("");
     setRating(0);
@@ -44,7 +52,7 @@ function Review() {
             <div>
               <div className="review-info">
                 <p>
-                  You review as <span>{user.username}</span>{" "}
+                  You review as <span>{user.username}</span>
                 </p>
               </div>
               <div className="review-rating">
@@ -62,8 +70,8 @@ function Review() {
                       onMouseEnter={() => setHover(index)}
                       onMouseLeave={() => setHover(rating)}
                       onDoubleClick={() => {
-                        setRating(0);
-                        setHover(0);
+                        setRating(1);
+                        setHover(1);
                       }}
                     >
                       <span className="star">&#9733;</span>
@@ -81,6 +89,11 @@ function Review() {
                   onChange={handleChange}
                 ></textarea>
               </div>
+              {errorMessage !== null && (
+                <div className="form-group">
+                  <span style={{ color: "red" }}>{errorMessage}</span>
+                </div>
+              )}
               <div className="review-buttons">
                 <Button
                   style={{ backgroundColor: "grey" }}
@@ -112,7 +125,7 @@ function Review() {
         </div>
       </div>
       <div className="reviews">
-        {reviews.length === 0 ? (
+        {reviews === null ? (
           <span>No posts have been submitted.</span>
         ) : (
           reviews.map((review, key) => (
