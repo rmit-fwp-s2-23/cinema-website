@@ -2,7 +2,7 @@ import "./Register.css";
 import React, { useState } from "react";
 import { Link as RouterLink, useHistory, useNavigate } from "react-router-dom";
 import Button from "../../components/nav/Button/Button";
-import { createUser, checkValidEmail } from "../../Account/Repository";
+import { createUser, checkValidEmail } from "../../Repository/Repository.js";
 
 const Register = () => {
   const navigate = useNavigate();

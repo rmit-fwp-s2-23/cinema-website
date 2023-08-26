@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import Button from "../../components/nav/Button/Button";
-import { verifyUser } from "../../Account/Repository.js";
+import { verifyUser } from "../../Repository/Repository.js";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
