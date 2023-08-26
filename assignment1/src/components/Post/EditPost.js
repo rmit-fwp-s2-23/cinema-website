@@ -40,7 +40,6 @@ function EditPost() {
         <div className="editpost-title">
           <h1>{post.title}</h1>
         </div>
-        <form>
           <div className="editpost-rating">
             {[...Array(5)].map((star, index) => {
               index += 1;
@@ -83,9 +82,11 @@ function EditPost() {
             </div>
           )}
           <div className="myprofile-button">
-            <Button type="Submit" onClick={handleUpdateClick}>
-              Update
-            </Button>
+            <Button
+              type="Submit"
+              onClick={handleUpdateClick}
+              children="Update"
+            />
             <Button
               style={{ backgroundColor: "grey" }}
               onClick={() => {
@@ -96,9 +97,8 @@ function EditPost() {
                 }
               }}
               children="Cancel"
-            ></Button>
+            />
           </div>
-        </form>
       </div>
     </div>
   );

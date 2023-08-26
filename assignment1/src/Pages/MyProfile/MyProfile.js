@@ -83,7 +83,7 @@ function MyProfile() {
             </form>
           </div>
           <div className="myprofile-post">
-            {reviews === null ? (
+            {reviews.length === 0 ? (
               <span>No posts have been submitted.</span>
             ) : (
               reviews.map((review, key) => (
