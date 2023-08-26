@@ -1,30 +1,36 @@
-import React, {useState} from 'react';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./Pages/register/Register";
 import Login from "./Pages/Login/Login";
-import MyProfile from './Pages/MyProfile/MyProfile';
-import Home from './Pages/Home/Home';
-import EditMyProfile from './Pages/MyProfile/EditMyProfile';
-import NavigationBar from './components/nav/Nav/Nav';
-import { getUser } from './Account/Repository';
+import MyProfile from "./Pages/MyProfile/MyProfile";
+import Home from "./Pages/Home/Home";
+import EditMyProfile from "./Pages/MyProfile/EditMyProfile";
+import NavigationBar from "./components/nav/Nav/Nav";
+import Review from "./Pages/Review/Review";
+import { initReview, createReview } from "./Pages/Review/Repository";
+
 function App() {
+  initReview();
   return (
-    <div className="App">
-      <Router>
-      <NavigationBar  />
-      <main role="main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="register" element= {<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path='myprofile' element={<MyProfile />} />
-          <Route path='editmyprofile' element={<EditMyProfile />} />
-          {/* Add other routes here */}
-        </Routes>
-        </main>
-      </Router>
-      
+    <div>
+      <div className="App">
+        <Router>
+          <NavigationBar />
+          <main role="main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="register" element={<Register />} />
+              <Route path="login" element={<Login />} />
+              <Route path="myprofile" element={<MyProfile />} />
+              <Route path="editmyprofile" element={<EditMyProfile />} />
+              <Route path="review" element={<Review />} />
+
+              {/* Add other routes here */}
+            </Routes>
+          </main>
+        </Router>
+      </div>
     </div>
   );
 }

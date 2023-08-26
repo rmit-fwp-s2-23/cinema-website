@@ -1,17 +1,25 @@
 import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
-import { getUser, deleteUser, removeUser } from "../../Account/Repository.js";
+import { getReviewsByWritter } from "../../Pages/Review/Repository";
+import {
+  getUser,
+  deleteUser,
+  removeUser,
+} from "../../Repository/Repository.js";
 import { useNavigate } from "react-router-dom";
+import { deleteReview } from "../Review/Repository";
+import Post from "../../components/Post/Post";
 
 function MyProfile() {
   const data = getUser();
+  const reviews = getReviewsByWritter(data.username);
   const navigate = useNavigate();
-
   const handleUpdateClick = () => {
     navigate("/editmyprofile");
   };
 
   const handleDeleteClick = () => {
+    deleteReview(data.username);
     deleteUser(data.username);
     removeUser();
     navigate("/login");
@@ -19,13 +27,20 @@ function MyProfile() {
   return (
     <div>
       <div className="myprofile-container">
-        <h1>My Profile</h1>
-        <div className="myprofile-data">
-          <div className="myprofile-avatar">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq2IU5Ms2W9aAfftphuUY9ISdst9nzyq3xW5RNu2IeJuMuOtYL-h3W5v7GfpWlxAc21ng&usqp=CAU"
-              alt="User Avatar"
-            />
+        <h1>My Profile </h1>
+        <div className="myprofile-wrapper">
+          <div className="myprofile-post">
+            {reviews.length === 0 ? (
+              <span>No posts have been submitted.</span>
+            ) : (
+              reviews.map((review) => (
+                <Post
+                  title={review.filmTitle}
+                  rating={review.rating}
+                  content={review.post.replace(/___LINE_BREAK___/g, '<br>')}
+                />
+              ))
+            )}
           </div>
           <div className="myprofile-form">
             <div className="myprofile-detail">
@@ -59,8 +74,8 @@ function MyProfile() {
             </div>
             <div className="myprofile-button">
               <Button
-                style={{ backgroundColor: "red"}}
-                className = "delete-button"
+                style={{ backgroundColor: "red" }}
+                className="delete-button"
                 onClick={() => {
                   if (
                     window.confirm("Are you sure you wish to delete this item?")

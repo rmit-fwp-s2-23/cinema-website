@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Nav.css";
 import { Link } from "react-router-dom";
-import { getUser, removeUser } from "../../../Account/Repository";
+import { getUser, removeUser } from "../../../Repository/Repository";
 import MyProfile from "../../../Pages/MyProfile/MyProfile";
 const NavigationBar = () => {
   const data = getUser();
