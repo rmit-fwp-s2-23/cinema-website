@@ -8,6 +8,7 @@ import Home from './Pages/Home/Home';
 import EditMyProfile from './Pages/MyProfile/EditMyProfile';
 import NavigationBar from './components/nav/Nav/Nav';
 import { getUser } from './Account/Repository';
+import Footer from './components/footer/Footer';
 function App() {
   return (
     <div className="App">
@@ -23,6 +24,8 @@ function App() {
           {/* Add other routes here */}
         </Routes>
         </main>
+        <Footer />
+
       </Router>
       
     </div>
