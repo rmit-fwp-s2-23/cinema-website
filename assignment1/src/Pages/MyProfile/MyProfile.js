@@ -11,16 +11,19 @@ import { deleteReview } from "../Review/Repository";
 import Post from "../../components/Post/Post";
 
 function MyProfile() {
-  const data = getUser();
-  const reviews = getReviewsByWritter(data.username);
+  const user = getUser();
+  const reviews = getReviewsByWritter(user.username);
   const navigate = useNavigate();
   const handleUpdateClick = () => {
     navigate("/editmyprofile");
   };
-
+  function handleUpdateReviewClick(title, rating, content, id) {
+    const data = { title: title, rating: rating, content: content, id: id };
+    navigate("/EditPost", { state: data });
+  }
   const handleDeleteClick = () => {
-    deleteReview(data.username);
-    deleteUser(data.username);
+    deleteReview(user.username);
+    deleteUser(user.username);
     removeUser();
     navigate("/login");
   };
@@ -29,7 +32,40 @@ function MyProfile() {
       <div className="myprofile-container">
         <h1>My Profile </h1>
         <div className="myprofile-wrapper">
-          {/* <div className="myprofile-button"></div> */}
+
+          <div className="myprofile-post">
+            {reviews === null ? (
+              <span>No posts have been submitted.</span>
+            ) : (
+              reviews.map((review, key) => (
+                <div>
+                  <Post
+                    title={review.title}
+                    rating={review.rating}
+                    content={review.content.replace(
+                      /___LINE_BREAK___/g,
+                      "<br />"
+                    )}
+                    id={key}
+                  />
+                  <Button
+                    onClick={() =>
+                      handleUpdateReviewClick(
+                        review.title,
+                        review.rating,
+                        review.content,
+                        key
+                      )
+                    }
+                  >
+                    Edit
+                  </Button>
+                </div>
+              ))
+            )}
+          </div>
+          <div className="myprofile-button"></div>
+
           <div className="myprofile-form">
             <form>
 
@@ -38,25 +74,25 @@ function MyProfile() {
               <div className="myprofile-form-member">
                 <p>
                   <strong>Username: </strong>
-                  <span>{data.username}</span>
+                  <span>{user.username}</span>
                 </p>
               </div>
               <div className="myprofile-form-member">
                 <p>
                   <strong>Password: </strong>
-                  <span>{data.password}</span>
+                  <span>{user.password}</span>
                 </p>
               </div>
               <div className="myprofile-form-member">
                 <p>
                   <strong>Email: </strong>
-                  <span>{data.email}</span>
+                  <span>{user.email}</span>
                 </p>
               </div>
               <div className="myprofile-form-member">
                 <p>
                   <strong>Joining Date: </strong>
-                  <span>{data.date}</span>
+                  <span>{user.date}</span>
                 </p>
               </div>
             </div>
