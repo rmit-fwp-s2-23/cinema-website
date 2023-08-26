@@ -9,6 +9,7 @@
     padding: 10px;
     text-align: left;
     max-width: 550px;
+    height: 250px;
 }
 
 .post-rating {
@@ -16,5 +17,7 @@
 }
 
 .post-content {
-    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-height: 200px; /* Adjust the max height as needed */
+    overflow: hidden;
 }
