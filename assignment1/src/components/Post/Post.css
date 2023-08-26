@@ -10,6 +10,7 @@
     text-align: left;
     max-width: 550px;
     height: 250px;
+    align-items: center;
 }
 
 .post-rating {
