@@ -9,7 +9,7 @@ function initReview() {
 function createReview(filmTitle, data, username) {
   data.filmTitle = filmTitle;
   data.writter = username;
-  data.post = data.post.replace(/\n/g, "___LINE_BREAK___");
+  data.content = data.content.replace(/\n/g, '___LINE_BREAK___');
   if (localStorage.getItem(FILMS) === null) {
     const lsFilm = new Array();
     lsFilm.push(data);

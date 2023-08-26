@@ -8,8 +8,8 @@ import Home from "./Pages/Home/Home";
 import EditMyProfile from "./Pages/MyProfile/EditMyProfile";
 import NavigationBar from "./components/nav/Nav/Nav";
 import Review from "./Pages/Review/Review";
-import { initReview, createReview } from "./Pages/Review/Repository";
-
+import { initReview } from "./Pages/Review/Repository";
+import EditPost from "./components/Post/EditPost";
 function App() {
   initReview();
   return (
@@ -25,7 +25,7 @@ function App() {
               <Route path="myprofile" element={<MyProfile />} />
               <Route path="editmyprofile" element={<EditMyProfile />} />
               <Route path="review" element={<Review />} />
-
+              <Route path="editpost" element={<EditPost />} />
               {/* Add other routes here */}
             </Routes>
           </main>

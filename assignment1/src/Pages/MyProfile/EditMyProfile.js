@@ -3,15 +3,18 @@ import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
 import { getUser, setUser } from "../../Repository/Repository.js";
 import { useNavigate } from "react-router-dom";
-import NavigationBar from "../../components/nav/Nav/Nav";
+import { getReviewsByWritter } from "../../Pages/Review/Repository";
+import Post from "../../components/Post/Post";
+
 function EditMyProfile() {
-  const userData = getUser();
+  const data = getUser();
+  const reviews = getReviewsByWritter(data.username);
   const navigate = useNavigate();
   const [editedData, setEditedData] = useState({
-    username: userData?.username || "", // Initialize with existing username
-    password: userData?.password || "", // Initialize with existing password
-    email: userData?.email || "", // Initialize with existing email
-    date: userData.date,
+    username: data?.username || "", // Initialize with existing username
+    password: data?.password || "", // Initialize with existing password
+    email: data?.email || "", // Initialize with existing email
+    date: data.date,
   });
 
   const handleInputChange = (event) => {
@@ -36,9 +39,22 @@ function EditMyProfile() {
     <div>
       <div className="myprofile-container">
         <h1>My Profile</h1>
-        <form onSubmit={handleUpdateClick}>
-          <div className="myprofile-data">
-            <div className="myprofile-form">
+        <div className="myprofile-wrapper">
+          <div className="myprofile-post">
+            {reviews.length === 0 ? (
+              <span>No posts have been submitted.</span>
+            ) : (
+              reviews.map((review) => (
+                <Post
+                  title={review.filmTitle}
+                  rating={review.rating}
+                  content={review.content.replace(/___LINE_BREAK___/g, "<br>")}
+                />
+              ))
+            )}
+          </div>
+          <div className="myprofile-form">
+            <form onSubmit={handleUpdateClick}>
               <div className="myprofile-detail">
                 <div>
                   <p className="myprofile-form-member">
@@ -79,10 +95,23 @@ function EditMyProfile() {
               </div>
               <div className="myprofile-button">
                 <Button type="Submit">Update</Button>
+                <Button
+                  style={{ backgroundColor: "grey" }}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Are you sure you wish to cancel this form ?"
+                      )
+                    ) {
+                      navigate("/myprofile");
+                    }
+                  }}
+                  children="Cancel"
+                ></Button>
               </div>
-            </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

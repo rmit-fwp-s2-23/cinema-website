@@ -3,27 +3,28 @@ import "./Review.css";
 import StarRating from "../../components/Rate/StarRating.js";
 import React, { useState } from "react";
 import Button from "../../components/nav/Button/Button.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getReviewsByTitle, createReview } from "./Repository.js";
 import Post from "../../components/Post/Post.js";
 
-function Review(props) {
-  const filmTitle = "Tom and Jerry";
+function Review() {
+  const title = useLocation().state;
   const user = getUser();
   const navigate = useNavigate();
-  const [reviews, setReviews] = useState(getReviewsByTitle("Tom and Jerry"));
-  const [rating, setRating] = useState(0);
+  const [reviews, setReviews] = useState(getReviewsByTitle(title));
+  const [rating, setRating] = useState(0);  
   const [hover, setHover] = useState(0);
   const [post, setPost] = useState("");
   function handleChange(event) {
     setPost(event.target.value);
+    console.log(title);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    const data = {post: post, rating: rating};
-    createReview(filmTitle, data, user.username);
-    setReviews(getReviewsByTitle('Tom and Jerry'));
+    const data = {content: post, rating: rating};
+    createReview(title, data, user.username);
+    setReviews(getReviewsByTitle(title));
     setPost("");
     setRating(0);
     setHover(0);
@@ -36,7 +37,7 @@ function Review(props) {
         <div>
           <h1>Review</h1>
         </div>
-        <div className="review-film">Tom and Jerry</div>
+        <div className="review-film">{title}</div>
         <div className="review-info">
           {" "}
           You review as <span>{user.username}</span>:
@@ -96,7 +97,7 @@ function Review(props) {
             <Post
               title={review.filmTitle}
               rating={review.rating}
-              content={review.post.replace(/___LINE_BREAK___/g, "<br>")}
+              content={review.content.replace(/___LINE_BREAK___/g, "<br />")}
             />
           ))
         )}

@@ -37,11 +37,12 @@ function MyProfile() {
                 <Post
                   title={review.filmTitle}
                   rating={review.rating}
-                  content={review.post.replace(/___LINE_BREAK___/g, '<br>')}
+                  content={review.content.replace(/___LINE_BREAK___/g, "<br />")}
                 />
               ))
             )}
           </div>
+          <div className="myprofile-button"></div>
           <div className="myprofile-form">
             <div className="myprofile-detail">
               <div className="myprofile-form-member">
