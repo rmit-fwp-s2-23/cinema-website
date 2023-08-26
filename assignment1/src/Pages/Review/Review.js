@@ -17,7 +17,6 @@ function Review() {
   const [post, setPost] = useState("");
   function handleChange(event) {
     setPost(event.target.value);
-    console.log(title);
   }
 
   function handleSubmit(event) {
@@ -116,11 +115,12 @@ function Review() {
         {reviews.length === 0 ? (
           <span>No posts have been submitted.</span>
         ) : (
-          reviews.map((review) => (
+          reviews.map((review, key) => (
             <Post
               title={review.filmTitle}
               rating={review.rating}
-              content={review.content.replace(/___LINE_BREAK___/g, "<br />")}
+              content={review.content}
+              id={key}
             />
           ))
         )}

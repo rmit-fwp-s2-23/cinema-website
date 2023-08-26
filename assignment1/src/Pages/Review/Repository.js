@@ -6,10 +6,11 @@ function initReview() {
     localStorage.setItem(FILMS, JSON.stringify(data));
   }
 }
+
 function createReview(filmTitle, data, username) {
   data.filmTitle = filmTitle;
   data.writter = username;
-  data.content = data.content.replace(/\n/g, '___LINE_BREAK___');
+  data.content = data.content.replace(/\n/g, "___LINE_BREAK___");
   if (localStorage.getItem(FILMS) === null) {
     const lsFilm = new Array();
     lsFilm.push(data);
@@ -35,6 +36,7 @@ function getReviewsByWritter(username) {
   const films = JSON.parse(localStorage.getItem(FILMS));
   let filtered_films = films.filter((film) => {
     if (username === film.writter) {
+      film.content = film.content.replace(/___LINE_BREAK___/g, "<br>");
       return film;
     }
   });
@@ -44,6 +46,7 @@ function getReviewsByWritter(username) {
 function getReviewsByTitle(title) {
   const films = JSON.parse(localStorage.getItem(FILMS));
   let filtered_films = films.filter((film) => {
+    film.content = film.content.replace(/___LINE_BREAK___/g, "<br>");
     if (title === film.filmTitle) {
       return film;
     }
@@ -51,10 +54,16 @@ function getReviewsByTitle(title) {
   return filtered_films;
 }
 
+function changeReview(id, data){
+  const films = JSON.parse(localStorage.getItem(FILMS));
+  films[id] = data;
+  localStorage.setItem(FILMS, JSON.stringify(films));
+}
 export {
   createReview,
   deleteReview,
   getReviewsByWritter,
   getReviewsByTitle,
   initReview,
+  changeReview
 };

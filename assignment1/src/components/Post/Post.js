@@ -7,6 +7,7 @@ function Post(props) {
     title: props.title,
     rating: props.rating,
     content: props.content,
+    id : props.id
   };
   function handleUpdateClick() {
     navigate("/EditPost", { state: data });
@@ -15,7 +16,7 @@ function Post(props) {
     <div className="post-container">
       <div className="post-wrapper">
         <div className="post-title">
-          <h1>{props.title}</h1>
+          <h1>{props.id}: {props.title}</h1>
         </div>
         <div className="post-rating">
           {[...Array(props.rating)].map(() => {
