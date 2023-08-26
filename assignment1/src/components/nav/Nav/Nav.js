@@ -17,7 +17,7 @@ const NavigationBar = () => {
   return (
     <nav className="navigation-bar">
       <a href="/" className="logo">
-        77 Movie
+        Loop Cinemas
       </a>
       <div className="dropdown-menu">
         <div className="hamburger" onMouseOver={toggleMenu}>
@@ -32,9 +32,9 @@ const NavigationBar = () => {
           <a href="#" className="dropdown-item">
             About
           </a>
-          <a href="#" className="dropdown-item">
+          {/* <a href="#" className="dropdown-item">
             Services
-          </a>
+          </a> */}
           {data !== null && (
             <React.Fragment>
               <Link to="/MyProfile" className="dropdown-item">

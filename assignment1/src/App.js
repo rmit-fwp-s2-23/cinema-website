@@ -7,7 +7,7 @@ import Login from "./Pages/Login/Login";
 import MyProfile from "./Pages/MyProfile/MyProfile";
 import Home from "./Pages/Home/Home";
 import EditMyProfile from "./Pages/MyProfile/EditMyProfile";
-import NavigationBar from "./components/nav/Nav/Nav";
+import NavigationBar from "./components/nav/Nav/Nav.js";
 import Review from "./Pages/Review/Review";
 import { initReview } from "./Pages/Review/Repository";
 import EditPost from "./components/Post/EditPost";
@@ -19,9 +19,11 @@ function App() {
 
     <div>
       <div className="App">
-        <Router>
+        <div className="content">
+
+         <Router>
           <NavigationBar />
-          <main role="main">
+           <main role="main">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="register" element={<Register />} />
@@ -32,9 +34,10 @@ function App() {
               <Route path="editpost" element={<EditPost />} />
               {/* Add other routes here */}
             </Routes>
-          </main>
+           </main>
           <Footer />
         </Router>
+        </div>
       </div>
 
     </div>

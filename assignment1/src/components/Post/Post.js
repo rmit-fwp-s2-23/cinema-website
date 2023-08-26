@@ -7,15 +7,15 @@ function Post(props) {
     title: props.title,
     rating: props.rating,
     content: props.content,
+    id: props.id,
   };
-  function handleUpdateClick() {
-    navigate("/EditPost", { state: data });
-  }
   return (
     <div className="post-container">
       <div className="post-wrapper">
         <div className="post-title">
-          <h1>{props.title}</h1>
+          <h1>
+            {props.id}: {props.title}
+          </h1>
         </div>
         <div className="post-rating">
           {[...Array(props.rating)].map(() => {
@@ -29,9 +29,8 @@ function Post(props) {
           })}
         </div>
         <div className="post-content">
-          <p dangerouslySetInnerHTML={{ __html: props.content }}></p>
+          <pre style={{fontSize : "1rem"}}>{props.content}</pre>
         </div>
-        <Button onClick={handleUpdateClick}>Edit</Button>
       </div>
     </div>
   );

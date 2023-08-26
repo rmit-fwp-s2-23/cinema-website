@@ -40,19 +40,6 @@ function EditMyProfile() {
       <div className="myprofile-container">
         <h1>My Profile</h1>
         <div className="myprofile-wrapper">
-          <div className="myprofile-post">
-            {reviews.length === 0 ? (
-              <span>No posts have been submitted.</span>
-            ) : (
-              reviews.map((review) => (
-                <Post
-                  title={review.filmTitle}
-                  rating={review.rating}
-                  content={review.content.replace(/___LINE_BREAK___/g, "<br>")}
-                />
-              ))
-            )}
-          </div>
           <div className="myprofile-form">
             <form onSubmit={handleUpdateClick}>
               <div className="myprofile-detail">
@@ -111,6 +98,20 @@ function EditMyProfile() {
               </div>
             </form>
           </div>
+        </div>
+        <div className="myprofile-post">
+          {reviews.length === 0 ? (
+            <span>No posts have been submitted.</span>
+          ) : (
+            reviews.map((review, key) => (
+              <Post
+                title={review.title}
+                rating={review.rating}
+                content={review.content.replace(/___LINE_BREAK___/g, "<br>")}
+                id={key}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>

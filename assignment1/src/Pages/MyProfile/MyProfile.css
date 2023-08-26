@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  max-width: 800px; 
+  margin: 0 auto; 
+  
 }
 
 .myprofile-container h1 {
@@ -11,9 +14,14 @@
   margin-bottom: 20px;
 }
 .myprofile-wrapper {
+  
   display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
   gap: 10px;
 }
+
+
 .myprofile-form {
   flex: 1;
   width:100%;
@@ -27,22 +35,33 @@
   border: 5px solid rgba(59, 119, 139, 0.4);
   border-radius: 8px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .myprofile-form form {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 
 }
 .myprofile-post {
-  flex: 1;
+  flex: 2;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  max-width: 600px; /* Set the maximum width you prefer */
+  min-width: 400px;
+  margin: 0 auto;
 }
 .myprofile-detail {
   flex: 1;
+  margin-bottom: 20px;
 }
 
 .myprofile-form-member {
@@ -67,7 +86,5 @@
 .myprofile-button {
   flex: 1;
   text-align: center;
-
 }
 
-/* You can define more specific styles for your Button component here */
