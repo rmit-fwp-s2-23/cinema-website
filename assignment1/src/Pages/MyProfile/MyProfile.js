@@ -32,6 +32,7 @@ function MyProfile() {
       <div className="myprofile-container">
         <h1>My Profile </h1>
         <div className="myprofile-wrapper">
+
           <div className="myprofile-post">
             {reviews === null ? (
               <span>No posts have been submitted.</span>
@@ -64,7 +65,11 @@ function MyProfile() {
             )}
           </div>
           <div className="myprofile-button"></div>
+
           <div className="myprofile-form">
+            <form>
+
+            
             <div className="myprofile-detail">
               <div className="myprofile-form-member">
                 <p>
@@ -91,10 +96,13 @@ function MyProfile() {
                 </p>
               </div>
             </div>
+
+
+
             <div className="myprofile-button">
-              <Button onClick={handleUpdateClick}>Edit</Button>
             </div>
             <div className="myprofile-button">
+              <Button onClick={handleUpdateClick}>Edit</Button>
               <Button
                 style={{ backgroundColor: "red" }}
                 className="delete-button"
@@ -108,7 +116,22 @@ function MyProfile() {
               >
                 Delete
               </Button>
+              
             </div>
+            </form>
+          </div>
+          <div className="myprofile-post">
+            {reviews.length === 0 ? (
+              <span>No posts have been submitted.</span>
+            ) : (
+              reviews.map((review) => (
+                <Post
+                  title={review.filmTitle}
+                  rating={review.rating}
+                  content={review.content.replace(/___LINE_BREAK___/g, "<br />")}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

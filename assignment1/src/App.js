@@ -19,9 +19,11 @@ function App() {
 
     <div>
       <div className="App">
-        <Router>
+        <div className="content">
+
+         <Router>
           <NavigationBar />
-          <main role="main">
+           <main role="main">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="register" element={<Register />} />
@@ -32,9 +34,10 @@ function App() {
               <Route path="editpost" element={<EditPost />} />
               {/* Add other routes here */}
             </Routes>
-          </main>
+           </main>
           <Footer />
         </Router>
+        </div>
       </div>
 
     </div>
