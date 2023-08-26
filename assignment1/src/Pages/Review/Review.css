@@ -1,7 +1,7 @@
 .review-container {
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .review-container h1 {
@@ -18,16 +18,20 @@
     margin-left: 30px;
     font-size: 25px;
 }
+
 .review-info span {
     text-decoration: underline;
     color: blue;
 }
+
 .review-rating {
     margin-bottom: 30px;
 }
+
 .review-content {
     height: 30vh;
 }
+
 .review-content .review-content-textarea {
     width: 70%;
     height: 70%;
@@ -37,6 +41,7 @@
     display: flex;
     justify-content: right;
 }
+
 .review-buttons button {
     margin-right: 30px;
     width: 100px;
@@ -51,11 +56,12 @@
 
 .post-container {
     width: 70%;
+    height: fit-content;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    border-radius: 8px; /* Add a subtle box shadow */
+    border-radius: 8px;
+    /* Add a subtle box shadow */
 }
-
