@@ -37,7 +37,7 @@ function MyProfile() {
                 <Post
                   title={review.filmTitle}
                   rating={review.rating}
-                  content={review.textarea.replace(/___LINE_BREAK___/g, '<br>')}
+                  content={review.post.replace(/___LINE_BREAK___/g, '<br>')}
                 />
               ))
             )}

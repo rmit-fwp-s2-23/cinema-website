@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./Pages/register/Register";
@@ -8,8 +8,10 @@ import Home from "./Pages/Home/Home";
 import EditMyProfile from "./Pages/MyProfile/EditMyProfile";
 import NavigationBar from "./components/nav/Nav/Nav";
 import Review from "./Pages/Review/Review";
+import { initReview, createReview } from "./Pages/Review/Repository";
 
 function App() {
+  initReview();
   return (
     <div>
       <div className="App">
