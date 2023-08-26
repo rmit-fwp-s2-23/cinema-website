@@ -6,7 +6,7 @@ import ReleaseComponent from '../../components/movie/Release';
 const Home = () => {
   return (
     <div className="home">
-      <h1>Welcome to 77 Movie</h1>
+      <h1>Welcome to 77 Movies</h1>
       <MovieList movies={movieData} />
       <ReleaseComponent/>
     </div>
