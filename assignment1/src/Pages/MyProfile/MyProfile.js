@@ -32,7 +32,56 @@ function MyProfile() {
       <div className="myprofile-container">
         <h1>My Profile </h1>
         <div className="myprofile-wrapper">
+          <div className="myprofile-form">
+            <form>
+              <div className="myprofile-detail">
+                <div className="myprofile-form-member">
+                  <p>
+                    <strong>Username: </strong>
+                    <span>{user.username}</span>
+                  </p>
+                </div>
+                <div className="myprofile-form-member">
+                  <p>
+                    <strong>Password: </strong>
+                    <span>{user.password}</span>
+                  </p>
+                </div>
+                <div className="myprofile-form-member">
+                  <p>
+                    <strong>Email: </strong>
+                    <span>{user.email}</span>
+                  </p>
+                </div>
+                <div className="myprofile-form-member">
+                  <p>
+                    <strong>Joining Date: </strong>
+                    <span>{user.date}</span>
+                  </p>
+                </div>
+              </div>
 
+              <div className="myprofile-button"></div>
+              <div className="myprofile-button">
+                <Button onClick={handleUpdateClick}>Edit</Button>
+                <Button
+                  style={{ backgroundColor: "red" }}
+                  className="delete-button"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Are you sure you wish to delete this item?"
+                      )
+                    ) {
+                      handleDeleteClick();
+                    }
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
+            </form>
+          </div>
           <div className="myprofile-post">
             {reviews === null ? (
               <span>No posts have been submitted.</span>
@@ -48,88 +97,21 @@ function MyProfile() {
                     )}
                     id={key}
                   />
-                  <Button
-                    onClick={() =>
-                      handleUpdateReviewClick(
-                        review.title,
-                        review.rating,
-                        review.content,
-                        key
-                      )
-                    }
-                  >
-                    Edit
-                  </Button>
+                  <div className="myprofile-button">
+                    <Button
+                      onClick={() =>
+                        handleUpdateReviewClick(
+                          review.title,
+                          review.rating,
+                          review.content,
+                          key
+                        )
+                      }
+                    >
+                      Edit
+                    </Button>
+                  </div>
                 </div>
-              ))
-            )}
-          </div>
-          <div className="myprofile-button"></div>
-
-          <div className="myprofile-form">
-            <form>
-
-            
-            <div className="myprofile-detail">
-              <div className="myprofile-form-member">
-                <p>
-                  <strong>Username: </strong>
-                  <span>{user.username}</span>
-                </p>
-              </div>
-              <div className="myprofile-form-member">
-                <p>
-                  <strong>Password: </strong>
-                  <span>{user.password}</span>
-                </p>
-              </div>
-              <div className="myprofile-form-member">
-                <p>
-                  <strong>Email: </strong>
-                  <span>{user.email}</span>
-                </p>
-              </div>
-              <div className="myprofile-form-member">
-                <p>
-                  <strong>Joining Date: </strong>
-                  <span>{user.date}</span>
-                </p>
-              </div>
-            </div>
-
-
-
-            <div className="myprofile-button">
-            </div>
-            <div className="myprofile-button">
-              <Button onClick={handleUpdateClick}>Edit</Button>
-              <Button
-                style={{ backgroundColor: "red" }}
-                className="delete-button"
-                onClick={() => {
-                  if (
-                    window.confirm("Are you sure you wish to delete this item?")
-                  ) {
-                    handleDeleteClick();
-                  }
-                }}
-              >
-                Delete
-              </Button>
-              
-            </div>
-            </form>
-          </div>
-          <div className="myprofile-post">
-            {reviews.length === 0 ? (
-              <span>No posts have been submitted.</span>
-            ) : (
-              reviews.map((review) => (
-                <Post
-                  title={review.filmTitle}
-                  rating={review.rating}
-                  content={review.content.replace(/___LINE_BREAK___/g, "<br />")}
-                />
               ))
             )}
           </div>
