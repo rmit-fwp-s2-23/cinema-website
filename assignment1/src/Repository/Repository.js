@@ -2,6 +2,7 @@ const USER_KEY = "user";
 
 function createUser(username, user, joinedDate) {
   user.date = joinedDate;
+  user.reviewedFilm = new Array();
   localStorage.setItem(username, JSON.stringify(user));
 }
 function checkValidEmail(email) {
