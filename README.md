@@ -98,3 +98,12 @@ This folder is used to store all the files that is used to deal with localStorag
 `Account.js`: This file is used to deal with all the data related to user account in localStorage.
 `Review.js`: This file is used to deal with all the data related to review/feeback in localStorage.
 `Security.js`: This file is used to deal with all the data related to handle fake posts in localStorage.
+
+# Development Environment
+### Global Requirements
+
+| Requirement                        | Version |
+|:-----------------------------------|:-------:|
+| [ReactJS](https://react.dev/)      | 18.2.0  |
+
+
