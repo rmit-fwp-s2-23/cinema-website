@@ -9,7 +9,7 @@
     padding: 10px;
     text-align: left;
     max-width: 550px;
-    height: 250px;
+
     align-items: center;
     object-fit: cover;
 }
@@ -19,7 +19,10 @@
 }
 
 .post-content {
-    word-wrap: break-word;
-    max-height: 200px; /* Adjust the max height as needed */
-    overflow: hidden;
+    /* Adjust the max height as needed */
+    overflow-wrap: break-word;
+}
+
+.post-wrapper {
+    max-width: 100%;
 }

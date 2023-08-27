@@ -54,7 +54,7 @@
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 8px;
-  max-width: 600px; /* Set the maximum width you prefer */
+  max-width: 400px; /* Set the maximum width you prefer */
   min-width: 400px;
   margin: 0 auto;
 }
@@ -93,7 +93,7 @@
 .myprofile-button {
   flex: 1;
   text-align: center;
-  width: 100%;
+  width: 50%;
 }
 
 .form-group {
