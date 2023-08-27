@@ -41,11 +41,13 @@ function EditMyProfile() {
     setErrorEmailMessage("");
     setErrorPasswordMessage("");
     //check valid data
-    if (localStorage.getItem(editedData.username) !== null) {
-      setErrorUsernameMessage(
-        "This username is already used. Please use another username !"
-      );
-      return;
+    if (editedData.username !== user.username) {
+      if (localStorage.getItem(editedData.username) !== null) {
+        setErrorUsernameMessage(
+          "This username is already used. Please use another username !"
+        );
+        return;
+      }
     }
     if (
       !/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(
@@ -55,11 +57,13 @@ function EditMyProfile() {
       setErrorPasswordMessage("Invalid Password");
       return;
     }
-    if (!checkValidEmail(editedData.email)) {
-      setErrorEmailMessage(
-        "This email is already used. Please use another email !"
-      );
-      return;
+    if (editedData.email !== user.email) {
+      if (!checkValidEmail(editedData.email)) {
+        setErrorEmailMessage(
+          "This email is already used. Please use another email !"
+        );
+        return;
+      }
     }
     //change the profile of this account in localStorage
     setUser(editedData);
