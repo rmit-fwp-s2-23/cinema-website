@@ -10,7 +10,6 @@ function initReview() {
 
 //add the review to the reviews list in localStorage
 function createReview(data) {
-  data.content = data.content.replace(/\n/g, "___LINE_BREAK___");
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
   reviews.push(data);
   localStorage.setItem(REVIEWS, JSON.stringify(reviews));
@@ -35,20 +34,17 @@ function getReviewsByWritter(user) {
   if (reviews !== null) {
     let filtered_reviews = reviews.filter((review) => {
       if (user.username === review.writer) {
-        review.content = review.content.replace(/___LINE_BREAK___/g, "\n");
         return review;
       }
     });
     return filtered_reviews;
   }
-  return reviews;
 }
 
 //get all the reviews of a specific film
 function getReviewsByTitle(title) {
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
   let filtered_reviews = reviews.filter((review) => {
-    review.content = review.content.replace(/___LINE_BREAK___/g, "\n");
     if (title === review.title) {
       return review;
     }
@@ -57,8 +53,9 @@ function getReviewsByTitle(title) {
 }
 
 //edit the review with a id of review
-function changeReview(id, data) {
-  const reviews = JSON.parse(localStorage.getItem(REVIEWS));
+function changeReview(id, data, user) {
+  const reviews = getReviewsByWritter(user);
+  console.log(reviews);
   reviews[id].content = data.content;
   reviews[id].rating = data.rating;
   localStorage.setItem(REVIEWS, JSON.stringify(reviews));

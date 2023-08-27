@@ -4,7 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import react, { useState } from "react";
 import Button from "../../components/Button/Button";
 import "../../components/Rate/StarRating.css";
+import { getUser } from "../../Repository/Account";
 function EditPost() {
+  const user = getUser();
   const navigate = useNavigate();
   const post = useLocation().state;
   const [errorMessage, setErrorMessage] = useState(null);
@@ -27,8 +29,8 @@ function EditPost() {
       setErrorMessage("A post cannot exceed 250 words.");
       return;
     }
-    const data = { content: content, rating: rating };
-    changeReview(post.id, data);
+    const data = { content: postTrimmed, rating: rating };
+    changeReview(post.id, data, user);
     navigate("/myprofile");
     return;
   }

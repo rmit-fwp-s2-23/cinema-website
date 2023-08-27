@@ -156,9 +156,10 @@ function EditMyProfile() {
             ) : (
               reviews.map((review, key) => (
                 <Post
+                  writer={user.username}
                   title={review.title}
                   rating={review.rating}
-                  content={review.content.replace(/___LINE_BREAK___/g, "<br>")}
+                  content={review.content}
                   id={key}
                 />
               ))
