@@ -1,6 +1,7 @@
 # rmit2023b-cosc2758-fullstack - Loop Cinemas
 
-## Background: During the COVID-19 pandemic, it was expected that many businesses and some industries would cease to exist after a
+## Background: 
+During the COVID-19 pandemic, it was expected that many businesses and some industries would cease to exist after a
 few years of being closed. One such industry was the film and cinema industry. Fortunately, going to see a movie in
 person has continued to exist, with some films continuing to break box office records. With the ever-growing adoption
 of streaming platforms such as Netflix, cinema operators are looking at ways to improve the way that they engage with
