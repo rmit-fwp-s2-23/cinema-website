@@ -28,6 +28,7 @@ const Register = () => {
     const date = new Date().toLocaleDateString();
     setDate(date);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrorUsernameMessage("");
