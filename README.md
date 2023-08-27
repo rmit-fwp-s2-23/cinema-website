@@ -59,3 +59,40 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+# Folder Structure:
+C:.
+├───components
+│   ├───Button
+│   ├───footer
+│   ├───movie
+│   ├───nav
+│   ├───Post
+│   └───Rate
+├───Pages
+│   ├───EditPost
+│   ├───Home
+│   ├───Login
+│   ├───MyProfile
+│   ├───register
+│   └───Review
+└───Repository
+
+## There are 3 main folders in /scr: Components, Pages and Repository.
+### Components
+This folder stores components such as navbar, footer, post, etc
+
+### Pages
+All main pages are stored in this folder.
+- Register folder: this folder is used to store register page.
+- Login folder: This folder is used to store login page.
+- EditPost folder: This folder is used to store the page used to edit review post.
+- Review folder: This folder is used to store review film page.
+- MyProfile folder: This folder is used to store both Profile page and Edit Profile page.
+- Home: This folder is used to store Homepage.
+
+### Repository
+This folder is used to store all the files that is used to deal with localStorage.
+- Account.js: This file is used to deal with all the data related to user account in localStorage.
+- Review.js: This file is used to deal with all the data related to review/feeback in localStorage.
+- Security.js: This file is used to deal with all the data related to handle fake posts in localStorage.
