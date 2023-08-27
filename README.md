@@ -86,15 +86,15 @@ This folder stores components such as navbar, footer, post, etc
 
 ### Pages
 All main pages are stored in this folder.
-- Register folder: this folder is used to store register page.
-- Login folder: This folder is used to store login page.
-- EditPost folder: This folder is used to store the page used to edit review post.
-- Review folder: This folder is used to store review film page.
-- MyProfile folder: This folder is used to store both Profile page and Edit Profile page.
-- Home: This folder is used to store Homepage.
+`Register folder`: this folder is used to store register page.
+`Login folder`: This folder is used to store login page.
+`EditPost folder`: This folder is used to store the page used to edit review post.
+`Review folder`: This folder is used to store review film page.
+`MyProfile folder`: This folder is used to store both Profile page and Edit Profile page.
+`Home folder`: This folder is used to store Homepage.
 
 ### Repository
 This folder is used to store all the files that is used to deal with localStorage.
-- Account.js: This file is used to deal with all the data related to user account in localStorage.
-- Review.js: This file is used to deal with all the data related to review/feeback in localStorage.
-- Security.js: This file is used to deal with all the data related to handle fake posts in localStorage.
+`Account.js`: This file is used to deal with all the data related to user account in localStorage.
+`Review.js`: This file is used to deal with all the data related to review/feeback in localStorage.
+`Security.js`: This file is used to deal with all the data related to handle fake posts in localStorage.
