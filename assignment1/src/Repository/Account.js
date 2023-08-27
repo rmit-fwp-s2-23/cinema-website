@@ -35,7 +35,7 @@ function getUser() {
   return JSON.parse(data);
 }
 
-//after logginng in, set that account to the user key in local storage
+//set a new userkey after fix the information
 function setUser(data) {
   const user = JSON.parse(localStorage.getItem(USER_KEY));
   createAccount(data, data.date);

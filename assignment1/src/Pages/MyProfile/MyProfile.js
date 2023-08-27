@@ -1,18 +1,23 @@
 import "./MyProfile.css";
 import Button from "../../components/Button/Button";
 import { getReviewsByWritter } from "../../Repository/Review";
-import { getUser, deleteAccount, removeUser } from "../../Repository/Account.js";
+import {
+  getUser,
+  deleteAccount,
+  removeUser,
+} from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
-import { deleteReview } from "../../Repository/Review";
+import { deleteReview, removeReview } from "../../Repository/Review";
 import { deleteSecurity } from "../../Repository/Security";
 import Post from "../../components/Post/Post";
+import {useState} from 'react';
 
 function MyProfile() {
   const navigate = useNavigate();
   //get the user from local storage
   const user = getUser();
   // get all the reviews posted by this account
-  const reviews = getReviewsByWritter(user);
+  const [reviews, setReviews] = useState(getReviewsByWritter(user));
 
   //click the edit button which will direct to edit profile
   const handleUpdateClick = () => {
@@ -25,6 +30,10 @@ function MyProfile() {
     navigate("/EditPost", { state: data });
   }
 
+  function handleRemoveReviewClick(id){
+    removeReview(id, user);
+    setReviews(getReviewsByWritter(user));
+  }
   //this change handler will delete all the information related to this account from local storage
   const handleDeleteClick = () => {
     deleteReview(user);
@@ -115,6 +124,21 @@ function MyProfile() {
                       }
                     >
                       Edit
+                    </Button>
+                    <Button
+                      style={{ backgroundColor: "red" }}
+                      className="delete-button"
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            "Are you sure you wish to delete this review?"
+                          )
+                        ) {
+                          handleRemoveReviewClick(key);
+                        }
+                      }}
+                    >
+                      Delete
                     </Button>
                   </div>
                 </div>

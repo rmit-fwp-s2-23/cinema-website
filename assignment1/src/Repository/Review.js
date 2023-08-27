@@ -1,3 +1,4 @@
+import isEqual from "lodash/isEqual";
 const REVIEWS = "reviews";
 
 //create an empty array with key named "reviews" in localStorage when running the web for first time
@@ -55,12 +56,24 @@ function getReviewsByTitle(title) {
 //edit the review with a id of review
 function changeReview(id, data, user) {
   const reviews = getReviewsByWritter(user);
-  console.log(reviews);
   reviews[id].content = data.content;
   reviews[id].rating = data.rating;
   localStorage.setItem(REVIEWS, JSON.stringify(reviews));
 }
 
+//remove the review 
+function removeReview(id, user) {
+  let reviews = getReviewsByWritter(user);
+  let filtered_review = reviews[id];
+  console.log(filtered_review);
+  reviews = JSON.parse(localStorage.getItem(REVIEWS));
+  console.log(reviews);
+  let final_reviews = reviews.filter(
+    (review) => !isEqual(review, filtered_review)
+  );
+  console.log(final_reviews);
+  localStorage.setItem(REVIEWS, JSON.stringify(final_reviews));
+}
 //get the average rating of a specific film
 function getAverageRating(title) {
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
@@ -90,4 +103,5 @@ export {
   initReview,
   changeReview,
   getAverageRating,
+  removeReview,
 };
