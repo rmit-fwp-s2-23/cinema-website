@@ -9,7 +9,7 @@ import EditMyProfile from "./Pages/MyProfile/EditMyProfile";
 import NavigationBar from "./components/nav/Nav.js";
 import Review from "./Pages/Review/Review";
 import { initReview } from "./Repository/Review";
-import EditPost from "./components/Post/EditPost";
+import EditPost from "./Pages/EditPost/EditPost";
 import Footer from './components/footer/Footer';
 import { initSecurity } from "./Repository/Security";
 function App() {

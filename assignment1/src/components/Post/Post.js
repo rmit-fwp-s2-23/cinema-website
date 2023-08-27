@@ -1,6 +1,6 @@
 import "./Post.css";
 import "../Rate/StarRating.css";
-import { useNavigate } from "react-router-dom";
+
 function Post(props) {
   return (
     <div className="post-container">

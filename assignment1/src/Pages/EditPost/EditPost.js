@@ -1,9 +1,9 @@
-import "./EditPost.css";
+import "../EditPost/EditPost.css";
 import { changeReview } from "../../Repository/Review";
 import { useLocation, useNavigate } from "react-router-dom";
 import react, { useState } from "react";
-import Button from "../Button/Button";
-import "../Rate/StarRating.css";
+import Button from "../../components/Button/Button";
+import "../../components/Rate/StarRating.css";
 function EditPost() {
   const navigate = useNavigate();
   const post = useLocation().state;
