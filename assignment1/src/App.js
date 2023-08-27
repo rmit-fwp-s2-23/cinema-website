@@ -6,7 +6,7 @@ import Login from "./Pages/Login/Login";
 import MyProfile from "./Pages/MyProfile/MyProfile";
 import Home from "./Pages/Home/Home";
 import EditMyProfile from "./Pages/MyProfile/EditMyProfile";
-import NavigationBar from "./components/nav/Nav/Nav.js";
+import NavigationBar from "./components/nav/Nav.js";
 import Review from "./Pages/Review/Review";
 import { initReview } from "./Repository/Review";
 import EditPost from "./components/Post/EditPost";

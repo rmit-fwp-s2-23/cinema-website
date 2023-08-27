@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Nav.css";
 import { Link } from "react-router-dom";
-import { getUser, removeUser } from "../../../Repository/Account.js";
+import { getUser, removeUser } from "../../Repository/Account.js";
 
 const NavigationBar = () => {
   const data = getUser();
@@ -59,10 +59,6 @@ const NavigationBar = () => {
               </Link>
             </React.Fragment>
           )}
-          {/* <a href="login" className="dropdown-item">Login</a>
-          <a href="signup" className="dropdown-item">Sign Up</a> */}
-
-          {/* Add your dropdown content here */}
         </div>
       </div>
     </nav>

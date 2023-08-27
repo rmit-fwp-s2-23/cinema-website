@@ -1,19 +1,23 @@
 const USER_KEY = "user";
 
-function createUser(user, joinedDate) {
+//create an account in the localStorage with the key is the username 
+function createAccount(user, joinedDate) {
   user.date = joinedDate;
   localStorage.setItem(user.username, JSON.stringify(user));
 }
+
+//check if registered email is exist or not
 function checkValidEmail(email) {
   for (let i = 0; i < localStorage.length; i++) {
-    const user = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (email === user.email) {
+    const data = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (email === data.email) {
       return false;
     }
   }
   return true;
 }
 
+//check if account is exist or not (used in log in page)
 function verifyUser(username, password) {
   if (localStorage.getItem(username) !== null) {
     const user = JSON.parse(localStorage.getItem(username));
@@ -25,30 +29,35 @@ function verifyUser(username, password) {
   return false;
 }
 
+//get all the information of current account
 function getUser() {
   const data = localStorage.getItem(USER_KEY);
   return JSON.parse(data);
 }
 
+//after logginng in, set that account to the user key in local storage
 function setUser(data) {
   const user = JSON.parse(localStorage.getItem(USER_KEY));
-  createUser(data, data.date);
-  deleteUser(user.username);
+  createAccount(data, data.date);
+  deleteAccount(user.username);
   localStorage.setItem(USER_KEY, JSON.stringify(data));
 }
 
+//remove user key after logging out (used in log out function)
 function removeUser() {
   localStorage.removeItem(USER_KEY);
 }
-function deleteUser(username) {
-  localStorage.removeItem(username);
+
+//delete the account (used in delete function)
+function deleteAccount(user) {
+  localStorage.removeItem(user.username);
 }
 export {
   verifyUser,
   getUser,
-  createUser,
+  createAccount,
   setUser,
   removeUser,
-  deleteUser,
+  deleteAccount,
   checkValidEmail,
 };

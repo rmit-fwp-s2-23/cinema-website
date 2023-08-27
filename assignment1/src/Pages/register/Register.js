@@ -1,8 +1,8 @@
 import "./Register.css";
 import React, { useState } from "react";
 import { Link as RouterLink, useHistory, useNavigate } from "react-router-dom";
-import Button from "../../components/nav/Button/Button";
-import { createUser, checkValidEmail } from "../../Repository/Account.js";
+import Button from "../../components/Button/Button";
+import { createAccount, checkValidEmail } from "../../Repository/Account.js";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,6 +12,7 @@ const Register = () => {
     password: "",
   });
   const [date, setDate] = useState("");
+  //set some errors when user enter invalid data (username, email and password)
   const [errorEmailMessage, setErrorEmailMessage] = useState(null);
   const [errorUsernameMessage, setErrorUsernameMessage] = useState(null);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState(null);
@@ -24,6 +25,7 @@ const Register = () => {
     }));
   };
 
+  //get the exact date when creating account
   const handleButton = () => {
     const date = new Date().toLocaleDateString();
     setDate(date);
@@ -31,10 +33,11 @@ const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    //reset the errors before clicking the submit button again
     setErrorUsernameMessage("");
     setErrorEmailMessage("");
     setErrorPasswordMessage("");
-    // Save form data to local storage
+    //check valid data
     if (localStorage.getItem(formData.username) !== null) {
       setErrorUsernameMessage(
         "This username is already used. Please use another username !"
@@ -63,7 +66,8 @@ const Register = () => {
       );
       return;
     }
-    createUser(formData, date);
+    // Save form data to local storage
+    createAccount(formData, date);
     alert("Register successfully !");
     navigate("/login");
     return;
@@ -121,9 +125,11 @@ const Register = () => {
               </div>
             )}
             <div className="register-form-member">
-              <Button type="Register" onClick={handleButton}>
-                Register
-              </Button>
+              <Button
+                type="Register"
+                onClick={handleButton}
+                children="Register"
+              ></Button>
             </div>
           </form>
         </div>

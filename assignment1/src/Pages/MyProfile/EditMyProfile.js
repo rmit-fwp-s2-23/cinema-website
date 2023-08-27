@@ -1,25 +1,30 @@
 import React, { useState } from "react";
 import "./MyProfile.css";
-import Button from "../../components/nav/Button/Button";
+import Button from "../../components/Button/Button";
 import { getUser, setUser } from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
 import { getReviewsByWritter } from "../../Repository/Review";
 import Post from "../../components/Post/Post";
 import { checkValidEmail } from "../../Repository/Account.js";
+
 function EditMyProfile() {
-  const data = getUser();
-  const reviews = getReviewsByWritter(data.username);
+  //get the user from local storage
+  const user = getUser();
+  // get all the reviews posted by this account
+  const reviews = getReviewsByWritter(user);
   const navigate = useNavigate();
   const [editedData, setEditedData] = useState({
-    username: data?.username || "", // Initialize with existing username
-    password: data?.password || "", // Initialize with existing password
-    email: data?.email || "", // Initialize with existing email
-    date: data.date,
+    username: user?.username || "", // Initialize with existing username
+    password: user?.password || "", // Initialize with existing password
+    email: user?.email || "", // Initialize with existing email
+    date: user.date,
   });
+  //set some errors when user enter invalid data (username, email and password)
   const [errorEmailMessage, setErrorEmailMessage] = useState(null);
   const [errorUsernameMessage, setErrorUsernameMessage] = useState(null);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState(null);
 
+  //change handler will change the profile
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEditedData((prevData) => ({
@@ -31,9 +36,11 @@ function EditMyProfile() {
   // Function to handle the update button click
   const handleUpdateClick = (event) => {
     event.preventDefault();
+    //reset the errors before clicking the submit button again
     setErrorUsernameMessage("");
     setErrorEmailMessage("");
     setErrorPasswordMessage("");
+    //check valid data
     if (localStorage.getItem(editedData.username) !== null) {
       setErrorUsernameMessage(
         "This username is already used. Please use another username !"
@@ -45,9 +52,7 @@ function EditMyProfile() {
         editedData.password
       )
     ) {
-      setErrorPasswordMessage(
-          "Invalid Password"
-      );
+      setErrorPasswordMessage("Invalid Password");
       return;
     }
     if (!checkValidEmail(editedData.email)) {
@@ -56,10 +61,10 @@ function EditMyProfile() {
       );
       return;
     }
-
+    //change the profile of this account in localStorage
     setUser(editedData);
-    // You can implement the logic here to update the user data
     alert("Update successfully !");
+    //navigate back to myprofile page if successfully update
     navigate("/myprofile");
     return;
   };
@@ -145,18 +150,20 @@ function EditMyProfile() {
           </div>
         </div>
         <div className="myprofile-post">
-          {reviews.length === 0 ? (
-            <span>No posts have been submitted.</span>
-          ) : (
-            reviews.map((review, key) => (
-              <Post
-                title={review.title}
-                rating={review.rating}
-                content={review.content.replace(/___LINE_BREAK___/g, "<br>")}
-                id={key}
-              />
-            ))
-          )}
+          <div>
+            {reviews.length === 0 ? (
+              <span>No posts have been submitted.</span>
+            ) : (
+              reviews.map((review, key) => (
+                <Post
+                  title={review.title}
+                  rating={review.rating}
+                  content={review.content.replace(/___LINE_BREAK___/g, "<br>")}
+                  id={key}
+                />
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>

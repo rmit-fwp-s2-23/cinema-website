@@ -62,7 +62,6 @@ const movieData = [
 
     description: "",
   },
-  // Add more movie objects here
 ];
 
 export default movieData;

@@ -1,30 +1,40 @@
 import "./MyProfile.css";
-import Button from "../../components/nav/Button/Button";
+import Button from "../../components/Button/Button";
 import { getReviewsByWritter } from "../../Repository/Review";
-import { getUser, deleteUser, removeUser } from "../../Repository/Account.js";
+import { getUser, deleteAccount, removeUser } from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
 import { deleteReview } from "../../Repository/Review";
 import { deleteSecurity } from "../../Repository/Security";
 import Post from "../../components/Post/Post";
 
 function MyProfile() {
-  const user = getUser();
-  const reviews = getReviewsByWritter(user.username);
   const navigate = useNavigate();
+  //get the user from local storage
+  const user = getUser();
+  // get all the reviews posted by this account
+  const reviews = getReviewsByWritter(user);
+
+  //click the edit button which will direct to edit profile
   const handleUpdateClick = () => {
     navigate("/editmyprofile");
   };
+
+  //this change handler will direct to edit a specific post
   function handleUpdateReviewClick(title, rating, content, id) {
     const data = { title: title, rating: rating, content: content, id: id };
     navigate("/EditPost", { state: data });
   }
+
+  //this change handler will delete all the information related to this account from local storage
   const handleDeleteClick = () => {
-    deleteReview(user.username);
-    deleteSecurity(user.username);
-    deleteUser(user.username);
+    deleteReview(user);
+    deleteSecurity(user);
+    deleteAccount(user);
+    //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
     removeUser();
     navigate("/login");
   };
+
   return (
     <div>
       <div className="myprofile-container">
@@ -90,10 +100,7 @@ function MyProfile() {
                     title={review.title}
                     writer={user.username}
                     rating={review.rating}
-                    content={review.content.replace(
-                      /___LINE_BREAK___/g,
-                      "<br />"
-                    )}
+                    content={review.content}
                     id={key}
                   />
                   <div className="myprofile-button">

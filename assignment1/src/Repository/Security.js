@@ -1,11 +1,14 @@
 const SECURITY = "security";
 
+//create an empty array with key named "reviews" in localStorage when running the web for first time
 function initSecurity() {
   if (localStorage.getItem(SECURITY) === null) {
     const data = [];
     localStorage.setItem(SECURITY, JSON.stringify(data));
   }
 }
+
+//add the security to the security list in localStorage
 function createSecurity(title, user) {
   const timeNow = new Date().getTime();
   const security = JSON.parse(localStorage.getItem(SECURITY));
@@ -32,6 +35,7 @@ function createSecurity(title, user) {
   }
 }
 
+//check if the user post too many posts in 30 seconds
 function checkSecurity(title, user) {
   const security = JSON.parse(localStorage.getItem(SECURITY));
   const timeNow = new Date().getTime();
@@ -52,11 +56,12 @@ function checkSecurity(title, user) {
   return true;
 }
 
-function deleteSecurity( username) {
+//delete the related security of a account when deleting that account
+function deleteSecurity(user) {
   const security = JSON.parse(localStorage.getItem(SECURITY));
   if (security.length !== 0) {
     let filtered_security = security.filter((e) => {
-      if (e.writer != username) {
+      if (e.writer != user.username) {
         return e;
       }
     });

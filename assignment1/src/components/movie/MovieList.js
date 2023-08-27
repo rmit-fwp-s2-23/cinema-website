@@ -3,9 +3,11 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 function MovieList({ movies }) {
+  //sort the movie based on their averageRating
   const numDescending = [...movies].sort(
     (a, b) => b.averageRating - a.averageRating
   );
+  //get the highest rating movie
   const highestRatedMovie = numDescending[0];
   return (
     <div className="movie-layout">

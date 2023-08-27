@@ -1,4 +1,6 @@
 const REVIEWS = "reviews";
+
+//create an empty array with key named "reviews" in localStorage when running the web for first time
 function initReview() {
   if (localStorage.getItem(REVIEWS) === null) {
     const data = [];
@@ -6,6 +8,7 @@ function initReview() {
   }
 }
 
+//add the review to the reviews list in localStorage
 function createReview(data) {
   data.content = data.content.replace(/\n/g, "___LINE_BREAK___");
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
@@ -13,11 +16,12 @@ function createReview(data) {
   localStorage.setItem(REVIEWS, JSON.stringify(reviews));
 }
 
-function deleteReview(username) {
+//delete a specific review from reviews list in localStorage
+function deleteReview(user) {
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
   if (reviews !== null) {
     let filtered_reviews = reviews.filter((review) => {
-      if (username != review.writer) {
+      if (user.username != review.writer) {
         return review;
       }
     });
@@ -25,11 +29,12 @@ function deleteReview(username) {
   }
 }
 
-function getReviewsByWritter(username) {
+//get all the reviews with the specific writer
+function getReviewsByWritter(user) {
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
   if (reviews !== null) {
     let filtered_reviews = reviews.filter((review) => {
-      if (username === review.writer) {
+      if (user.username === review.writer) {
         review.content = review.content.replace(/___LINE_BREAK___/g, "\n");
         return review;
       }
@@ -39,6 +44,7 @@ function getReviewsByWritter(username) {
   return reviews;
 }
 
+//get all the reviews of a specific film
 function getReviewsByTitle(title) {
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
   let filtered_reviews = reviews.filter((review) => {
@@ -50,6 +56,7 @@ function getReviewsByTitle(title) {
   return filtered_reviews;
 }
 
+//edit the review with a id of review
 function changeReview(id, data) {
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
   reviews[id].content = data.content;
@@ -57,6 +64,7 @@ function changeReview(id, data) {
   localStorage.setItem(REVIEWS, JSON.stringify(reviews));
 }
 
+//get the average rating of a specific film
 function getAverageRating(title) {
   const reviews = JSON.parse(localStorage.getItem(REVIEWS));
   let averageRating = 0;

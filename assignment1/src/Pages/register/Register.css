@@ -25,6 +25,7 @@
   padding: 0;
   border-bottom: 1px solid black;
 }
+
 .register-form {
   display: flex;
   flex-direction: column;
@@ -38,7 +39,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 30px;
-  
+
 }
 
 .form-group {
@@ -46,10 +47,12 @@
   overflow-wrap: break-word;
 
 }
+
 .form-group p {
   margin: 0;
   float: left;
 }
+
 .register-form-member label {
   align-self: flex-start;
   margin-bottom: 10px;
