@@ -55,23 +55,32 @@ function getReviewsByTitle(title) {
 
 //edit the review with a id of review
 function changeReview(id, data, user) {
-  const reviews = getReviewsByWritter(user);
-  reviews[id].content = data.content;
-  reviews[id].rating = data.rating;
-  localStorage.setItem(REVIEWS, JSON.stringify(reviews));
+  let editedReviews = getReviewsByWritter(user);
+  let filtered_review = editedReviews[id];
+  console.log(filtered_review);
+  let reviews = JSON.parse(localStorage.getItem(REVIEWS));
+  let final_reviews = reviews.map((review) => {
+    if (isEqual(review, filtered_review)) {
+      return {
+        ...review,
+        content: data.content,
+        rating: data.rating,
+      };
+    }
+    return review; // Return unchanged review
+  });
+  console.log(final_reviews);
+  localStorage.setItem(REVIEWS, JSON.stringify(final_reviews));
 }
 
-//remove the review 
+//remove the review
 function removeReview(id, user) {
   let reviews = getReviewsByWritter(user);
   let filtered_review = reviews[id];
-  console.log(filtered_review);
   reviews = JSON.parse(localStorage.getItem(REVIEWS));
-  console.log(reviews);
   let final_reviews = reviews.filter(
     (review) => !isEqual(review, filtered_review)
   );
-  console.log(final_reviews);
   localStorage.setItem(REVIEWS, JSON.stringify(final_reviews));
 }
 //get the average rating of a specific film
