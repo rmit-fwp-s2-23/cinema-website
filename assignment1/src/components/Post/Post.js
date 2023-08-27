@@ -13,9 +13,8 @@ function Post(props) {
     <div className="post-container">
       <div className="post-wrapper">
         <div className="post-title">
-          <h1>
-            {props.id}: {props.title}
-          </h1>
+          <h1>{props.title}</h1>
+          <p>Postetd by <span style={{textDecoration: "underline"}}>{props.writer}</span></p>
         </div>
         <div className="post-rating">
           {[...Array(props.rating)].map(() => {
@@ -29,7 +28,7 @@ function Post(props) {
           })}
         </div>
         <div className="post-content">
-          <pre style={{fontSize : "1rem"}}>{props.content}</pre>
+          <pre style={{ fontSize: "1rem" }}>{props.content}</pre>
         </div>
       </div>
     </div>

@@ -52,4 +52,15 @@ function checkSecurity(title, user) {
   return true;
 }
 
-export { initSecurity, createSecurity, checkSecurity };
+function deleteSecurity( username) {
+  const security = JSON.parse(localStorage.getItem(SECURITY));
+  if (security.length !== 0) {
+    let filtered_security = security.filter((e) => {
+      if (e.writer != username) {
+        return e;
+      }
+    });
+    localStorage.setItem(SECURITY, JSON.stringify(filtered_security));
+  }
+}
+export { initSecurity, createSecurity, checkSecurity, deleteSecurity };

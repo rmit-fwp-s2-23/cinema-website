@@ -32,16 +32,19 @@ const Register = () => {
     event.preventDefault();
     setErrorUsernameMessage("");
     setErrorEmailMessage("");
+    setErrorPasswordMessage("");
     // Save form data to local storage
     if (localStorage.getItem(formData.username) !== null) {
       setErrorUsernameMessage(
         "This username is already used. Please use another username !"
       );
+      return;
     }
     if (!checkValidEmail(formData.email)) {
       setErrorEmailMessage(
         "This email is already used. Please use another email !"
       );
+      return;
     }
     if (
       !/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(
@@ -57,12 +60,12 @@ const Register = () => {
           <p>-one special character</p>
         </div>
       );
-    } else {
-      createUser(formData, date);
-      alert("Register successfully !");
-      navigate("/login");
       return;
     }
+    createUser(formData, date);
+    alert("Register successfully !");
+    navigate("/login");
+    return;
   };
 
   return (

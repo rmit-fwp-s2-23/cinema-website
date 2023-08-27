@@ -142,6 +142,7 @@ function Review() {
           reviews.map((review, key) => (
             <Post
               title={review.title}
+              writer= {user.username}
               rating={review.rating}
               content={review.content}
               id={key}

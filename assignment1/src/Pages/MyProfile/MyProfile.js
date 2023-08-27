@@ -1,13 +1,10 @@
 import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
 import { getReviewsByWritter } from "../../Repository/Review";
-import {
-  getUser,
-  deleteUser,
-  removeUser,
-} from "../../Repository/Account.js";
+import { getUser, deleteUser, removeUser } from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
 import { deleteReview } from "../../Repository/Review";
+import { deleteSecurity } from "../../Repository/Security";
 import Post from "../../components/Post/Post";
 
 function MyProfile() {
@@ -23,6 +20,7 @@ function MyProfile() {
   }
   const handleDeleteClick = () => {
     deleteReview(user.username);
+    deleteSecurity(user.username);
     deleteUser(user.username);
     removeUser();
     navigate("/login");
@@ -90,6 +88,7 @@ function MyProfile() {
                 <div>
                   <Post
                     title={review.title}
+                    writer={user.username}
                     rating={review.rating}
                     content={review.content.replace(
                       /___LINE_BREAK___/g,
