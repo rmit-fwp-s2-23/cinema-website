@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
-import { getUser, setUser } from "../../Repository/Repository.js";
+import { getUser, setUser } from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
-import { getReviewsByWritter } from "../../Pages/Review/Repository";
+import { getReviewsByWritter } from "../../Repository/Review";
 import Post from "../../components/Post/Post";
 
 function EditMyProfile() {

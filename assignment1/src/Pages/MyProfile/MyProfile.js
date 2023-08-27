@@ -1,13 +1,13 @@
 import "./MyProfile.css";
 import Button from "../../components/nav/Button/Button";
-import { getReviewsByWritter } from "../../Pages/Review/Repository";
+import { getReviewsByWritter } from "../../Repository/Review";
 import {
   getUser,
   deleteUser,
   removeUser,
-} from "../../Repository/Repository.js";
+} from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
-import { deleteReview } from "../Review/Repository";
+import { deleteReview } from "../../Repository/Review";
 import Post from "../../components/Post/Post";
 
 function MyProfile() {

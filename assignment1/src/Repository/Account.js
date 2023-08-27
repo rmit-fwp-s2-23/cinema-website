@@ -1,9 +1,8 @@
 const USER_KEY = "user";
 
-function createUser(username, user, joinedDate) {
+function createUser(user, joinedDate) {
   user.date = joinedDate;
-  user.reviewedFilm = new Array();
-  localStorage.setItem(username, JSON.stringify(user));
+  localStorage.setItem(user.username, JSON.stringify(user));
 }
 function checkValidEmail(email) {
   for (let i = 0; i < localStorage.length; i++) {
@@ -33,7 +32,7 @@ function getUser() {
 
 function setUser(data) {
   const user = JSON.parse(localStorage.getItem(USER_KEY));
-  createUser(data.username, data, data.date);
+  createUser(data, data.date);
   deleteUser(user.username);
   localStorage.setItem(USER_KEY, JSON.stringify(data));
 }

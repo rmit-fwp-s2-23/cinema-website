@@ -1,9 +1,9 @@
 import "./EditPost.css";
-import { changeReview } from "../../Pages/Review/Repository";
+import { changeReview } from "../../Repository/Review";
 import { useLocation, useNavigate } from "react-router-dom";
 import react, { useState } from "react";
 import Button from "../nav/Button/Button";
-import { getUser } from "../../Repository/Repository";
+import { getUser } from "../../Repository/Account.js";
 
 function EditPost() {
   const user = getUser();

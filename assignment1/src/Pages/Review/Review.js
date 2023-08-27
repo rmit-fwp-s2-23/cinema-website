@@ -1,12 +1,12 @@
-import { getUser } from "../../Repository/Repository.js";
+import { getUser } from "../../Repository/Account.js";
 import "./Review.css";
 import StarRating from "../../components/Rate/StarRating.js";
 import React, { useState } from "react";
 import Button from "../../components/nav/Button/Button.js";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getReviewsByTitle, createReview } from "./Repository.js";
+import { getReviewsByTitle, createReview } from "../../Repository/Review.js";
 import Post from "../../components/Post/Post.js";
-
+import { checkSecurity, createSecurity } from "../../Repository/Security.js";
 function Review() {
   const title = useLocation().state;
   const user = getUser();
@@ -31,12 +31,23 @@ function Review() {
       setErrorMessage("A post cannot exceed 250 words.");
       return;
     }
-    const data = {title: title, content: post, rating: rating, writer: user.username };
-    createReview( data);
+    if (!checkSecurity(title, user)) {
+      setErrorMessage("Wait for 30 seconds for the next review");
+      return;
+    }
+    const data = {
+      title: title,
+      content: post,
+      rating: rating,
+      writer: user.username,
+    };
+    createReview(data);
+    createSecurity(title, user);
     setReviews(getReviewsByTitle(title));
     setPost("");
-    setRating(0);
-    setHover(0);
+    setErrorMessage("");
+    setRating(1);
+    setHover(1);
     return;
   }
 

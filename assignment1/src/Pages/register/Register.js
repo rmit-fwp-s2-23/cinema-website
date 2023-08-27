@@ -2,7 +2,7 @@ import "./Register.css";
 import React, { useState } from "react";
 import { Link as RouterLink, useHistory, useNavigate } from "react-router-dom";
 import Button from "../../components/nav/Button/Button";
-import { createUser, checkValidEmail } from "../../Repository/Repository.js";
+import { createUser, checkValidEmail } from "../../Repository/Account.js";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ const Register = () => {
         </div>
       );
     } else {
-      createUser(formData.username, formData, date);
+      createUser(formData, date);
       alert("Register successfully !");
       navigate("/login");
       return;

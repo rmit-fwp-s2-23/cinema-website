@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Nav.css";
 import { Link } from "react-router-dom";
-import { getUser, removeUser } from "../../../Repository/Repository";
-import MyProfile from "../../../Pages/MyProfile/MyProfile";
+import { getUser, removeUser } from "../../../Repository/Account.js";
+
 const NavigationBar = () => {
   const data = getUser();
   const [isMenuOpen, setMenuOpen] = useState(false);
