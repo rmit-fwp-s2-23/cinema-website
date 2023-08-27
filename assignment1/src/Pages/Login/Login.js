@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Button from "../../components/nav/Button/Button";
-import { verifyUser } from "../../Repository/Repository.js";
+import Button from "../../components/Button/Button";
+import { verifyUser } from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [fields, setFields] = useState({ username: "", password: "" });
   const navigate = useNavigate();
+  //create error when user input wrong username or password
   const [errMessage, setErrMessage] = useState(null);
 
+  //change handler
   function handleChange(event) {
     const username = event.target.name;
     const value = event.target.value;
 
+    //copy fields
     const temp = { username: fields.username, password: fields.password };
     temp[username] = value;
     setFields(temp);
@@ -20,12 +23,14 @@ function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    //check if user enter correct username or password
     if (verifyUser(fields.username, fields.password)) {
       navigate("/MyProfile");
       return;
     }
 
     const temp = { ...fields };
+    //reset password to black
     temp.password = "";
     setFields(temp);
     setErrMessage("Username and / or password invalid, please try again.");

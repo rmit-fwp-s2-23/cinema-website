@@ -1,32 +1,49 @@
 import "./MyProfile.css";
-import Button from "../../components/nav/Button/Button";
-import { getReviewsByWritter } from "../../Pages/Review/Repository";
+import Button from "../../components/Button/Button";
+import { getReviewsByWritter } from "../../Repository/Review";
 import {
   getUser,
-  deleteUser,
+  deleteAccount,
   removeUser,
-} from "../../Repository/Repository.js";
+} from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
-import { deleteReview } from "../Review/Repository";
+import { deleteReview, removeReview } from "../../Repository/Review";
+import { deleteSecurity } from "../../Repository/Security";
 import Post from "../../components/Post/Post";
+import {useState} from 'react';
 
 function MyProfile() {
-  const user = getUser();
-  const reviews = getReviewsByWritter(user.username);
   const navigate = useNavigate();
+  //get the user from local storage
+  const user = getUser();
+  // get all the reviews posted by this account
+  const [reviews, setReviews] = useState(getReviewsByWritter(user));
+
+  //click the edit button which will direct to edit profile
   const handleUpdateClick = () => {
     navigate("/editmyprofile");
   };
+
+  //this change handler will direct to edit a specific post
   function handleUpdateReviewClick(title, rating, content, id) {
     const data = { title: title, rating: rating, content: content, id: id };
     navigate("/EditPost", { state: data });
   }
+
+  function handleRemoveReviewClick(id){
+    removeReview(id, user);
+    setReviews(getReviewsByWritter(user));
+  }
+  //this change handler will delete all the information related to this account from local storage
   const handleDeleteClick = () => {
-    deleteReview(user.username);
-    deleteUser(user.username);
+    deleteReview(user);
+    deleteSecurity(user);
+    deleteAccount(user);
+    //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
     removeUser();
     navigate("/login");
   };
+
   return (
     <div>
       <div className="myprofile-container">
@@ -90,11 +107,9 @@ function MyProfile() {
                 <div>
                   <Post
                     title={review.title}
+                    writer={user.username}
                     rating={review.rating}
-                    content={review.content.replace(
-                      /___LINE_BREAK___/g,
-                      "<br />"
-                    )}
+                    content={review.content}
                     id={key}
                   />
                   <div className="myprofile-button">
@@ -109,6 +124,21 @@ function MyProfile() {
                       }
                     >
                       Edit
+                    </Button>
+                    <Button
+                      style={{ backgroundColor: "red" }}
+                      className="delete-button"
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            "Are you sure you wish to delete this review?"
+                          )
+                        ) {
+                          handleRemoveReviewClick(key);
+                        }
+                      }}
+                    >
+                      Delete
                     </Button>
                   </div>
                 </div>

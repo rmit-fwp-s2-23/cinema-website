@@ -1,21 +1,40 @@
-import './Movie.css';
-import React from 'react';
-import MovieCard from './MovieCard';
+import "./Movie.css";
+import React from "react";
+import MovieCard from "./MovieCard";
 
-const MovieList = ({ movies }) => {
+function MovieList({ movies }) {
+  //sort the movie based on their averageRating
+  const numDescending = [...movies].sort(
+    (a, b) => b.averageRating - a.averageRating
+  );
+  //get the highest rating movie
+  const highestRatedMovie = numDescending[0];
   return (
     <div className="movie-layout">
-      <MovieCard key={movies[0].id} movie={movies[0]} isBig={true} />
-      <MovieCard key={movies[1].id} movie={movies[1]} />
-      <MovieCard key={movies[2].id} movie={movies[2]} />
-      <MovieCard key={movies[3].id} movie={movies[3]} />
-      <MovieCard key={movies[4].id} movie={movies[4]} />
-      <MovieCard key={movies[5].id} movie={movies[5]} />
-      <MovieCard key={movies[6].id} movie={movies[6]} />
+      <div className="hottest">
+        <p>
+          <strong>Hottest</strong><span>&#128293;</span>
+        </p>
+      </div>
+      <MovieCard
+        key={highestRatedMovie.id}
+        movie={highestRatedMovie}
+        isBig={true}
+      />
+      <div className="trending">
+        <p>
+          Trending<span></span>
+        </p>
+      </div>
+      {numDescending.map((movie, key) => {
+        return (
+          <div className="movie-layout">
+            <MovieCard order={key + 1} key={movie.id} movie={movie} />
+          </div>
+        );
+      })}
     </div>
   );
-};
+}
 
 export default MovieList;
-
-
