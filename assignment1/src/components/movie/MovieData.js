@@ -10,7 +10,7 @@ const movieData = [
 
   {
     id: 1,
-    title: "The Mokey King 3",
+    title: "The Monkey King 3",
     releaseDate: "2023-01-01",
     poster:
       "https://occ-0-64-1380.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABZP3GeXRxBgql10Lgi_G-oUlbMs-Nu3cY6WfGCI0JybcBICCkkV6ttlXW-duW06jJ576RlRO8kdi0r06fyjUhe4ssh5raelAMbeH.jpg?r=f43",
