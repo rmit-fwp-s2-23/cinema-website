@@ -2,6 +2,8 @@ import "./Movie.css";
 import React from "react";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const MovieCard = ({ movie, isBig, order }) => {
   const cardClass = isBig ? "movie-card big" : "movie-card";
@@ -19,12 +21,14 @@ const MovieCard = ({ movie, isBig, order }) => {
       <div className="img-container">
         <img src={movie.poster} alt={`${movie.title} Poster`} />
       </div>
+      <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none" }}>
       <h2>{movie.title}</h2>
+     </Link>
       <p>
         {movie.averageRating} / 5<span style={{ color: "gold" }}>&#9733;</span>
       </p>
       <p>{movie.releaseDate}</p>
-      <p>{movie.description}</p>
+      
       <div className="movie-form-member">
         <Button onClick={handleClick}>Feedback</Button>
       </div>
