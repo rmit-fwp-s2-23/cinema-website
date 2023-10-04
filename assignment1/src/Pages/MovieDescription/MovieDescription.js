@@ -10,9 +10,11 @@ import {
   Select,
   Stack,
 } from "@chakra-ui/react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const MovieDescription = ({ movies }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   
   // Find the movie with the matching ID
   const movie = movies.find((movie) => movie.id === parseInt(id, 10));
@@ -79,7 +81,25 @@ const MovieDescription = ({ movies }) => {
           <option value="21:00">21:00</option>
           {/* Add more time options */}
         </Select>
-
+       {/* Back and Process buttons with spacing and size */}
+       <Flex marginTop="9" width="15%" justifyContent="space-between">
+          <Button
+            style={{ backgroundColor: "grey", width: "150%" }}
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+             Back 
+          </Button>
+          <Button
+            style={{ width: "100%" }}
+            onClick={() => {
+              navigate("/next-page");
+            }}
+          >
+            Process
+          </Button>
+        </Flex>
       </Flex>
     </Box>
   );
