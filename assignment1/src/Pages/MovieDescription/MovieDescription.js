@@ -11,6 +11,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
 const MovieDescription = ({ movies }) => {
   const { id } = useParams();
@@ -38,7 +39,7 @@ const MovieDescription = ({ movies }) => {
   return (
     <Box p={4}>
       <Flex direction="column" alignItems="center">
-        <Heading as="h2" size="xl" mb={4}>
+        <Heading as="h1" size="xl" mb={4}>
           {movie.title}
         </Heading>
         <Image
@@ -82,7 +83,7 @@ const MovieDescription = ({ movies }) => {
           {/* Add more time options */}
         </Select>
        {/* Back and Process buttons with spacing and size */}
-       <Flex marginTop="9" width="15%" justifyContent="space-between">
+       <Flex marginTop="25" width="15%" justifyContent="space-between">
           <Button
             style={{ backgroundColor: "grey", width: "150%" }}
             onClick={() => {
