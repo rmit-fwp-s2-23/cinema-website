@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./MyProfile.css";
 import Button from "../../components/Button/Button";
-import { getUser, setUser } from "../../Repository/Account.js";
+// import { setUser } from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
 import { getReviewsByWritter } from "../../Repository/Review";
 import Post from "../../components/Post/Post";
 import { checkValidEmail } from "../../Repository/Account.js";
+import { getUser, findUser, updateUser, findEmail } from "../../Repository/repository";
 
 function EditMyProfile() {
   //get the user from local storage
@@ -34,7 +35,7 @@ function EditMyProfile() {
   };
 
   // Function to handle the update button click
-  const handleUpdateClick = (event) => {
+  const handleUpdateClick = async (event) => {
     event.preventDefault();
     //reset the errors before clicking the submit button again
     setErrorUsernameMessage("");
@@ -42,7 +43,7 @@ function EditMyProfile() {
     setErrorPasswordMessage("");
     //check valid data
     if (editedData.username !== user.username) {
-      if (localStorage.getItem(editedData.username) !== null) {
+      if (await findUser(editedData.username) !== null) {
         setErrorUsernameMessage(
           "This username is already used. Please use another username !"
         );
@@ -58,7 +59,7 @@ function EditMyProfile() {
       return;
     }
     if (editedData.email !== user.email) {
-      if (!checkValidEmail(editedData.email)) {
+      if (await findEmail(editedData.email) !== null) {
         setErrorEmailMessage(
           "This email is already used. Please use another email !"
         );
@@ -66,7 +67,7 @@ function EditMyProfile() {
       }
     }
     //change the profile of this account in localStorage
-    setUser(editedData);
+    await updateUser(user.username,editedData);
     alert("Update successfully !");
     //navigate back to myprofile page if successfully update
     navigate("/myprofile");

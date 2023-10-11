@@ -2,7 +2,6 @@ import "./MyProfile.css";
 import Button from "../../components/Button/Button";
 import { getReviewsByWritter } from "../../Repository/Review";
 import {
-  getUser,
   deleteAccount,
   removeUser,
 } from "../../Repository/Account.js";
@@ -11,6 +10,7 @@ import { deleteReview, removeReview } from "../../Repository/Review";
 import { deleteSecurity } from "../../Repository/Security";
 import Post from "../../components/Post/Post";
 import {useState} from 'react';
+import { getUser } from "../../Repository/repository";
 
 function MyProfile() {
   const navigate = useNavigate();

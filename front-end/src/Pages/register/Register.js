@@ -2,14 +2,14 @@ import "./Register.css";
 import React, { useState } from "react";
 import { Link as RouterLink, useHistory, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import { createAccount, checkValidEmail } from "../../Repository/Account.js";
-
+import { createAccount, checkValidEmail, verifyUser } from "../../Repository/Account.js";
+import { findUser, createUser, findEmail } from "../../Repository/repository";
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    password: "",
+    password: ""
   });
   const [date, setDate] = useState("");
   //set some errors when user enter invalid data (username, email and password)
@@ -31,20 +31,20 @@ const Register = () => {
     setDate(date);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     //reset the errors before clicking the submit button again
     setErrorUsernameMessage("");
     setErrorEmailMessage("");
     setErrorPasswordMessage("");
     //check valid data
-    if (localStorage.getItem(formData.username) !== null) {
+    if (await findUser(formData.username) !== null) {
       setErrorUsernameMessage(
         "This username is already used. Please use another username !"
       );
       return;
     }
-    if (!checkValidEmail(formData.email)) {
+    if (await findEmail(formData.email) !== null) {
       setErrorEmailMessage(
         "This email is already used. Please use another email !"
       );
@@ -67,7 +67,7 @@ const Register = () => {
       return;
     }
     // Save form data to local storage
-    createAccount(formData, date);
+    createUser(formData, date);
     alert("Register successfully !");
     navigate("/login");
     return;
