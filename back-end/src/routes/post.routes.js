@@ -7,6 +7,10 @@ module.exports = (express, app) => {
 
     //Select all posts from username
     router.get("/:id", controller.find)
+
+    //Select all posts from film
+    router.get("/film/:id", controller.findByFilm)
+    
     // Create a new post.
     router.post("/", controller.create);
 

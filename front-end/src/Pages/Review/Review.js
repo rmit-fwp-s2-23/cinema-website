@@ -1,13 +1,13 @@
 import { getUser } from "../../Repository/Account.js";
 import "./Review.css";
 import "../../components/Rate/StarRating.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../components/Button/Button.js";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getReviewsByTitle, createReview } from "../../Repository/Review.js";
 import Post from "../../components/Post/Post.js";
 import { checkSecurity, createSecurity } from "../../Repository/Security.js";
-import { createPost } from "../../Repository/post.js";
+import { createPost, getPostsByFilm } from "../../Repository/post.js";
 function Review() {
   const title = useLocation().state;
   const user = getUser();
@@ -15,13 +15,22 @@ function Review() {
   //set error when user leave feedback null or write over 250 words
   const [errorMessage, setErrorMessage] = useState(null);
   //get the all the reviews of specific movie (with the title)
-  const [reviews, setReviews] = useState(getReviewsByTitle(title));
+  const [reviews, setReviews] = useState([]);
   //get the star rating
   const [rating, setRating] = useState(1);
   //get the star rating when user hover over the stars
   const [hover, setHover] = useState(1);
   //get the review content
   const [post, setPost] = useState("");
+
+  const fetchReviews = async () =>{
+    const reviewsData = await getPostsByFilm(title);
+    setReviews(reviewsData);
+  }
+
+  useEffect(()=> {
+    fetchReviews();
+  },[]);
   //change handler to get the content of the review
   function handleChange(event) {
     setPost(event.target.value);
@@ -58,7 +67,6 @@ function Review() {
     // create a security check of this account in localStorage
     createSecurity(title, user);
     //add a new review of this film after user submit his/her review
-    setReviews(getReviewsByTitle(title));
     //set the post input blank
     setPost("");
     //set error message blank
@@ -165,8 +173,8 @@ function Review() {
         ) : (
           reviews.map((review, key) => (
             <Post
-              title={review.title}
-              writer={review.writer}
+              title={review.film.title}
+              writer={review.user.username}
               rating={review.rating}
               content={review.content}
               id={key}

@@ -4,7 +4,22 @@ const db = require("../database");
 exports.find = async (req, res) => {
   const user = await db.user.findOne({ where: { username: req.params.id } });
   const user_id = user.user_id;  
-  const posts = await db.post.findAll({where: {user_id},include: db.user });
+  const posts = await db.post.findAll({where: {user_id},  include: [
+    { model: db.user }, 
+    { model: db.film }, 
+  ],
+});
+  res.json(posts);
+};
+
+exports.findByFilm = async (req, res) => {
+  const film = await db.film.findOne({ where: { title: req.params.id } });
+  const film_id = film.film_id;  
+  const posts = await db.post.findAll({where: {film_id}, include: [
+    { model: db.user }, 
+    { model: db.film }, 
+  ],
+});
   res.json(posts);
 };
 
@@ -18,10 +33,13 @@ exports.all = async (req, res) => {
 exports.create = async (req, res) => {
   const user = await db.user.findOne({ where: { username: req.body.username } });
   const user_id = user.user_id;
+  const film = await db.film.findOne({ where: { title: req.body.title } });
+  const film_id = film.film_id;
   const post = await db.post.create({
     content: req.body.content,
     rating: req.body.rating,
-    user_id: user_id  });
+    user_id: user_id,
+    film_id: film_id  });
 
   res.json(post);
 };

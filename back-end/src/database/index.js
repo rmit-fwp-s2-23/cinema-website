@@ -17,6 +17,8 @@ db.post = require("./models/post.js")(db.sequelize, DataTypes);
 db.film = require("./models/film.js")(db.sequelize, DataTypes);
 // Relate post and user.
 db.post.belongsTo(db.user, { foreignKey: { name: "user_id", allowNull: false } });
+db.post.belongsTo(db.film, {foreignKey: {name:"film_id", allowNull: false}})
+
 
 // Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
@@ -33,6 +35,7 @@ db.sync = async () => {
 
 async function seedData() {
   const count = await db.user.count();
+  const count_film = await db.film.count();
 
   // Only seed data if necessary.
   if(count > 0)
@@ -45,6 +48,20 @@ async function seedData() {
 
   hash = await argon2.hash("def456", { type: argon2.argon2id });
   await db.user.create({ username: "shekhar", password_hash: hash, email: "shekhar@gmail.com", date:"11/20/2020" });
+
+  if (count_film > 0)
+    return;
+  
+  await db.film.create({title: "Avatar 2", rating: 0, releaseDate: 2023-01-01, description: ""});
+  await db.film.create({title: "The Mokey King 3", rating: 0, releaseDate: 2023-01-01, description: ""});
+  await db.film.create({title: "The Boss Baby", rating: 0, releaseDate: 2023-01-01, description: ""});
+  await db.film.create({title: "Kung Fu Panda 2", rating: 0, releaseDate: 2023-01-01, description: ""});
+  await db.film.create({title: "Scooby-Doo 2", rating: 0, releaseDate: 2023-01-01, description: ""});
+  await db.film.create({title: "Tom and Jerry", rating: 0, releaseDate: 2023-01-01, description: ""});
+  await db.film.create({title: "Mr. Bean's Holiday", rating: 0, releaseDate: 2023-01-01, description: ""});
+
 }
+
+
 
 module.exports = db;

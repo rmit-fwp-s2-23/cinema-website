@@ -10,7 +10,6 @@ function MyProfile() {
   const navigate = useNavigate();
   //get the user from local storage
   const user = getUser();
-  // get all the reviews posted by this account
   const [reviews, setReviews] = useState([]);
 
   //click the edit button which will direct to edit profile
@@ -35,6 +34,7 @@ function MyProfile() {
   function handleRemoveReviewClick(id){
     deletePost(id);
   }
+  
   //this change handler will delete all the information related to this account from local storage
   const handleDeleteClick = () => {
     reviews.map((review) => {
@@ -109,7 +109,7 @@ function MyProfile() {
               reviews.map((review, key) => (
                 <div>
                   <Post
-                    title={review.title}
+                    title={review.film.title}
                     writer={user.username}
                     rating={review.rating}
                     content={review.content}

@@ -10,8 +10,15 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: false
     },
     rating: {
-        type: DataTypes.INTEGER,
-        allowNull: true
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    releaseDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).

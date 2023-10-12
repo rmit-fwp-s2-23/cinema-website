@@ -13,7 +13,11 @@ async function createPost(post) {
 
 async function getPosts(id){
   const response = await axios.get(API_HOST + `/api/posts/${id}`);
-  console.log(response.data)
+  return response.data;
+}
+
+async function getPostsByFilm(id){
+  const response = await axios.get(API_HOST + `/api/posts/film/${id}`);
   return response.data;
 }
 
@@ -27,4 +31,4 @@ async function updatePost(id, data){
   return response.data;
 }
 
-export {createPost, getPosts, deletePost, updatePost}
+export {createPost, getPosts, deletePost, updatePost, getPostsByFilm}

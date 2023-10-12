@@ -168,7 +168,7 @@ function EditMyProfile() {
               reviews.map((review, key) => (
                 <Post
                   writer={user.username}
-                  title={review.title}
+                  title={review.film.title}
                   rating={review.rating}
                   content={review.content}
                   id={key}

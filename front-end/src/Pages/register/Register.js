@@ -1,6 +1,6 @@
 import "./Register.css";
 import React, { useState } from "react";
-import { Link as RouterLink, useHistory, useNavigate } from "react-router-dom";
+import { Link as  useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { findUser, createUser, findEmail } from "../../Repository/user";
 const Register = () => {
