@@ -1,10 +1,10 @@
 import "../EditPost/EditPost.css";
-import { changeReview } from "../../Repository/Review";
 import { useLocation, useNavigate } from "react-router-dom";
 import react, { useState } from "react";
 import Button from "../../components/Button/Button";
 import "../../components/Rate/StarRating.css";
-import { getUser } from "../../Repository/Account";
+import { updatePost } from "../../Repository/post";
+import { getUser } from "../../Repository/user";
 function EditPost() {
   const user = getUser();
   const navigate = useNavigate();
@@ -14,11 +14,11 @@ function EditPost() {
   const [rating, setRating] = useState(post?.rating || 1);
   const [hover, setHover] = useState(post?.rating || 1);
 
-  function handleInputChange(event) {
+  function handleInputChange(event){
     setContent(event.target.value);
   }
 
-  function handleUpdateClick(event) {
+  const handleUpdateClick = async (event) => {
     event.preventDefault();
     const postTrimmed = content.trim();
     if (postTrimmed === "") {
@@ -30,7 +30,7 @@ function EditPost() {
       return;
     }
     const data = { content: postTrimmed, rating: rating };
-    changeReview(post.id, data, user);
+    await updatePost(post.post_id, data);
     navigate("/myprofile");
     return;
   }

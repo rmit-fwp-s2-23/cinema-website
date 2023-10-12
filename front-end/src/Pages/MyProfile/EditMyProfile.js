@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MyProfile.css";
 import Button from "../../components/Button/Button";
-// import { setUser } from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
-import { getReviewsByWritter } from "../../Repository/Review";
 import Post from "../../components/Post/Post";
-import { checkValidEmail } from "../../Repository/Account.js";
-import { getUser, findUser, updateUser, findEmail } from "../../Repository/repository";
-
+import { getUser, findUser, updateUser, findEmail } from "../../Repository/user";
+import { getPosts } from "../../Repository/post";
 function EditMyProfile() {
   //get the user from local storage
   const user = getUser();
   // get all the reviews posted by this account
-  const reviews = getReviewsByWritter(user);
+  const [reviews, setReviews] = useState([]);
+  const fetchReviews = async () =>{
+    const reviewsData = await getPosts(user.username);
+    setReviews(reviewsData);
+  }
+
+  useEffect(()=> {
+    fetchReviews();
+  },[]);
+
   const navigate = useNavigate();
   const [editedData, setEditedData] = useState({
     username: user?.username || "", // Initialize with existing username

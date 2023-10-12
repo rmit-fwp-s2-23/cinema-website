@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, HasMany } = require("sequelize");
 const config = require("./config.js");
 
 const db = {
@@ -16,10 +16,8 @@ db.user = require("./models/user.js")(db.sequelize, DataTypes);
 db.post = require("./models/post.js")(db.sequelize, DataTypes);
 db.film = require("./models/film.js")(db.sequelize, DataTypes);
 // Relate post and user.
-db.post.belongsTo(db.user, { foreignKey: { name: "username", allowNull: false } });
-db.post.belongsTo(db.film, {foreignKey: {name: "film_id", allowNull:false }});
+db.post.belongsTo(db.user, { foreignKey: { name: "user_id", allowNull: false } });
 
-db.film.hasMany(db.post, { as: "post" });
 // Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
 // Include a sync option with seed data logic included.

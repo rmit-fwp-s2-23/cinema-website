@@ -4,10 +4,18 @@ module.exports = (express, app) => {
   
     // Select all posts.
     router.get("/", controller.all);
-  
+
+    //Select all posts from username
+    router.get("/:id", controller.find)
     // Create a new post.
     router.post("/", controller.create);
-  
+
+    //update review
+    router.put("/:id", controller.update);
+
+    // Delete a user with id.
+    router.delete("/:id", controller.remove);
+
     // Add routes to server.
     app.use("/api/posts", router);
   };

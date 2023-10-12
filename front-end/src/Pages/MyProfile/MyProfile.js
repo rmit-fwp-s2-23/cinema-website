@@ -1,44 +1,47 @@
 import "./MyProfile.css";
 import Button from "../../components/Button/Button";
-import { getReviewsByWritter } from "../../Repository/Review";
-import {
-  deleteAccount,
-  removeUser,
-} from "../../Repository/Account.js";
 import { useNavigate } from "react-router-dom";
-import { deleteReview, removeReview } from "../../Repository/Review";
 import { deleteSecurity } from "../../Repository/Security";
 import Post from "../../components/Post/Post";
-import {useState} from 'react';
-import { getUser } from "../../Repository/repository";
-
+import {useState, useEffect} from 'react';
+import { getUser, deleteUser, removeUser } from "../../Repository/user";
+import { getPosts, deletePost } from "../../Repository/post";
 function MyProfile() {
   const navigate = useNavigate();
   //get the user from local storage
   const user = getUser();
   // get all the reviews posted by this account
-  const [reviews, setReviews] = useState(getReviewsByWritter(user));
+  const [reviews, setReviews] = useState([]);
 
   //click the edit button which will direct to edit profile
   const handleUpdateClick = () => {
     navigate("/editmyprofile");
   };
 
+  const fetchReviews = async () =>{
+    const reviewsData = await getPosts(user.username);
+    setReviews(reviewsData);
+  }
+
+  useEffect(()=> {
+    fetchReviews();
+  },[]);
+
   //this change handler will direct to edit a specific post
-  function handleUpdateReviewClick(title, rating, content, id) {
-    const data = { title: title, rating: rating, content: content, id: id };
+  function handleUpdateReviewClick(data) {
     navigate("/EditPost", { state: data });
   }
 
   function handleRemoveReviewClick(id){
-    removeReview(id, user);
-    setReviews(getReviewsByWritter(user));
+    deletePost(id);
   }
   //this change handler will delete all the information related to this account from local storage
   const handleDeleteClick = () => {
-    deleteReview(user);
+    reviews.map((review) => {
+     deletePost(review.post_id);
+    })
     deleteSecurity(user);
-    deleteAccount(user);
+    deleteUser(user.username);
     //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
     removeUser();
     navigate("/login");
@@ -116,10 +119,7 @@ function MyProfile() {
                     <Button
                       onClick={() =>
                         handleUpdateReviewClick(
-                          review.title,
-                          review.rating,
-                          review.content,
-                          key
+                          review
                         )
                       }
                     >
@@ -134,7 +134,7 @@ function MyProfile() {
                             "Are you sure you wish to delete this review?"
                           )
                         ) {
-                          handleRemoveReviewClick(key);
+                          handleRemoveReviewClick(review.post_id);
                         }
                       }}
                     >

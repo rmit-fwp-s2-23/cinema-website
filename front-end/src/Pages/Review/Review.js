@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getReviewsByTitle, createReview } from "../../Repository/Review.js";
 import Post from "../../components/Post/Post.js";
 import { checkSecurity, createSecurity } from "../../Repository/Security.js";
+import { createPost } from "../../Repository/post.js";
 function Review() {
   const title = useLocation().state;
   const user = getUser();
@@ -26,7 +27,7 @@ function Review() {
     setPost(event.target.value);
   }
   // handle when user enter the submit button
-  function handleSubmit(event) {
+  const handleSubmit= async (event) => {
     event.preventDefault();
     //trim post
     const postTrimmed = post.trim();
@@ -50,10 +51,10 @@ function Review() {
       title: title,
       content: post,
       rating: rating,
-      writer: user.username,
+      username: user.username,
     };
     // create a review in localStorage
-    createReview(data);
+    await createPost(data);
     // create a security check of this account in localStorage
     createSecurity(title, user);
     //add a new review of this film after user submit his/her review

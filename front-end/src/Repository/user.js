@@ -40,6 +40,11 @@ async function updateUser(id, data){
     setUser(user);
     return user;
 }
+
+async function deleteUser(id){
+  const response = await axios.delete(API_HOST + `/api/users/${id}`);
+  return response.data;
+}
 // --- Post ---------------------------------------------------------------------------------------
 async function getPosts() {
   const response = await axios.get(API_HOST + "/api/posts");
@@ -70,5 +75,5 @@ export {
   verifyUser, findUser, createUser,
   getPosts, createPost,
   getUser, removeUser, updateUser,
-  setUser, findEmail
+  setUser, findEmail, deleteUser
 }
