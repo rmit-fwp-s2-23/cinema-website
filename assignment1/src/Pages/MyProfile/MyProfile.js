@@ -98,7 +98,7 @@ function MyProfile() {
                 </Button>
               </div>
             </form>
-          </div>
+          </div>        
           <div className="myprofile-post">
             {reviews.length === 0 ? (
               <span>No posts have been submitted.</span>

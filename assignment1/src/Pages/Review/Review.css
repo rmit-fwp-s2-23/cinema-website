@@ -6,6 +6,7 @@
 .review-container h1 {
     font-size: 3rem;
     margin-bottom: 0;
+    
 }
 
 .review-film {
@@ -20,7 +21,7 @@
 
 .review-info span {
     text-decoration: underline;
-    color: blue;
+    color: #deb992;
 }
 
 .review-rating {
@@ -29,11 +30,13 @@
 
 .review-content {
     height: 30vh;
+    
 }
 
 .review-content .review-content-textarea {
     width: 70%;
     height: 70%;
+    
 }
 
 .review-buttons {
@@ -52,22 +55,24 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: #deb992;
+    color: #051622;
     border-radius: 8px;
-    max-width: 600px;
+    max-width: 400px;
     /* Set the maximum width you prefer */
     min-width: 400px;
     margin: 0 auto;
+
 }
 
 .post-container {
     width: 70%;
     height: fit-content;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #deb992;
     padding: 20px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: #deb992;
     border-radius: 8px;
     /* Add a subtle box shadow */
 }

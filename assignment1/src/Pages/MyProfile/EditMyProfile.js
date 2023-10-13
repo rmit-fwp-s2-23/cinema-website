@@ -152,6 +152,7 @@ function EditMyProfile() {
               </div>
             </form>
           </div>
+          <br/>
         </div>
         <div className="myprofile-post">
           <div>
