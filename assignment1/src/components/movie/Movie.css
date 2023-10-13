@@ -17,7 +17,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #ccc;
+    border: 1px solid #deb992;
     padding: 20px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     width: 100%; /* Take full width initially */

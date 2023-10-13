@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getReviewsByTitle, createReview } from "../../Repository/Review.js";
 import Post from "../../components/Post/Post.js";
 import { checkSecurity, createSecurity } from "../../Repository/Security.js";
+
 function Review() {
   const title = useLocation().state;
   const user = getUser();
@@ -69,8 +70,12 @@ function Review() {
     return;
   }
 
+  
+
   return (
+    
     <div className="review-container">
+    
       <div className="review-feedback">
         <div>
           <h1>Review</h1>

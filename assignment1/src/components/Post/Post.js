@@ -24,7 +24,9 @@ function Post(props) {
           })}
         </div>
         <div className="post-content">
-          <pre style={{ fontSize: "1rem" }}>{props.content}</pre>
+          <pre style={{ fontSize: "1rem", whiteSpace: "pre-wrap" }}>
+            {props.content}
+          </pre>
         </div>
       </div>
     </div>
