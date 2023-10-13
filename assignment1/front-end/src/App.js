@@ -12,7 +12,6 @@ import { initReview } from "./Repository/Review";
 import EditPost from "./Pages/EditPost/EditPost";
 import Footer from "./components/footer/Footer";
 import { initSecurity } from "./Repository/Security";
-import MovieDescription from "./Pages/MovieDescription/MovieDescription";
 import MovieData from "./components/movie/MovieData";
 function App() {
   initReview();
@@ -35,7 +34,6 @@ function App() {
                   <Route path="editmyprofile" element={<EditMyProfile />} />
                   <Route path="review" element={<Review />} />
                   <Route path="editpost" element={<EditPost />} />
-                  <Route path="movie/:id" element={<MovieDescription movies={MovieData} />} />
                   
                   {/* Add other routes here */}
                 </Routes>

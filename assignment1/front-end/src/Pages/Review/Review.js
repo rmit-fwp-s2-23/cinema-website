@@ -7,11 +7,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getReviewsByTitle, createReview } from "../../Repository/Review.js";
 import Post from "../../components/Post/Post.js";
 import { checkSecurity, createSecurity } from "../../Repository/Security.js";
-<<<<<<< HEAD:front-end/src/Pages/Review/Review.js
 import { createPost, getPostsByFilm } from "../../Repository/post.js";
-=======
 
->>>>>>> dev:assignment1/src/Pages/Review/Review.js
 function Review() {
   const title = useLocation().state;
   const user = getUser();
