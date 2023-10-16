@@ -14,7 +14,7 @@ import Footer from "./components/footer/Footer";
 import { initSecurity } from "./Repository/Security";
 import MovieData from "./components/movie/MovieData";
 import MovieDescription from "./Pages/MovieDescription/MovieDescription"
-// import movieData from "./components/movie/MovieData";
+import movieData from "./components/movie/MovieData";
 function App() {
   initReview();
   initSecurity();
@@ -37,7 +37,7 @@ function App() {
                   <Route path="review" element={<Review />} />
                   <Route path="editpost" element={<EditPost />} />
                   <Route path="movie/:id" element={<MovieDescription movies={MovieData} />} />
-                  <Route path="movie/:ids" element={<MovieDescription movies={MovieData} />} />
+                  <Route path="movie/:id" element={<MovieDescription movies={movieData} />} />
                   {/* <Route path="movie/:id" element={<MovieDescription  />} /> */}
                   {/* Add other routes here */}
                 </Routes>

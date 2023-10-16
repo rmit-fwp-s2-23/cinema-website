@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Nav.css";
 import { Link, useNavigate } from "react-router-dom";
 import { getUser, removeUser } from "../../Repository/Account.js";
-import MovieData from "../movie/MovieData";
+import movieData from "../movie/MovieData";
 
 
 const NavigationBar = () => {
@@ -26,8 +26,8 @@ const NavigationBar = () => {
     setSearchQuery(query);
 
     // Filter movie titles based on the query
-    const filtered = MovieData.filter((Movie) =>
-      Movie.title.toLowerCase().includes(query.toLowerCase())
+    const filtered = movieData.filter((movie) =>
+      movie.title.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredMovies(filtered);
   };
@@ -76,13 +76,13 @@ const NavigationBar = () => {
           {showDropdown && (
             <div className="search-dropdown">
               <ul>
-                {filteredMovies.map((Movie) => (
-                  <li key={Movie.id}>
+                {filteredMovies.map((movie) => (
+                  <li key={movie.id}>
                     <Link
-                      to={`/movie/${Movie.id}`}
+                      to={`/movie/${movie.id}`}
                       onClick={() => setShowDropdown(false)}
                     >
-                      {Movie.title}
+                      {movie.title}
                     </Link>
                   </li>
                 ))}
