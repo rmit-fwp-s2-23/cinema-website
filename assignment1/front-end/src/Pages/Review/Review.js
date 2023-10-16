@@ -65,6 +65,7 @@ function Review() {
     // create a review in localStorage
     await createPost(data);
     await updateRating(title);
+    await fetchReviews();
     // create a security check of this account in localStorage
     createSecurity(title, user);
     //add a new review of this film after user submit his/her review
