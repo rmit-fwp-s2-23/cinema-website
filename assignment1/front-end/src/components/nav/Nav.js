@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Nav.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUser, removeUser } from "../../Repository/Account.js";
+import MovieData from "../movie/MovieData";
+
 
 const NavigationBar = () => {
   const data = getUser();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchRef = useRef(null); // Ref to the search input element
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -13,12 +20,76 @@ const NavigationBar = () => {
     removeUser();
     // Perform any additional logout actions here
   };
+  
+  const handleSearchInputChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    // Filter movie titles based on the query
+    const filtered = MovieData.filter((Movie) =>
+      Movie.title.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredMovies(filtered);
+  };
+
+  const handleSearchClick = () => {
+    setShowDropdown(true);
+  };
+
+  const handleSearchBlur = () => {
+    setTimeout(() => {
+      setShowDropdown(false);
+    }, 100);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    // Add the event listener when the component mounts
+    document.addEventListener("click", handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="navigation-bar">
       <a href="/" className="logo">
         Loop Cinemas
       </a>
+      <div className="search-menu">
+      <div className="search-bar" ref={searchRef}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+            onClick={handleSearchClick}
+            onBlur={handleSearchBlur}
+          />
+          {showDropdown && (
+            <div className="search-dropdown">
+              <ul>
+                {filteredMovies.map((Movie) => (
+                  <li key={Movie.id}>
+                    <Link
+                      to={`/movie/${Movie.id}`}
+                      onClick={() => setShowDropdown(false)}
+                    >
+                      {Movie.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       <div className="dropdown-menu">
         <div className="hamburger" onMouseOver={toggleMenu}>
           <div className={`line ${isMenuOpen ? "open" : ""}`}></div>
@@ -60,6 +131,7 @@ const NavigationBar = () => {
             </React.Fragment>
           )}
         </div>
+      </div>
       </div>
     </nav>
   );

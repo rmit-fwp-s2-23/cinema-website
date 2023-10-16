@@ -76,3 +76,71 @@
 .dropdown-item:hover {
   background-color: #ddd;
 }
+
+.search-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* .search-bar {
+  display: flex;
+  align-items: center;
+} */
+
+.search-bar input {
+  padding: 5px;
+  width: 200px;
+  border: 1px solid #deb992;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  background-color: #deb992;
+  color: #051622;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #1ba098;
+  color: #fff;
+}
+.search-bar {
+  position: relative; /* Add this to make it a relative container */
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%; /* Position it below the search input */
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+
+.search-dropdown ul {
+  padding: 0;
+  margin: 0;
+}
+
+.search-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-dropdown li:hover {
+  background-color: #f2f2f2;
+}
