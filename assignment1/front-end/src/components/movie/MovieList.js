@@ -5,7 +5,7 @@ import MovieCard from "./MovieCard";
 function MovieList({ movies }) {
   //sort the movie based on their averageRating
   const numDescending = [...movies].sort(
-    (a, b) => b.averageRating - a.averageRating
+    (a, b) => b.rating - a.rating
   );
   //get the highest rating movie
   const highestRatedMovie = numDescending[0];
@@ -17,7 +17,7 @@ function MovieList({ movies }) {
         </p>
       </div>
       <MovieCard
-        key={highestRatedMovie.id}
+        key={highestRatedMovie.film_id}
         movie={highestRatedMovie}
         isBig={true}
       />
@@ -26,10 +26,10 @@ function MovieList({ movies }) {
           Trending<span></span>
         </p>
       </div>
-      {numDescending.map((movie, key) => {
+      {numDescending.map((movie) => {
         return (
           <div className="movie-layout">
-            <MovieCard order={key + 1} key={movie.id} movie={movie} />
+            <MovieCard order={movie.film_id} key={movie.film_id} movie={movie} />
           </div>
         );
       })}

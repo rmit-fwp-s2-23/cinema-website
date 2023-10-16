@@ -1,27 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
-import {
-  Box,
-  Image,
-  Text,
-  Heading,
-  Flex,
-  Select,
-} from "@chakra-ui/react";
+import { Box, Image, Text, Heading, Flex, Select } from "@chakra-ui/react";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { getFilms } from "../../Repository/film";
 
-const MovieDescription = ({ movies }) => {
-  const { id } = useParams();
+const MovieDescription = () => {
+  const { film_id } = useParams();
   const navigate = useNavigate();
+  const [movie, setMovie] = useState(null); // Initialize movie as null
 
+  useEffect(() => {
+    fetchMovie();
+  }, []);
+
+  const fetchMovie = async () => {
+    const movieData = await getFilms();
+    const foundMovie = movieData.find(
+      (movie) => movie.film_id === parseInt(film_id, 10)
+    );
+    setMovie(foundMovie); // Set the found movie
+  };
   // Find the movie with the matching ID
-  const movie = movies.find((movie) => movie.id === parseInt(id, 10));
+  // const movie = movies.find((movie) => movie.film_id === parseInt(id, 10));
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
 
   if (!movie) {
-    return <div>Movie not found</div>;
+    return <div>Loading...</div>;
   }
 
   const handleDateChange = (event) => {
@@ -88,7 +94,7 @@ const MovieDescription = ({ movies }) => {
               navigate("/");
             }}
           >
-             Back 
+            Back
           </Button>
           <Button
             style={{ width: "100%" }}

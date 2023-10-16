@@ -1,14 +1,13 @@
-import { getUser } from "../../Repository/Account.js";
 import "./Review.css";
 import "../../components/Rate/StarRating.css";
 import React, { useState, useEffect } from "react";
 import Button from "../../components/Button/Button.js";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getReviewsByTitle, createReview } from "../../Repository/Review.js";
 import Post from "../../components/Post/Post.js";
 import { checkSecurity, createSecurity } from "../../Repository/Security.js";
 import { createPost, getPostsByFilm } from "../../Repository/post.js";
-
+import { updateRating } from "../../Repository/film.js";
+import { getUser } from "../../Repository/user";
 function Review() {
   const title = useLocation().state;
   const user = getUser();
@@ -24,20 +23,20 @@ function Review() {
   //get the review content
   const [post, setPost] = useState("");
 
-  const fetchReviews = async () =>{
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  const fetchReviews = async () => {
     const reviewsData = await getPostsByFilm(title);
     setReviews(reviewsData);
-  }
-
-  useEffect(()=> {
-    fetchReviews();
-  },[]);
+  };
   //change handler to get the content of the review
   function handleChange(event) {
     setPost(event.target.value);
   }
   // handle when user enter the submit button
-  const handleSubmit= async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     //trim post
     const postTrimmed = post.trim();
@@ -65,6 +64,7 @@ function Review() {
     };
     // create a review in localStorage
     await createPost(data);
+    await updateRating(title);
     // create a security check of this account in localStorage
     createSecurity(title, user);
     //add a new review of this film after user submit his/her review
@@ -77,14 +77,10 @@ function Review() {
     //set the hover rating to 1
     setHover(1);
     return;
-  }
-
-  
+  };
 
   return (
-    
     <div className="review-container">
-    
       <div className="review-feedback">
         <div>
           <h1>Review</h1>

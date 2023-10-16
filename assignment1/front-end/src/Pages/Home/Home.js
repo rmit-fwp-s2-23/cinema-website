@@ -1,17 +1,27 @@
 import React from "react";
 import MovieList from "../../components/movie/MovieList";
-import movieData from "../../components/movie/MovieData"; // Import your movie data here
 import ReleaseComponent from "../../components/movie/Release";
-import { getAverageRating } from "../../Repository/Review";
+import { getFilms } from "../../Repository/film";
+import { useState, useEffect } from "react";
 const Home = () => {
-  //calculate the averageRating of each movie
-  movieData.map((movie) => {
-    movie.averageRating = getAverageRating(movie.title);
-  });
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+  const [movies, setMovies] = useState([]);
+
+  const fetchMovies = async () => {
+    const movieData = await getFilms();
+    setMovies(movieData);
+  };
+
   return (
     <div className="home">
       <h1>Welcome to Loop Cinemas</h1>
-      <MovieList movies={movieData} />
+      {movies.length > 0 ? (
+        <MovieList movies={movies} />
+      ) : (
+        <p>Loading movies...</p>
+      )}
       <ReleaseComponent />
     </div>
   );

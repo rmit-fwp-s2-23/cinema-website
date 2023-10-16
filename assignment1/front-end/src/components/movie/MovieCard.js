@@ -21,11 +21,11 @@ const MovieCard = ({ movie, isBig, order }) => {
       <div className="img-container">
         <img src={movie.poster} alt={`${movie.title} Poster`} />
       </div>
-      <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none" }}>
+      <Link to={`/movie/${movie.film_id}`} style={{ textDecoration: "none" }}>
       <h2>{movie.title}</h2>
      </Link>
       <p>
-        {movie.averageRating} / 5<span style={{ color: "gold" }}>&#9733;</span>
+        {movie.rating} / 5<span style={{ color: "gold" }}>&#9733;</span>
       </p>
       <p>{movie.releaseDate}</p>
       
