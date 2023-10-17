@@ -13,9 +13,8 @@ import EditPost from "./Pages/EditPost/EditPost";
 import Footer from "./components/footer/Footer";
 import { initSecurity } from "./Repository/Security";
 import MovieDescription from "./Pages/MovieDescription/MovieDescription"
-import movieData from "./components/movie/MovieData";
+
 function App() {
-  // initReview();
   initSecurity();
   return (
     <div>

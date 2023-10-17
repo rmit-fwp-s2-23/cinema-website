@@ -46,8 +46,8 @@ function Review() {
       return;
     }
     //check if trimmed post over 250 words
-    if (postTrimmed.length > 250) {
-      setErrorMessage("A post cannot exceed 250 words.");
+    if (postTrimmed.length > 600) {
+      setErrorMessage("A post cannot exceed 600 words.");
       return;
     }
     // check fake post
@@ -125,6 +125,7 @@ function Review() {
               </div>
               <div className="review-content">
                 <textarea
+                  id="review-textarea"
                   name="textarea"
                   value={post}
                   className="review-content-textarea"

@@ -26,13 +26,13 @@ function EditPost() {
       setErrorMessage("A post cannot be empty.");
       return;
     }
-    if (postTrimmed.length > 250) {
-      setErrorMessage("A post cannot exceed 250 words.");
+    if (postTrimmed.length > 600) {
+      setErrorMessage("A post cannot exceed 600 words.");
       return;
     }
     const data = { content: postTrimmed, rating: rating };
     await updatePost(post.post_id, data);
-    await updateRating(post.title);
+    await updateRating(post.film.title);
     navigate("/myprofile");
     return;
   }

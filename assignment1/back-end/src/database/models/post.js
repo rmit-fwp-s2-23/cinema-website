@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) =>
       primaryKey: true
     },
     content: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(600),
       allowNull: false
     },
     rating: {
