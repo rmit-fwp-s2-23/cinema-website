@@ -83,7 +83,7 @@ async function seedData() {
   const film_1 = await db.film.create({
     title: "Avatar 2",
     rating: 0,
-    releaseDate: 2023 - 01 - 01,
+    releaseDate: "2023 - 01 - 01",
     description:
       "Set more than a decade after the events of the first film, Avatar: The Way of Water begins to tell the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
     poster:
@@ -93,7 +93,7 @@ async function seedData() {
   const film_2 = await db.film.create({
     title: "The Mokey King 3",
     rating: 0,
-    releaseDate: 2023 - 01 - 01,
+    releaseDate: "2023 - 01 - 01",
     description:
       "The third installment of the blockbuster fantasy series sees the return of the Monkey King (Aaron Kwok) in his most action-packed adventure yet, as the travelers on their journey to the West are imprisoned by the Queen of an all-female kingdom and threatened by the wrathful River God.",
     poster:
@@ -102,7 +102,7 @@ async function seedData() {
   const film_3 = await db.film.create({
     title: "The Boss Baby",
     rating: 0,
-    releaseDate: 2023 - 01 - 01,
+    releaseDate: "2023 - 01 - 01",
     description:
       "In the sequel to DreamWorks Animation’s Oscar®-nominated blockbuster comedy, the Templeton brothers—Tim (James Marsden, X-Men franchise) and his Boss Baby little bro Ted (Alec Baldwin)—have become adults and drifted away from each other. Tim is now a married stay-at-home dad. Ted is a hedge fund CEO. But a new boss baby with a cutting-edge approach and a can-do attitude is about to bring them together again … and inspire a new family business. Tim and his wife, Carol (Eva Longoria), the breadwinner of the family, live in the suburbs with their super-smart 7-year-old daughter Tabitha (Ariana Greenblatt, Avengers: Infinity War), and adorable new infant Tina (Amy Sedaris, Netflix’s BoJack Horseman). Tabitha, who’s at the top her class at the prestigious Acorn Center for Advanced Childhood, idolizes her Uncle Ted and wants to become like him, but Tim, still in touch with his overactive youthful imagination, worries that she’s working too hard and is missing out on a normal childhood. When baby Tina reveals that she’s—ta-da!—a top secret agent for BabyCorp on a mission to uncover the dark secrets behind Tabitha’s school and its mysterious founder, Dr. Edwin Armstrong (Jeff Goldblum), it will reunite the Templeton brothers in unexpected ways, lead them to re-evaluate the meaning of family and discover what truly matters. Lisa Kudrow and Jimmy Kimmel also reprise their roles as Ted and Tim’s parents. Building on the success of the first film, which earned more than $500 million worldwide, The Boss Baby: Family Business is directed by returning filmmaker Tom McGrath and is produced by Jeff Hermann (Kung Fu Panda 3).",
     poster:
@@ -111,7 +111,7 @@ async function seedData() {
   const film_4 = await db.film.create({
     title: "Kung Fu Panda 2",
     rating: 0,
-    releaseDate: 2023 - 01 - 01,
+    releaseDate: "2023 - 01 - 01",
     description:
       "Po and his friends fight to stop a peacock villain from conquering China with a deadly new weapon, but first the Dragon Warrior must come to terms with his past.",
     poster:
@@ -120,7 +120,7 @@ async function seedData() {
   const film_5 = await db.film.create({
     title: "Scooby-Doo 2",
     rating: 0,
-    releaseDate: 2023 - 01 - 01,
+    releaseDate: "2023 - 01 - 01",
     description:
       "The Mystery Inc. gang must save Coolsville from an attack of their past monsters brought to life by an evil masked figure trying to take down the gang.",
     poster:
@@ -129,7 +129,7 @@ async function seedData() {
   const film_6 = await db.film.create({
     title: "Tom and Jerry",
     rating: 0,
-    releaseDate: 2023 - 01 - 01,
+    releaseDate: "2023 - 01 - 01",
     description:
       "Jerry, a small mouse, lives within the walls of a large, New England country home where he's befriended the longtime owners, a loving elderly couple. Their unique, comedic friendship comes to an end after the elderly couple passes on and their house is put up for sale. When a young family moves in, Jerry's determined to scare them away from taking over his home. The family quickly adopts a stray cat, later named Tom, to help rid them of their pest problem. In an epic battle for the house, Tom & Jerry soon discover their growing adoration for the family and must work together to protect them from an outside threat. Through their teamwork, they both learn the ultimate value of family and friendship.",
     poster:
@@ -138,7 +138,7 @@ async function seedData() {
   const film_7 = await db.film.create({
     title: "Mr. Bean's Holiday",
     rating: 0,
-    releaseDate: 2023 - 01 - 01,
+    releaseDate: "2023 - 01 - 01",
     description:
       "The hapless Mr. Bean takes a vacation on the French Riviera, where he becomes ensnared in an accidental kidnapping and a case of mistaken identity.",
     poster:
@@ -147,87 +147,87 @@ async function seedData() {
 
   if (count_session > 0) return;
   await db.session.create({
-    session: '2023-10-18 14:30:00',
+    session: "2023-10-18 14:30:00",
     slot: 10,
-    film_id: film_1.film_id
-  });
-  
-  await db.session.create({
-    session: '2023-10- 14:30:00',
-    slot: 10,
-    film_id: film_1.film_id
+    film_id: film_1.film_id,
   });
 
   await db.session.create({
-    session: '2023-10-18 12:30:00',
+    session: "2023-10- 14:30:00",
     slot: 10,
-    film_id: film_2.film_id
+    film_id: film_1.film_id,
   });
 
   await db.session.create({
-    session: '2023-10- 12:30:00',
+    session: "2023-10-18 12:30:00",
     slot: 10,
-    film_id: film_2.film_id
+    film_id: film_2.film_id,
   });
 
   await db.session.create({
-    session: '2023-10-18 15:30:00',
+    session: "2023-10- 12:30:00",
     slot: 10,
-    film_id: film_3.film_id
+    film_id: film_2.film_id,
   });
 
   await db.session.create({
-    session: '2023-10- 15:30:00',
+    session: "2023-10-18 15:30:00",
     slot: 10,
-    film_id: film_3.film_id
+    film_id: film_3.film_id,
   });
 
   await db.session.create({
-    session: '2023-10-18 12:30:00',
+    session: "2023-10- 15:30:00",
     slot: 10,
-    film_id: film_4.film_id
+    film_id: film_3.film_id,
   });
 
   await db.session.create({
-    session: '2023-10- 12:30:00',
+    session: "2023-10-18 12:30:00",
     slot: 10,
-    film_id: film_4.film_id
+    film_id: film_4.film_id,
   });
 
   await db.session.create({
-    session: '2023-10-18 12:30:00',
+    session: "2023-10- 12:30:00",
     slot: 10,
-    film_id: film_5.film_id
+    film_id: film_4.film_id,
   });
 
   await db.session.create({
-    session: '2023-10- 12:30:00',
+    session: "2023-10-18 12:30:00",
     slot: 10,
-    film_id: film_5.film_id
+    film_id: film_5.film_id,
   });
 
   await db.session.create({
-    session: '2023-10-18 12:30:00',
+    session: "2023-10- 12:30:00",
     slot: 10,
-    film_id: film_6.film_id
+    film_id: film_5.film_id,
   });
 
   await db.session.create({
-    session: '2023-10- 12:30:00',
+    session: "2023-10-18 12:30:00",
     slot: 10,
-    film_id: film_6.film_id
+    film_id: film_6.film_id,
   });
 
   await db.session.create({
-    session: '2023-10-18 12:30:00',
+    session: "2023-10- 12:30:00",
     slot: 10,
-    film_id: film_7.film_id
+    film_id: film_6.film_id,
   });
 
   await db.session.create({
-    session: '2023-10- 12:30:00',
+    session: "2023-10-18 12:30:00",
     slot: 10,
-    film_id: film_7.film_id
+    film_id: film_7.film_id,
+  });
+
+  await db.session.create({
+    session: "2023-10- 12:30:00",
+    slot: 10,
+    film_id: film_7.film_id,
   });
 }
 

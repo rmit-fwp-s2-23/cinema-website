@@ -22,6 +22,9 @@ app.get("/", (req, res) => {
 require("./src/routes/user.routes.js")(express, app);
 require("./src/routes/post.routes.js")(express, app);
 require("./src/routes/film.routes.js")(express,app);
+require("./src/routes/session.routes.js")(express,app);
+require("./src/routes/ticket.routes.js")(express,app);
+
 // Set port, listen for requests.
 const PORT = 3002;
 app.listen(PORT, () => {

@@ -11,9 +11,9 @@ exports.all = async (req, res) => {
 
 // Select all sessions based on film
 exports.find = async (req, res) => {
-  const film = await db.film.findOne({ where: { title: req.body.title } });
-  const session = await db.session.findOne({
-    where: { film_id: film.film_id, session: req.params.id },
+  const film = await db.film.findOne({ where: { title: req.params.id } });
+  const session = await db.session.findAll({
+    where: { film_id: film.film_id },
     include: { model: db.film },
   });
   res.json(session);
@@ -21,19 +21,30 @@ exports.find = async (req, res) => {
 
 //Update slot after reserving
 exports.updateSlot = async (req, res) => {
-  const film = await db.film.findOne({ where: { title: req.body.title } });
+  const film = await db.film.findOne({ where: { title: req.params.id } });
   const session = await db.session.findOne({
-    where: { film_id: film.film_id, session: req.params.id },
-    include: { model: db.film },
+    where: { film_id: film.film_id, session: req.params.session },
+    include: [{ model: db.film }, { model: db.ticket, as: "tickets" }],
   });
-  const ticket = await db.ticket.findAll({
-    where: { session_id: session.id },
-  });
-  if (ticket.length != 0) {
-    session.slot = 10 - ticket.length;
+
+  if (session.tickets.length != 0) {
+    let totalQuantity = 0;
+    for (const ticket of session.tickets) {
+      totalQuantity += ticket.quantity;
+    }
+    session.slot = 10 - totalQuantity;
   } else {
     session.slot = 10;
   }
   await session.save();
   return res.json(session);
+};
+
+exports.findSession = async (req, res) => {
+  const film = await db.film.findOne({ where: { title: req.params.id } });
+  const session = await db.session.findOne({
+    where: { film_id: film.film_id, session: req.params.session },
+    include: [{ model: db.film }, { model: db.ticket, as: "tickets" }],
+  });
+  res.json(session);
 };

@@ -3,51 +3,63 @@ import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { deleteSecurity } from "../../Repository/Security";
 import Post from "../../components/Post/Post";
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
+import { getTickets, deleteTickets } from "../../Repository/ticket";
+import { updateSlot } from "../../Repository/session";
 import { getUser, deleteUser, removeUser } from "../../Repository/user";
 import { getPosts, deletePost } from "../../Repository/post";
 import { updateRating } from "../../Repository/film";
+
 function MyProfile() {
   const navigate = useNavigate();
   //get the user from local storage
   const user = getUser();
   const [reviews, setReviews] = useState([]);
-
+  const [tickets, setTickets] = useState([]);
   //click the edit button which will direct to edit profile
   const handleUpdateClick = () => {
     navigate("/editmyprofile");
   };
 
-  const fetchReviews = async () =>{
+  const fetchReviews = async () => {
     const reviewsData = await getPosts(user.username);
     setReviews(reviewsData);
-  }
-
-  useEffect(()=> {
+  };
+  const fecthTicket = async () => {
+    const ticketData = await getTickets(user.username);
+    setTickets(ticketData);
+  };
+  useEffect(() => {
     fetchReviews();
-  },[]);
+    fecthTicket();
+  }, []);
 
   //this change handler will direct to edit a specific post
   function handleUpdateReviewClick(review) {
     navigate("/EditPost", { state: review });
   }
 
-  async function handleRemoveReviewClick(review){
+  async function handleRemoveReviewClick(review) {
     await deletePost(review.post_id);
     await fetchReviews();
     await updateRating(review.film.title);
   }
-  
+
   //this change handler will delete all the information related to this account from local storage
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     reviews.map(async (review) => {
-     await deletePost(review.post_id);
-     await fetchReviews();
-     await updateRating(review.film.title);
-    })
+      await deletePost(review.post_id);
+      await fetchReviews();
+      await updateRating(review.film.title);
+    });
+    tickets.map(async (ticket) => {
+      await deleteTickets(ticket.ticket_id);
+      await fecthTicket();
+      await updateSlot(ticket.session.film.title, ticket.session.session);
+    });
     deleteSecurity(user);
     deleteUser(user.username);
- 
+
     //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
     removeUser();
     navigate("/login");
@@ -107,7 +119,7 @@ function MyProfile() {
                 </Button>
               </div>
             </form>
-          </div>        
+          </div>
           <div className="myprofile-post">
             {reviews.length === 0 ? (
               <span>No posts have been submitted.</span>
@@ -122,13 +134,7 @@ function MyProfile() {
                     id={key}
                   />
                   <div className="myprofile-button">
-                    <Button
-                      onClick={() =>
-                        handleUpdateReviewClick(
-                          review
-                        )
-                      }
-                    >
+                    <Button onClick={() => handleUpdateReviewClick(review)}>
                       Edit
                     </Button>
                     <Button

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) =>
       primaryKey: true
     },
     session: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING(20),
       allowNull: false
     },
     slot: {

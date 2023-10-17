@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Center, Heading, VStack } from '@chakra-ui/react';
-import { tickets } from './tickets';
-
-
+import { getTickets } from '../../Repository/ticket';
+import { getUser } from '../../Repository/user';
 const MyTickets = () => {
+  const user = getUser();
+  const [tickets, setTickets] = useState([]);
+  useEffect(()=>{
+    fecthTicket();
+  },[])
+  const fecthTicket = async () => {
+    const ticketData = await getTickets(user.username);
+    setTickets(ticketData);
+  }
   return (
     <Center >
       <Box p={5} width="40%" margin="0 auto">
@@ -15,7 +23,7 @@ const MyTickets = () => {
             
 
             <Box
-              key={ticket.id}
+              key={ticket.ticket_id}
               p={4}
               borderWidth="1px"
               borderRadius="md"
@@ -25,10 +33,10 @@ const MyTickets = () => {
               alignContent="center"
               >
               <Heading as="h2" size="lg" color="#051622"> {/* Change text color to black */}
-                {ticket.title}
+                {ticket.session.film.title}
               </Heading>
-              <p color="#051622">name: {ticket.name}</p> {/* Change text color to black */}
-              <p color="#051622">Status: {ticket.status}</p> {/* Change text color to black */}
+              <p color="#051622">Quantity: {ticket.quantity}</p> {/* Change text color to black */}
+              <p color="#051622">Session: {ticket.session.session}</p> {/* Change text color to black */}
             </Box>
             
           ))}
