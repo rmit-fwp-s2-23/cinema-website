@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) =>
     },
     description: {
       type: DataTypes.TEXT,
+    },
+    poster: {
+      type: DataTypes.TEXT,
+      allowNull: false
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).

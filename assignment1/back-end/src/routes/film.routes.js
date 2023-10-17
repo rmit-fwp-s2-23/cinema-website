@@ -5,5 +5,10 @@ module.exports = (express, app) => {
     // Select all users.
     router.get("/", controller.all);
 
+     //update rating
+     router.put("/:id", controller.updateRating);
+
+     router.get("/:id", controller.find)
+
     app.use("/api/film", router);
 };

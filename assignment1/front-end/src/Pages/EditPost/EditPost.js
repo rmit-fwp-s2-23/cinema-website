@@ -5,6 +5,7 @@ import Button from "../../components/Button/Button";
 import "../../components/Rate/StarRating.css";
 import { updatePost } from "../../Repository/post";
 import { getUser } from "../../Repository/user";
+import { updateRating } from "../../Repository/film";
 function EditPost() {
   const user = getUser();
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function EditPost() {
     }
     const data = { content: postTrimmed, rating: rating };
     await updatePost(post.post_id, data);
+    await updateRating(post.title);
     navigate("/myprofile");
     return;
   }

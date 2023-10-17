@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Nav.css";
-import { Link, useNavigate } from "react-router-dom";
-import { getUser, removeUser } from "../../Repository/Account.js";
-import movieData from "../movie/MovieData";
-
+import { Link } from "react-router-dom";
+import { getUser, removeUser } from "../../Repository/user";
 
 const NavigationBar = () => {
   const data = getUser();

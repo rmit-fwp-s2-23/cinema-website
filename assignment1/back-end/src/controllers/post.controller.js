@@ -40,7 +40,8 @@ exports.create = async (req, res) => {
     rating: req.body.rating,
     user_id: user_id,
     film_id: film_id  });
-
+  film.addPost(post);
+  user.addPost(post);
   res.json(post);
 };
 

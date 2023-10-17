@@ -16,6 +16,11 @@ async function verifyUser(username, password) {
   return user;
 }
 
+async function getUsers(){
+  const response = await axios.get(API_HOST + `/api/users`);
+  return response.data;
+}
+
 async function findUser(id) {
   const response = await axios.get(API_HOST + `/api/users/select/${id}`);
 
@@ -73,7 +78,7 @@ function removeUser() {
 
 export {
   verifyUser, findUser, createUser,
-  getPosts, createPost,
+  getPosts, createPost, getUsers,
   getUser, removeUser, updateUser,
   setUser, findEmail, deleteUser
 }
