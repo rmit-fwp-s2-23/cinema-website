@@ -13,6 +13,7 @@ import EditPost from "./Pages/EditPost/EditPost";
 import Footer from "./components/footer/Footer";
 import { initSecurity } from "./Repository/Security";
 import MovieDescription from "./Pages/MovieDescription/MovieDescription"
+import MyTickets from "./Pages/MyTickets/MyTickets";
 
 function App() {
   initSecurity();
@@ -35,7 +36,8 @@ function App() {
                   <Route path="review" element={<Review />} />
                   <Route path="editpost" element={<EditPost />} />
                   <Route path="movie/:film_id" element={<MovieDescription  />} />
-
+                  <Route path="mytickets" element={<MyTickets />} />
+                  
                   {/* Add other routes here */}
                 </Routes>
               </main>

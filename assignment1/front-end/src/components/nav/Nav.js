@@ -112,6 +112,9 @@ const NavigationBar = () => {
                 <Link to="/MyProfile" className="dropdown-item">
                   Profile
                 </Link>
+                <Link to="/mytickets" className="dropdown-item">
+                  MyTickets
+                </Link>
                 <Link
                   to="/login"
                   className="dropdown-item"
