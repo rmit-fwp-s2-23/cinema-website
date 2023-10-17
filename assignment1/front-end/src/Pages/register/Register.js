@@ -3,19 +3,25 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { findUser, createUser, findEmail } from "../../Repository/user";
+
+function isValidPassword(password){
+  return /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(
+    password
+  );
+}
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
   });
+
   const [date, setDate] = useState("");
   //set some errors when user enter invalid data (username, email and password)
   const [errorEmailMessage, setErrorEmailMessage] = useState(null);
   const [errorUsernameMessage, setErrorUsernameMessage] = useState(null);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState(null);
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -37,23 +43,19 @@ const Register = () => {
     setErrorEmailMessage("");
     setErrorPasswordMessage("");
     //check valid data
-    if (await findUser(formData.username) !== null) {
+    if ((await findUser(formData.username)) !== null) {
       setErrorUsernameMessage(
         "This username is already used. Please use another username !"
       );
       return;
     }
-    if (await findEmail(formData.email) !== null) {
+    if ((await findEmail(formData.email)) !== null) {
       setErrorEmailMessage(
         "This email is already used. Please use another email !"
       );
       return;
     }
-    if (
-      !/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(
-        formData.password
-      )
-    ) {
+    if (!isValidPassword(formData.password)) {
       setErrorPasswordMessage(
         <div>
           <p>A password must contain:</p>
@@ -109,8 +111,9 @@ const Register = () => {
               </div>
             )}
             <div className="register-form-member">
-              <label>Password:</label>
+              <label htmlFor="password">Password</label>
               <input
+                id="password"
                 type="password"
                 name="password"
                 value={formData.password}
@@ -137,4 +140,5 @@ const Register = () => {
   );
 };
 
+export { isValidPassword };
 export default Register;

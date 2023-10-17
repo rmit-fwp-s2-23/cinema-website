@@ -6,6 +6,7 @@ import Post from "../../components/Post/Post";
 import {useState, useEffect} from 'react';
 import { getUser, deleteUser, removeUser } from "../../Repository/user";
 import { getPosts, deletePost } from "../../Repository/post";
+import { updateRating } from "../../Repository/film";
 function MyProfile() {
   const navigate = useNavigate();
   //get the user from local storage
@@ -27,21 +28,26 @@ function MyProfile() {
   },[]);
 
   //this change handler will direct to edit a specific post
-  function handleUpdateReviewClick(data) {
-    navigate("/EditPost", { state: data });
+  function handleUpdateReviewClick(review) {
+    navigate("/EditPost", { state: review });
   }
 
-  function handleRemoveReviewClick(id){
-    deletePost(id);
+  async function handleRemoveReviewClick(review){
+    await deletePost(review.post_id);
+    await fetchReviews();
+    await updateRating(review.film.title);
   }
   
   //this change handler will delete all the information related to this account from local storage
   const handleDeleteClick = () => {
-    reviews.map((review) => {
-     deletePost(review.post_id);
+    reviews.map(async (review) => {
+     await deletePost(review.post_id);
+     await fetchReviews();
+     await updateRating(review.film.title);
     })
     deleteSecurity(user);
     deleteUser(user.username);
+ 
     //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
     removeUser();
     navigate("/login");
@@ -134,7 +140,7 @@ function MyProfile() {
                             "Are you sure you wish to delete this review?"
                           )
                         ) {
-                          handleRemoveReviewClick(review.post_id);
+                          handleRemoveReviewClick(review);
                         }
                       }}
                     >

@@ -1,6 +1,5 @@
 import axios from "axios";
-import { getPostsByFilm } from "./post";
-import { useState, useEffect } from "react";
+
 // --- Constants ----------------------------------------------------------------------------------
 const API_HOST = "http://localhost:3002";
 

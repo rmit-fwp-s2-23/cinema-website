@@ -1,15 +1,15 @@
 module.exports = (sequelize, DataTypes) =>
-  sequelize.define("post", {
-    post_id: {
+  sequelize.define("session", {
+    session_id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    content: {
-      type: DataTypes.STRING(600),
+    session: {
+      type: DataTypes.DATE,
       allowNull: false
     },
-    rating: {
+    slot: {
         type: DataTypes.INTEGER,
         allowNull: false
     }

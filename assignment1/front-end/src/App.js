@@ -13,9 +13,10 @@ import EditPost from "./Pages/EditPost/EditPost";
 import Footer from "./components/footer/Footer";
 import { initSecurity } from "./Repository/Security";
 import MovieDescription from "./Pages/MovieDescription/MovieDescription"
-import movieData from "./components/movie/MovieData";
+import MyTickets from "./Pages/MyTickets/MyTickets";
+
+
 function App() {
-  // initReview();
   initSecurity();
   return (
     <div>
@@ -28,7 +29,7 @@ function App() {
             <div className="body">
               <main role="main">
                 <Routes>
-                  <Route path="/" element={<Home   />} />
+                  <Route path="/" element={<Home />} />
                   <Route path="register" element={<Register />} />
                   <Route path="login" element={<Login />} />
                   <Route path="myprofile" element={<MyProfile />} />
@@ -36,6 +37,8 @@ function App() {
                   <Route path="review" element={<Review />} />
                   <Route path="editpost" element={<EditPost />} />
                   <Route path="movie/:film_id" element={<MovieDescription  />} />
+                  <Route path="mytickets" element={<MyTickets />} />
+                  
 
                   {/* Add other routes here */}
                 </Routes>
