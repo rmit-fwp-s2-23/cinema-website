@@ -26,12 +26,13 @@ exports.all = async (req, res) => {
 
 // Create a ticket in the database.
 exports.create = async (req, res) => {
+  const film = await db.film.findOne({ where: { title: req.body.title } });
   const user = await db.user.findOne({
     where: { username: req.body.username },
   });
 
   const session = await db.session.findOne({
-    where: { session: req.body.session },
+    where: { session: req.body.session, film_id: film.film_id },
   });
 
   const ticket = await db.ticket.create({
@@ -45,7 +46,9 @@ exports.create = async (req, res) => {
 };
 
 exports.remove = async (req, res) => {
-  const ticket = await db.ticket.findOne({ where: { ticket_id: req.params.id } });
+  const ticket = await db.ticket.findOne({
+    where: { ticket_id: req.params.id },
+  });
   if (ticket !== null) {
     await ticket.destroy();
     removed = true;

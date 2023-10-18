@@ -20,6 +20,7 @@ const MovieDescription = () => {
   const [fields, setFields] = useState({ session: "", quantity: 0 });
   const [slot, setSlot] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
+
   const fetchMovie = async () => {
     const movieData = await getFilms();
     const foundMovie = movieData.find(
@@ -66,7 +67,12 @@ const MovieDescription = () => {
       setErrorMessage("Please select a session time/ a quantity of ticket");
       return;
     }
+    if (fields.quantity > slot || fields.quantity < 0) {
+      setErrorMessage("Please select a valid number of ticket");
+      return;
+    }
     fields.username = user.username;
+    fields.title = movie.title;
     await createTicket(fields);
     await updateSlot(movie.title, fields.session);
     await fetchSlot();
