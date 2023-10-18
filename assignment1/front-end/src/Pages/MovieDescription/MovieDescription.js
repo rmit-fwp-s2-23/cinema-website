@@ -31,7 +31,7 @@ const MovieDescription = () => {
 
   useEffect(() => {
     fetchMovie();
-  }, []);
+  }, [film_id]);
   useEffect(() => {
     if (movie) {
       const fecthSessions = async () => {

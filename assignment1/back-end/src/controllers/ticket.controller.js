@@ -6,11 +6,12 @@ exports.find = async (req, res) => {
   const ticket = await db.ticket.findAll({
     where: { user_id: user.user_id },
     include: [
-      { model: db.user },
+      { model: db.user,  attributes: ['user_id', 'username']  },
       {
         model: db.session,
         include: {
           model: db.film,
+          attributes: ['film_id', 'title'] 
         },
       },
     ],

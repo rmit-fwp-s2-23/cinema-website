@@ -37,8 +37,8 @@ db.session.belongsTo(db.film, {
 
 db.film.hasMany(db.post, { as: "posts" });
 db.film.hasMany(db.session, { as: "sessions" });
-db.user.hasMany(db.post, { as: "posts" });
-db.user.hasMany(db.ticket, { as: "tickets" });
+db.user.hasMany(db.post, { as: "posts", onDelete: "CASCADE" });
+db.user.hasMany(db.ticket, { as: "tickets", onDelete: "CASCADE" });
 db.session.hasMany(db.ticket, { as: "tickets" });
 // Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 

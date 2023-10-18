@@ -5,6 +5,7 @@ import { getUser, removeUser } from "../../Repository/user";
 import { getFilms } from "../../Repository/film";
 
 const NavigationBar = () => {
+  const mounted = useRef(true);
   const data = getUser();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,7 +36,7 @@ const NavigationBar = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-  
+
   const handleSearchInputChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -48,7 +49,11 @@ const NavigationBar = () => {
   };
   const fetchMovie = async () => {
     const movieData = await getFilms();
-    setMovies(movieData);
+    const filtered = movieData.map(({ film_id, title }) => ({
+      film_id,
+      title,
+    }));
+    setMovies(filtered);
   };
   const handleSearchClick = () => {
     setShowDropdown(true);
@@ -78,13 +83,9 @@ const NavigationBar = () => {
           {showDropdown && (
             <div className="search-dropdown">
               <ul>
-                {filteredMovies.map((movie) => (
-                  <li>
-                    <Link
-                      to={`/movie/${movie.film_id}`}
-                    >
-                      {movie.title}
-                    </Link>
+                {filteredMovies.map((movie, key) => (
+                  <li key={key}>
+                    <Link to={`/movie/${movie.film_id}`}>{movie.title}</Link>
                   </li>
                 ))}
               </ul>

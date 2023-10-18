@@ -22,16 +22,22 @@ function MyProfile() {
   };
 
   const fetchReviews = async () => {
-    const reviewsData = await getPosts(user.username);
-    setReviews(reviewsData);
+    if (user) {
+      const reviewsData = await getPosts(user.username);
+      setReviews(reviewsData);
+    }
   };
   const fecthTicket = async () => {
-    const ticketData = await getTickets(user.username);
-    setTickets(ticketData);
+    if (user) {
+      const ticketData = await getTickets(user.username);
+      setTickets(ticketData);
+    }
   };
   useEffect(() => {
-    fetchReviews();
-    fecthTicket();
+    if (user) {
+      fetchReviews();
+      fecthTicket();
+    }
   }, []);
 
   //this change handler will direct to edit a specific post
@@ -47,22 +53,27 @@ function MyProfile() {
 
   //this change handler will delete all the information related to this account from local storage
   const handleDeleteClick = async () => {
-    reviews.map(async (review) => {
-      await deletePost(review.post_id);
-      await fetchReviews();
-      await updateRating(review.film.title);
-    });
-    tickets.map(async (ticket) => {
-      await deleteTickets(ticket.ticket_id);
-      await fecthTicket();
-      await updateSlot(ticket.session.film.title, ticket.session.session);
-    });
-    deleteSecurity(user);
-    deleteUser(user.username);
+    if (user) {
+      reviews.map(async (review) => {
+        let title = review.film.title;
+        await deletePost(review.post_id);
+        await updateRating(title);
+        // await fetchReviews();
+      });
+      tickets.map(async (ticket) => {
+        let title = ticket.session.film.title;
+        let session = ticket.session.session;
+        await deleteTickets(ticket.ticket_id);
+        await updateSlot(title, session);
+        // await fecthTicket();
+      });
+      deleteSecurity(user);
+      deleteUser(user.username);
 
-    //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
-    removeUser();
-    navigate("/login");
+      //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
+      removeUser();
+      navigate("/login");
+    }
   };
 
   return (

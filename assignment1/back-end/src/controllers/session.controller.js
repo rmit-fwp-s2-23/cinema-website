@@ -4,7 +4,10 @@ const db = require("../database");
 // Select all sessions
 exports.all = async (req, res) => {
   const session = await db.session.findAll({
-    include: [{ model: db.film }, { model: db.ticket, as: "tickets" }],
+    include: [
+      { model: db.film, attributes: ["film_id", "title"] },
+      { model: db.ticket, as: "tickets" },
+    ],
   });
   res.json(session);
 };
@@ -14,7 +17,7 @@ exports.find = async (req, res) => {
   const film = await db.film.findOne({ where: { title: req.params.id } });
   const session = await db.session.findAll({
     where: { film_id: film.film_id },
-    include: { model: db.film },
+    include: { model: db.film, attributes: ["film_id", "title"] },
   });
   res.json(session);
 };
@@ -24,7 +27,10 @@ exports.updateSlot = async (req, res) => {
   const film = await db.film.findOne({ where: { title: req.params.id } });
   const session = await db.session.findOne({
     where: { film_id: film.film_id, session: req.params.session },
-    include: [{ model: db.film }, { model: db.ticket, as: "tickets" }],
+    include: [
+      { model: db.film, attributes: ["film_id", "title"] },
+      { model: db.ticket, as: "tickets" },
+    ],
   });
 
   if (session.tickets.length != 0) {
@@ -44,7 +50,7 @@ exports.findSession = async (req, res) => {
   const film = await db.film.findOne({ where: { title: req.params.id } });
   const session = await db.session.findOne({
     where: { film_id: film.film_id, session: req.params.session },
-    include: [{ model: db.film }, { model: db.ticket, as: "tickets" }],
+    include: [{ model: db.ticket, as: "tickets" }],
   });
   res.json(session);
 };
