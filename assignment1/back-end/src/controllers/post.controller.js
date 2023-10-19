@@ -1,6 +1,6 @@
 const db = require("../database");
 
-// Select all posts from the database.
+// Select all posts from the database based on username.
 exports.find = async (req, res) => {
   const user = await db.user.findOne({ where: { username: req.params.id } });
   const user_id = user.user_id;

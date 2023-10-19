@@ -26,10 +26,10 @@ function MovieList({ movies }) {
           Trending<span></span>
         </p>
       </div>
-      {numDescending.map((movie) => {
+      {numDescending.map((movie, key) => {
         return (
           <div className="movie-layout">
-            <MovieCard order={movie.film_id} key={movie.film_id} movie={movie} />
+            <MovieCard  order={key+1} key={movie.film_id} movie={movie} />
           </div>
         );
       })}

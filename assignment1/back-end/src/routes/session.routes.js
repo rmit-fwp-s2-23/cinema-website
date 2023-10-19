@@ -1,14 +1,17 @@
 module.exports = (express, app) => {
-    const controller = require("../controllers/session.controller.js");
-    const router = express.Router();
-  
-    // Select all users.
-    router.get("/", controller.all);
+  const controller = require("../controllers/session.controller.js");
+  const router = express.Router();
 
-     //update slot
-     router.put("/:id", controller.updateSlot);
+  // Select all users.
+  router.get("/", controller.all);
 
-     router.get("/:id", controller.find)
+  //update slot
+  router.put("/:id/:session", controller.updateSlot);
 
-    app.use("/api/film", router);
+  router.get("/:id", controller.find);
+
+  router.get("/:id/:session",controller.findSession)
+
+
+  app.use("/api/sessions", router);
 };
