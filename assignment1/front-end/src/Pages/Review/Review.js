@@ -7,7 +7,7 @@ import Post from "../../components/Post/Post.js";
 import { checkSecurity, createSecurity } from "../../Repository/Security.js";
 import { createPost, getPostsByFilm } from "../../Repository/post.js";
 import { updateRating } from "../../Repository/film.js";
-import { getUser } from "../../Repository/user";
+import { getUser, findUser } from "../../Repository/user";
 function Review() {
   const title = useLocation().state;
   const user = getUser();
@@ -22,14 +22,21 @@ function Review() {
   const [hover, setHover] = useState(1);
   //get the review content
   const [post, setPost] = useState("");
-
+  const [account, setAccount] = useState(null);
   useEffect(() => {
-    fetchReviews();
+    if (user) {
+      fetchReviews();
+      fecthAccount();
+    }
   }, []);
 
   const fetchReviews = async () => {
     const reviewsData = await getPostsByFilm(title);
     setReviews(reviewsData);
+  };
+  const fecthAccount = async () => {
+    const accountData = await getUser(user.username);
+    setAccount(accountData);
   };
   //change handler to get the content of the review
   function handleChange(event) {
@@ -65,6 +72,7 @@ function Review() {
     // create a review in localStorage
     await createPost(data);
     await fetchReviews();
+    await fecthAccount();
     await updateRating(title);
 
     // create a security check of this account in localStorage
@@ -90,7 +98,7 @@ function Review() {
         <div className="review-film">{title}</div>
         <div>
           {/*check if a guest or a logged in user looking at review of a film*/}
-          {user !== null ? (
+          {user !== null || account.isBlocked ? (
             <div>
               <div className="review-info">
                 {/*announce that you are  viewing the feedback as a logged in user */}

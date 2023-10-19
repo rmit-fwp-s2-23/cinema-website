@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) =>
     date: {
       type: DataTypes.STRING(40),
       allowNull: false
+    },
+    isBlocked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).

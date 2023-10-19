@@ -68,6 +68,7 @@ async function seedData() {
     password_hash: hash,
     email: "mbolger@gmail.com",
     date: "11/20/2020",
+    isBlocked: false,
   });
 
   hash = await argon2.hash("def456", { type: argon2.argon2id });
@@ -76,6 +77,7 @@ async function seedData() {
     password_hash: hash,
     email: "shekhar@gmail.com",
     date: "11/20/2020",
+    isBlocked: false,
   });
 
   if (count_film > 0) return;

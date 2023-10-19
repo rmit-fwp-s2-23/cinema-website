@@ -39,7 +39,8 @@ exports.create = async (req, res) => {
     username: req.body.username,
     password_hash: hash,
     email: req.body.email,
-    date: req.body.date
+    date: req.body.date,
+    isBlocked: false
   });
 
   res.json(user);
