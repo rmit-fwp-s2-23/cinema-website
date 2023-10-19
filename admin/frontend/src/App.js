@@ -1,16 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import Login from './pages/login';
+import Login from './pages/Login/login';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Dashboard from './pages/Dashboard/Dashboard';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <div className="App">
       <Router>
 
-      <Routes>
+           <Routes>
                   <Route path="/" element={<Login />} />
-      </Routes>
+                  <Route path="/dashboard" element={<Dashboard />} />
+           </Routes>
+        < Footer />
       </Router>
       
     </div>
