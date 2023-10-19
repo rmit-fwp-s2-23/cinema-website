@@ -9,13 +9,21 @@ import {
   VStack,
   HStack,
 } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    // Implement your authentication logic here
+    if (username === 'admin' && password === 'admin') {
+      // Authentication successful
+      navigate('/dashboard');
+    } else {
+      // Authentication failed, you can display an error message or take other actions
+      alert('Invalid username or password');
+    }
   };
 
   return (
