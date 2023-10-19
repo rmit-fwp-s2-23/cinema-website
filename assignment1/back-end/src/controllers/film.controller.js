@@ -21,12 +21,21 @@ exports.updateRating = async (req, res) => {
     include: { model: db.post, as: "posts" },
   });
   let totalRating = 0;
+  let length = 0;
   if (film.posts != 0) {
     for (const post of film.posts) {
-      totalRating += post.rating;
+      if (post.rating > 0) {
+        totalRating += post.rating;
+        length += 1;
+      }
     }
-    const averageRating = totalRating / film.posts.length;
-    film.rating = averageRating.toFixed(2);
+    if (length > 0) {
+      const averageRating = totalRating / length;
+      film.rating = averageRating.toFixed(2);
+    }
+    else {
+      film.rating =0;
+    }
   } else {
     film.rating = 0;
   }
