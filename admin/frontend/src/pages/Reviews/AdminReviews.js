@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import { useQuery, useMutation } from '@apollo/client';
 import { Flex, Box, Button, Center, SimpleGrid } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import NavigationBar from '../../components/Nav/Nav';
 
 // Define your GraphQL query to fetch reviews
 // const GET_REVIEWS = yourGraphQLQueryHere;
@@ -25,6 +26,7 @@ function AdminReviews() {
   return (
     
     // <Center h="100vh" flexDirection="column" alignItems="flex-start">
+    
       <Flex direction="column" h="100vh">
       <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md" width="100%" >
         <h1>Admin Reviews Management</h1>
