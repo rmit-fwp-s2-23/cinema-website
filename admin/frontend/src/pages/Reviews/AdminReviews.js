@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // import { useQuery, useMutation } from '@apollo/client';
-import { Flex, Box, Button, Center, SimpleGrid } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-
+import { Flex, Box, Button, Center, SimpleGrid } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { getPosts, deletePost } from "../../repository/post";
 // Define your GraphQL query to fetch reviews
 // const GET_REVIEWS = yourGraphQLQueryHere;
 
@@ -10,11 +10,35 @@ import { Link } from 'react-router-dom';
 // const DELETE_REVIEW = yourGraphQLMutationHere;
 
 function AdminReviews() {
-  // Fetch reviews using the GET_REVIEWS query
-  // const { loading, error, data } = useQuery(GET_REVIEWS);
+  const [reviews, setReviews] = useState([]);
+  const [filteredReviews, setFilteredReviews] = useState([]);
+  async function fetchReviews() {
+    const reviewsData = await getPosts();
+    setReviews(reviewsData);
+  }
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  useEffect(() => {
+    const unsuitableWords = ["shit", "fuck"]; // Add more words as needed
+
+    const filetered = reviews.filter((review) => {
+      const content = review.content.toLowerCase(); // Convert to lowercase for case-insensitive matching
+
+      // Use a regular expression to match any of the unsuitable words
+      const regex = new RegExp(unsuitableWords.join("|"), "g");
+
+      // Check if the content contains any of the unsuitable words
+      return regex.test(content);
+    });
+    setFilteredReviews(filetered);
+  }, [reviews]);
 
   // Define a function to handle review deletion
-  const handleDeleteReview = (reviewId) => {
+  const handleDeleteReview = async (review) => {
+    await deletePost(review.post_id);
+    await fetchReviews();
     // Call the DELETE_REVIEW mutation to delete the review
     // Implement the actual mutation logic here
   };
@@ -23,54 +47,52 @@ function AdminReviews() {
   // if (error) return <p>Error: {error.message}</p>;
 
   return (
-    
     // <Center h="100vh" flexDirection="column" alignItems="flex-start">
-      <Flex direction="column" h="100vh">
-      <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md" width="100%" >
+    <Flex direction="column" h="100vh">
+      <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md" width="100%">
         <h1>Admin Reviews Management</h1>
-        
         <SimpleGrid columns={4} spacing={4}>
-          <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md" >
-            <h2>Title</h2>
+          <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md">
+            <h2>Post ID</h2>
           </Box>
           <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md">
-            <h2>User</h2>
+            <h2>Content</h2>
           </Box>
           <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md">
-            <h2>Review</h2>
+            <h2>Rating</h2>
           </Box>
           <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md">
             <h2>Edit</h2>
           </Box>
-          
         </SimpleGrid>
-        {/* {data.reviews.map((review) => ( */}
-          <SimpleGrid columns={4} spacing={4} 
-          // key={review.id}
+        {filteredReviews.map((review, key) => (
+          <SimpleGrid
+            columns={4}
+            spacing={4}
+            // key={review.id}
           >
             <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md">
-              {/* {review.title} */}
+              {review.post_id}
             </Box>
             <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md">
-              {/* {review.user.username} */}
+              {review.content}
             </Box>
             <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md">
-              {/* {review.content} */}
+              {review.rating}
             </Box>
             <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md">
               <Button
                 colorScheme="teal"
-                // onClick={() => handleDeleteReview(review.id)}
+                onClick={() => handleDeleteReview(review)}
               >
                 Delete
               </Button>
             </Box>
           </SimpleGrid>
-        {/* ))} */}
+        ))}
       </Box>
-    {/* </Center> */}
+      {/* </Center> */}
     </Flex>
-    
   );
 }
 

@@ -15,13 +15,16 @@ graphql.schema = buildSchema(`
   type User {
     user_id: Int,
     username: String,
+    email: String,
+    isBlocked: Boolean
     posts: [Post]
   }
 
   type Post {
     post_id: Int,
     content: String,
-    rating: Float
+    rating: Float,
+    isDeleted: Boolean
   }
 
   # The input type can be used for incoming data.
@@ -40,8 +43,9 @@ graphql.schema = buildSchema(`
 
   # Mutations (modify data in the underlying data-source, i.e., the database).
   type Mutation {
-    update_post(input: PostInput): Post,
-    update_user(user_id: Int): User
+    delete_post(post_id: Int): Post,
+    block_user(user_id: Int): User,
+    unblock_user(user_id: Int): User
   }
 `);
 
@@ -59,19 +63,37 @@ graphql.root = {
   },
 
   // Mutations.
-  update_post: async (args) => {
-    const post = await db.post.findByPk(args.post_id);
-    post.content = args.input.content;
-    post.rating = args.input.content;
+  delete_post: async (args) => {
+    const post = await db.post.findOne({where: {post_id: args.post_id}});
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    post.content = "**** This review has been deleted by the admin ***";
+    post.rating = 0;
+    post.isDeleted = true;
+    // Save the changes to the post
     await post.save();
 
+    // Return the updated post
     return post;
   },
-  update_user: async (args) => {
+
+  block_user: async (args) => {
     const user = await db.user.findByPk(args.user_id);
 
     // Update owner fields.
     user.isBlocked = true;
+
+    await user.save();
+
+    return user;
+  },
+  unblock_user: async (args) => {
+    const user = await db.user.findByPk(args.user_id);
+
+    // Update owner fields.
+    user.isBlocked = false;
 
     await user.save();
 

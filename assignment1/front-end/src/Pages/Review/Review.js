@@ -24,10 +24,8 @@ function Review() {
   const [post, setPost] = useState("");
   const [account, setAccount] = useState(null);
   useEffect(() => {
-    if (user) {
-      fetchReviews();
-      fecthAccount();
-    }
+    fetchReviews();
+    fecthAccount();
   }, []);
 
   const fetchReviews = async () => {
@@ -35,7 +33,7 @@ function Review() {
     setReviews(reviewsData);
   };
   const fecthAccount = async () => {
-    const accountData = await getUser(user.username);
+    const accountData = await findUser(user.username);
     setAccount(accountData);
   };
   //change handler to get the content of the review
@@ -98,7 +96,7 @@ function Review() {
         <div className="review-film">{title}</div>
         <div>
           {/*check if a guest or a logged in user looking at review of a film*/}
-          {user !== null || account.isBlocked ? (
+          {user !== null && account && account.isBlocked === false ? (
             <div>
               <div className="review-info">
                 {/*announce that you are  viewing the feedback as a logged in user */}
@@ -170,10 +168,19 @@ function Review() {
             </div>
           ) : (
             <div className="review-info">
-              {/*announce that you are  viewing the feedback as a guest */}
-              <p>
-                You review as <span>Guest</span>
-              </p>
+              {!user ? (
+                <div>
+                  <p>
+                    You review as <span>Guest</span>
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  <p>
+                    Your account has been <span>BLOCKED</span>
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>
