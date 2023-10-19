@@ -17,9 +17,13 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    // Implement your authentication logic here
-    navigate("/")
-    
+    if (username === 'admin' && password === 'admin') {
+      // Authentication successful
+      navigate('/dashboard');
+    } else {
+      // Authentication failed, you can display an error message or take other actions
+      alert('Invalid username or password');
+    }
   };
 
   return (
