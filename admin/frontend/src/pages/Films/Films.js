@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ChakraProvider,
   Box,
@@ -8,36 +8,24 @@ import {
   Image,
   Flex,
   Button,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
-const movies = [
-  {
-    title: 'Movie 1',
-    releaseYear: 2020,
-    
-  },
-  {
-    title: 'Movie 2',
-    releaseYear: 2019,
-    
-  },
-  // Add more movie objects as needed
-];
-
+import { getFilms } from "../../repository/film";
+import { useState, useEffect } from "react";
 
 function Films() {
-    const navigate = useNavigate();
-    
-    
-    function handleEditClick() {
-        
-        navigate("/movie/:movieTitle");
-      }
-//   const handleEditClick = (title) => {
-//     console.log(`Edit button clicked for ${title}`);
-//   };
-
+  const navigate = useNavigate();
+  const [films, setFilms] = useState([]);
+  async function fecthFilms() {
+    const filmsData = await getFilms();
+    setFilms(filmsData);
+  }
+  useEffect(() => {
+    fecthFilms();
+  }, []);
+  function handleEditClick(film_id) {
+    navigate(`/film/${film_id}`);
+  }
   return (
     <ChakraProvider>
       <Flex direction="column" h="100vh">
@@ -45,36 +33,59 @@ function Films() {
           <Text fontSize="3xl" fontWeight="bold" mb={4} color="white">
             Movie List
           </Text>
-          <Flex flexWrap="wrap">
-            {movies.map((movie, index) => (
-              <Box
-                key={index}
-                p={4}
-                borderWidth="1px"
-                borderRadius="lg"
-                boxShadow="md"
-                minW="300px"
-                maxW="400px" // Increase the maximum width to make the boxes wider
-                flex="1"
-                margin="1rem"
-                bg="gray.700"
-              >
-                <Image src={movie.image} alt={movie.title} />
-                <Text fontSize="xl" fontWeight="semibold" mt={2} color="white">
-                  {movie.title}
-                </Text>
-                <Text fontSize="md" color="white">Released in {movie.releaseYear}</Text>
-                <Button
-                  colorScheme="blue"
-                  size="sm"
-                  mt={4}
-                  onClick={() => handleEditClick(movie.title)}
-                >
-                  Edit
-                </Button>
-              </Box>
-            ))}
-          </Flex>
+          <Button
+            colorScheme="blue"
+            size="sm"
+            mt={4}
+            onClick={() =>  navigate(`/newfilm`) }
+          >
+            Create new film
+          </Button>
+          {films.length === 0 ? (
+            <div>
+              <p>Loading ...</p>
+            </div>
+          ) : (
+            <div>
+              <Flex flexWrap="wrap">
+                {films.map((film, index) => (
+                  <Box
+                    key={index}
+                    p={4}
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    boxShadow="md"
+                    minW="300px"
+                    maxW="400px" // Increase the maximum width to make the boxes wider
+                    flex="1"
+                    margin="1rem"
+                    bg="gray.700"
+                  >
+                    <Image src={film.poster} alt={film.title} />
+                    <Text
+                      fontSize="xl"
+                      fontWeight="semibold"
+                      mt={2}
+                      color="white"
+                    >
+                      {film.title}
+                    </Text>
+                    <Text fontSize="md" color="white">
+                      Released in {film.releaseDate}
+                    </Text>
+                    <Button
+                      colorScheme="blue"
+                      size="sm"
+                      mt={4}
+                      onClick={() => handleEditClick(film.film_id)}
+                    >
+                      Edit
+                    </Button>
+                  </Box>
+                ))}
+              </Flex>
+            </div>
+          )}
         </Box>
       </Flex>
     </ChakraProvider>

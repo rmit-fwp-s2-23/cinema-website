@@ -27,15 +27,30 @@ graphql.schema = buildSchema(`
     isDeleted: Boolean
   }
 
-  # The input type can be used for incoming data.
-  input PostInput {
-    post_id: Int,
-    content: String,
-    rating: Float
+  type Film {
+    film_id: Int,
+    title: String,
+    releaseDate: String,
+    poster: String,
+    rating: Float,
+    description: String
   }
-
+  # The input type can be used for incoming data.
+  input FilmInput {
+    title: String,
+    releaseDate: String,
+    poster: String,
+    rating: Float,
+    description: String
+  }
+   input FilmUpdateInput {
+    film_id: Int,
+    releaseDate: String,
+    description: String
+   }
   # Queries (read-only operations).
   type Query {
+    all_films: [Film],
     all_users: [User],
     all_posts: [Post],
     specific_posts(post_id: Int ): [Post]
@@ -45,7 +60,9 @@ graphql.schema = buildSchema(`
   type Mutation {
     delete_post(post_id: Int): Post,
     block_user(user_id: Int): User,
-    unblock_user(user_id: Int): User
+    unblock_user(user_id: Int): User,
+    create_film(input: FilmInput): Film,
+    update_film(input: FilmUpdateInput): Film
   }
 `);
 
@@ -58,13 +75,18 @@ graphql.root = {
   all_posts: async () => {
     return await db.post.findAll();
   },
+
+  all_films: async () => {
+    return await db.film.findAll();
+  },
+
   specific_posts: async (args) => {
     return await db.post.findByPk(args.post_id);
   },
 
   // Mutations.
   delete_post: async (args) => {
-    const post = await db.post.findOne({where: {post_id: args.post_id}});
+    const post = await db.post.findOne({ where: { post_id: args.post_id } });
     if (!post) {
       throw new Error("Post not found");
     }
@@ -98,6 +120,23 @@ graphql.root = {
     await user.save();
 
     return user;
+  },
+
+  create_film: async (args) => {
+    const film = await db.film.create(args.input);
+
+    return film;
+  },
+
+  update_film: async (args) => {
+    const film = await db.film.findByPk(args.input.film_id);
+
+    // Update owner fields.
+    film.releaseDate = args.input.releaseDate;
+    film.description = args.input.description;
+    await film.save();
+
+    return film;
   },
 };
 
