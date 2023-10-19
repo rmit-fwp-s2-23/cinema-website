@@ -26,7 +26,7 @@ function Dashboard() {
       </Box>
       <Center mt={20}>
         <Button colorScheme="teal">
-          <Link to="/login">Logout</Link>
+          <Link to="/">Logout</Link>
         </Button>
       </Center>
     </Center>

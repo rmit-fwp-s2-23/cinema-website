@@ -9,13 +9,17 @@ import {
   VStack,
   HStack,
 } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     // Implement your authentication logic here
+    navigate("/")
+    
   };
 
   return (
