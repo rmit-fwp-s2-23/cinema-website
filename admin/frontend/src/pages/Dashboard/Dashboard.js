@@ -12,11 +12,11 @@ function Dashboard() {
         <SimpleGrid columns={3} spacing={4}>
           <Box p={20} shadow="lg" borderWidth="1px" borderRadius="md">
             
-            <Link to="/review"><h2>Reviews</h2></Link>
+            <Link to="/adminreviews"><h2>Reviews</h2></Link>
           </Box>
           <Box p={20} shadow="lg" borderWidth="1px" borderRadius="md">
             
-            <Link to="/users"><h2>Users</h2></Link>
+            <Link to="/adminusers"><h2>Users</h2></Link>
           </Box>
           <Box p={20} shadow="lg" borderWidth="1px" borderRadius="md">
             
