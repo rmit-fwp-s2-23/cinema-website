@@ -15,12 +15,12 @@ function App() {
     {
       title: 'Movie 1',
       releaseYear: 2020,
-      image: 'https://example.com/movie1.jpg',
+      
     },
     {
       title: 'Movie 2',
       releaseYear: 2019,
-      image: 'https://example.com/movie2.jpg',
+      
     },
     // Add more movie objects as needed
   ]);
