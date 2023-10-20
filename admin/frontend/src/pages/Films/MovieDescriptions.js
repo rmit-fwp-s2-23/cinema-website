@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"; // Importing useParams to get parameters from the URL.
 import {
   ChakraProvider,
   Box,
@@ -7,13 +7,14 @@ import {
   Input,
   Button,
   Flex,
-} from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import { getFilms, updateFilm } from "../../repository/film";
+} from "@chakra-ui/react"; // Importing necessary components from Chakra UI for styling.
+import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation.
+import { getFilms, updateFilm } from "../../repository/film"; // Importing functions for fetching and updating film data.
 const MovieDescription = () => {
-  const [fields, setFields] = useState({ releaseDate: "", description: "" });
-  const { film_id } = useParams();
-  const [movie, setMovie] = useState(null);
+  const [fields, setFields] = useState({ releaseDate: "", description: "" }); // Initializing state for input fields.
+  const { film_id } = useParams(); // Getting the film_id parameter from the URL.
+  const [movie, setMovie] = useState(null); // Initializing state for the selected movie.
+  // Function to fetch movie data based on the film_id 
   const fetchMovie = async () => {
     const movieData = await getFilms();
     const foundMovie = movieData.find(
@@ -25,7 +26,7 @@ const MovieDescription = () => {
     fetchMovie();
   }, [film_id]);
   const navigate = useNavigate();
-
+// Function to handle input field changes.
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFields((prevData) => ({
@@ -33,13 +34,15 @@ const MovieDescription = () => {
       [name]: value,
     }));
   };
+  // Function to handle updating movie data.
   const handleUpdate = async () => {
     fields.film_id = movie.film_id;
     await updateFilm(fields);
       navigate("/films");
   };
+   // Function to handle canceling the update (optionally, you can reset input values or navigate back).
   const handleCancel = () => {
-    // Optionally, you can reset the input values or navigate back to the previous page
+    
     navigate("/films");
   };
 
@@ -95,4 +98,4 @@ const MovieDescription = () => {
   );
 };
 
-export default MovieDescription;
+export default MovieDescription; // Exporting the MovieDescription component for use in other parts of the application.

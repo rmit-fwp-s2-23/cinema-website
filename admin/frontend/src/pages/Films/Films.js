@@ -8,28 +8,32 @@ import {
   Image,
   Flex,
   Button,
-} from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import { getFilms } from "../../repository/film";
-import { useState, useEffect } from "react";
-import NavigationBar from "../../components/Nav/Nav";
+} from "@chakra-ui/react"; // Importing necessary components from Chakra UI for styling.
+import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation.
+import { getFilms } from "../../repository/film"; // Importing a function to fetch film data from a repository.
+import { useState, useEffect } from "react"; // Importing useState and useEffect for managing state and performing side effects.
+import NavigationBar from "../../components/Nav/Nav"; // Importing a navigation bar component.
 
 function Films() {
-  const navigate = useNavigate();
-  const [films, setFilms] = useState([]);
+  const navigate = useNavigate(); // Initializing a navigation function for use with React Router.
+  const [films, setFilms] = useState([]); // Initializing a state variable to store film data.
+  // Function to fetch films data when the component mounts.
   async function fecthFilms() {
-    const filmsData = await getFilms();
-    setFilms(filmsData);
+    const filmsData = await getFilms(); // Fetching film data using the getFilms function.
+    setFilms(filmsData); // Updating the state with the fetched film data.
   }
+
+  // Use useEffect to fetch films when the component mounts .
   useEffect(() => {
     fecthFilms();
   }, []);
+   // Function to handle clicking the "Edit" button for a specific film.
   function handleEditClick(film_id) {
     navigate(`/film/${film_id}`);
   }
   return (
     <ChakraProvider>
-        < NavigationBar />
+        < NavigationBar /> {/* Rendering a navigation bar component. */}
       <Flex direction="column" h="120vh">
         <Box p={4}>
           <Text fontSize="3xl" fontWeight="bold" mb={4} color="white">
@@ -94,4 +98,4 @@ function Films() {
   );
 }
 
-export default Films;
+export default Films; // Exporting the Films component for use in other parts of the application.

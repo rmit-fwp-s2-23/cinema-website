@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"; // Importing useParams to get parameters from the URL.
 import {
   ChakraProvider,
   Box,
@@ -7,13 +7,14 @@ import {
   Input,
   Button,
   Flex,
-} from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import { createFilm } from "../../repository/film";
+} from "@chakra-ui/react"; // Importing necessary components from Chakra UI for styling.
+import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation.
+import { createFilm } from "../../repository/film"; // Importing a function for creating a new film entry.
 const NewFilm = () => {
-  const [fields, setFields] = useState({ releaseDate: "", description: "", title: "", poster: "" });
+  const [fields, setFields] = useState({ releaseDate: "", description: "", title: "", poster: "" }); // Initializing state for input fields.
 
   const navigate = useNavigate();
+  // Function to handle input field changes.
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFields((prevData) => ({
@@ -21,11 +22,13 @@ const NewFilm = () => {
       [name]: value,
     }));
   };
+  // Function to handle form submission for creating a new film entry.
   const handleSubmit = async () => {
     fields.rating = 0;
     await createFilm(fields);
     navigate("/films");
   };
+  // Function to handle canceling the creation .
   const handleCancel = () => {
     // Optionally, you can reset the input values or navigate back to the previous page
     navigate("/films");
@@ -97,4 +100,4 @@ const NewFilm = () => {
   );
 };
 
-export default NewFilm;
+export default NewFilm;  // Exporting the NewFilm component for use in other parts of the application.
