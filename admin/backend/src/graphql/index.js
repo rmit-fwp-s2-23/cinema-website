@@ -104,7 +104,6 @@ graphql.root = {
   block_user: async (args) => {
     const user = await db.user.findByPk(args.user_id);
 
-    // Update owner fields.
     user.isBlocked = true;
 
     await user.save();
@@ -114,7 +113,6 @@ graphql.root = {
   unblock_user: async (args) => {
     const user = await db.user.findByPk(args.user_id);
 
-    // Update owner fields.
     user.isBlocked = false;
 
     await user.save();
@@ -131,7 +129,6 @@ graphql.root = {
   update_film: async (args) => {
     const film = await db.film.findByPk(args.input.film_id);
 
-    // Update owner fields.
     film.releaseDate = args.input.releaseDate;
     film.description = args.input.description;
     await film.save();

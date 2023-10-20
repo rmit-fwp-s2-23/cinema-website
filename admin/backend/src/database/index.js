@@ -18,7 +18,6 @@ db.film = require("./models/film.js")(db.sequelize, DataTypes);
 db.ticket = require("./models/ticket.js")(db.sequelize, DataTypes);
 db.session = require("./models/session.js")(db.sequelize, DataTypes);
 
-// Relate post and user.
 db.post.belongsTo(db.user, {
   foreignKey: { name: "user_id", allowNull: false },
 });
@@ -47,8 +46,6 @@ db.sync = async () => {
   // Sync schema.
   await db.sequelize.sync();
 
-  // Can sync with force if the schema has become out of date - note that syncing with force is a destructive operation.
-  // await db.sequelize.sync({ force: true });
 };
 
 module.exports = db;

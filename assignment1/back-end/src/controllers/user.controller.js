@@ -59,6 +59,7 @@ exports.update = async (req, res) => {
   return res.json(user);
 };
 
+// delete a user in database
 exports.remove = async (req,res) => {
   
   const user = await db.user.findOne({where: {username: req.params.id}});

@@ -63,7 +63,7 @@ function MyProfile() {
     await updateRating(review.film.title);
   }
 
-  //this change handler will delete all the information related to this account from local storage
+  //this change handler will delete all the information related to this account in database
   const handleDeleteClick = async () => {
     if (user) {
       reviews.map(async (review) => {
@@ -82,7 +82,7 @@ function MyProfile() {
       deleteSecurity(user);
       deleteUser(user.username);
 
-      //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
+      //after delete all information in database, it also remove this account from localStorage and navigate to log in page
       removeUser();
       navigate("/login");
     }

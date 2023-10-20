@@ -67,7 +67,7 @@ const Register = () => {
       );
       return;
     }
-    // Save form data to local storage
+    // Save form data to database
     await createUser(formData, date);
     alert("Register successfully !");
     navigate("/login");

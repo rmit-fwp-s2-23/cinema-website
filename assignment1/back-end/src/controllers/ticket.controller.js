@@ -49,6 +49,7 @@ exports.create = async (req, res) => {
   res.json(ticket);
 };
 
+// delete all ticket of an account
 exports.remove = async (req, res) => {
   const ticket = await db.ticket.findOne({
     where: { ticket_id: req.params.id },

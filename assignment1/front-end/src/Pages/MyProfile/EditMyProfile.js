@@ -72,7 +72,7 @@ function EditMyProfile() {
         return;
       }
     }
-    //change the profile of this account in localStorage
+    //change the profile of this account in database
     await updateUser(user.username,editedData);
     alert("Update successfully !");
     //navigate back to myprofile page if successfully update

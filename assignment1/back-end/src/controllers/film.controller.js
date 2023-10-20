@@ -1,5 +1,6 @@
 const db = require("../database");
 
+// get all films from database
 exports.all = async (req, res) => {
   const film = await db.film.findAll({
     include: { model: db.post, as: "posts" },
@@ -7,6 +8,7 @@ exports.all = async (req, res) => {
   res.json(film);
 };
 
+// get film from database based on title
 exports.find = async (req, res) => {
   const film = await db.film.findOne({
     where: { title: req.params.id },
@@ -15,6 +17,7 @@ exports.find = async (req, res) => {
   res.json(film);
 };
 
+// update the rating of the film
 exports.updateRating = async (req, res) => {
   const film = await db.film.findOne({
     where: { title: req.params.id },
