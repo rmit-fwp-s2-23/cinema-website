@@ -33,8 +33,10 @@ function Review() {
     setReviews(reviewsData);
   };
   const fecthAccount = async () => {
-    const accountData = await findUser(user.username);
-    setAccount(accountData);
+    if (user) {
+      const accountData = await findUser(user.username);
+      setAccount(accountData);
+    }
   };
   //change handler to get the content of the review
   function handleChange(event) {
