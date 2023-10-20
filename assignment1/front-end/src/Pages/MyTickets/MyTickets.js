@@ -32,11 +32,11 @@ const MyTickets = () => {
               backgroundColor="#deb992"
               alignContent="center"
               >
-              <Heading as="h2" size="lg" color="#051622"> {/* Change text color to black */}
+              <Heading as="h2" size="lg" color="#051622">
                 {ticket.session.film.title}
               </Heading>
-              <p color="#051622">Quantity: {ticket.quantity}</p> {/* Change text color to black */}
-              <p color="#051622">Session: {ticket.session.session}</p> {/* Change text color to black */}
+              <p color="#051622">Quantity: {ticket.quantity}</p> 
+              <p color="#051622">Session: {ticket.session.session}</p>  
             </Box>
             
           ))}

@@ -39,6 +39,7 @@ exports.create = async (req, res) => {
   const post = await db.post.create({
     content: req.body.content,
     rating: req.body.rating,
+    isDeleted : false,
     user_id: user_id,
     film_id: film_id,
   });

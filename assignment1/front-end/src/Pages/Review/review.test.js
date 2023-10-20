@@ -19,6 +19,6 @@ beforeEach(() => {
   });
 
 //check if register render in DOM
-test("Check the length review", async () => {
+test("Check the riview working as expected when logged in", async () => {
   expect(screen.queryByText("You review as")).toBeInTheDocument();
 });

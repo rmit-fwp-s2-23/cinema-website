@@ -6,7 +6,12 @@ import Post from "../../components/Post/Post";
 import { useState, useEffect } from "react";
 import { getTickets, deleteTickets } from "../../Repository/ticket";
 import { updateSlot } from "../../Repository/session";
-import { getUser, deleteUser, removeUser } from "../../Repository/user";
+import {
+  getUser,
+  deleteUser,
+  removeUser,
+  findUser,
+} from "../../Repository/user";
 import { getPosts, deletePost } from "../../Repository/post";
 import { updateRating } from "../../Repository/film";
 
@@ -14,6 +19,8 @@ function MyProfile() {
   const navigate = useNavigate();
   //get the user from local storage
   const user = getUser();
+  const [account, setAccount] = useState(null);
+
   const [reviews, setReviews] = useState([]);
   const [tickets, setTickets] = useState([]);
   //click the edit button which will direct to edit profile
@@ -27,6 +34,10 @@ function MyProfile() {
       setReviews(reviewsData);
     }
   };
+  const fecthAccount = async () => {
+    const accountData = await findUser(user.username);
+    setAccount(accountData);
+  };
   const fecthTicket = async () => {
     if (user) {
       const ticketData = await getTickets(user.username);
@@ -37,6 +48,7 @@ function MyProfile() {
     if (user) {
       fetchReviews();
       fecthTicket();
+      fecthAccount();
     }
   }, []);
 
@@ -51,7 +63,7 @@ function MyProfile() {
     await updateRating(review.film.title);
   }
 
-  //this change handler will delete all the information related to this account from local storage
+  //this change handler will delete all the information related to this account in database
   const handleDeleteClick = async () => {
     if (user) {
       reviews.map(async (review) => {
@@ -70,7 +82,7 @@ function MyProfile() {
       deleteSecurity(user);
       deleteUser(user.username);
 
-      //after delete all information from localStorage, it also remove this account from localStorage and navigate to log in page
+      //after delete all information in database, it also remove this account from localStorage and navigate to log in page
       removeUser();
       navigate("/login");
     }
@@ -144,26 +156,44 @@ function MyProfile() {
                     content={review.content}
                     id={key}
                   />
-                  <div className="myprofile-button">
-                    <Button onClick={() => handleUpdateReviewClick(review)}>
-                      Edit
-                    </Button>
-                    <Button
-                      style={{ backgroundColor: "red" }}
-                      className="delete-button"
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            "Are you sure you wish to delete this review?"
-                          )
-                        ) {
-                          handleRemoveReviewClick(review);
-                        }
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </div>
+                  {account &&
+                  account.isBlocked === false &&
+                  review.isDeleted === false ? (
+                    <div className="myprofile-button">
+                      <Button onClick={() => handleUpdateReviewClick(review)}>
+                        Edit
+                      </Button>
+                      <Button
+                        style={{ backgroundColor: "red" }}
+                        className="delete-button"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "Are you sure you wish to delete this review?"
+                            )
+                          ) {
+                            handleRemoveReviewClick(review);
+                          }
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  ) : (
+                    <div>
+                      {review.isDeleted === false ? (
+                        <div>
+                          <p>
+                            Your account has been <span>BLOCKED</span>
+                          </p>
+                        </div>
+                      ) : (
+                        <p>
+                          Your review has been <span>DELETED</span>
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))
             )}

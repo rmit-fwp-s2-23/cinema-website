@@ -39,7 +39,8 @@ exports.create = async (req, res) => {
     username: req.body.username,
     password_hash: hash,
     email: req.body.email,
-    date: req.body.date
+    date: req.body.date,
+    isBlocked: false
   });
 
   res.json(user);
@@ -58,6 +59,7 @@ exports.update = async (req, res) => {
   return res.json(user);
 };
 
+// delete a user in database
 exports.remove = async (req,res) => {
   
   const user = await db.user.findOne({where: {username: req.params.id}});

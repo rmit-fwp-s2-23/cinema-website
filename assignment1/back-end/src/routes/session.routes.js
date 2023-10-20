@@ -2,7 +2,7 @@ module.exports = (express, app) => {
   const controller = require("../controllers/session.controller.js");
   const router = express.Router();
 
-  // Select all users.
+  // Select all sessions.
   router.get("/", controller.all);
 
   //update slot

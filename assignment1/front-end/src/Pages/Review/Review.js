@@ -7,12 +7,12 @@ import Post from "../../components/Post/Post.js";
 import { checkSecurity, createSecurity } from "../../Repository/Security.js";
 import { createPost, getPostsByFilm } from "../../Repository/post.js";
 import { updateRating } from "../../Repository/film.js";
-import { getUser } from "../../Repository/user";
+import { getUser, findUser } from "../../Repository/user";
 function Review() {
   const title = useLocation().state;
   const user = getUser();
   const navigate = useNavigate();
-  //set error when user leave feedback null or write over 250 words
+  //set error when user leave feedback null or write over 600 words
   const [errorMessage, setErrorMessage] = useState(null);
   //get the all the reviews of specific movie (with the title)
   const [reviews, setReviews] = useState([]);
@@ -22,14 +22,21 @@ function Review() {
   const [hover, setHover] = useState(1);
   //get the review content
   const [post, setPost] = useState("");
-
+  const [account, setAccount] = useState(null);
   useEffect(() => {
     fetchReviews();
+    fecthAccount();
   }, []);
 
   const fetchReviews = async () => {
     const reviewsData = await getPostsByFilm(title);
     setReviews(reviewsData);
+  };
+  const fecthAccount = async () => {
+    if (user) {
+      const accountData = await findUser(user.username);
+      setAccount(accountData);
+    }
   };
   //change handler to get the content of the review
   function handleChange(event) {
@@ -45,7 +52,7 @@ function Review() {
       setErrorMessage("A post cannot be empty.");
       return;
     }
-    //check if trimmed post over 250 words
+    //check if trimmed post over 600 words
     if (postTrimmed.length > 600) {
       setErrorMessage("A post cannot exceed 600 words.");
       return;
@@ -55,21 +62,21 @@ function Review() {
       setErrorMessage("Wait for 30 seconds for the next review");
       return;
     }
-    //create a data object about review to store in the local storage
+    //create a data object about review to store in the database
     const data = {
       title: title,
       content: post,
       rating: rating,
       username: user.username,
     };
-    // create a review in localStorage
+    // create a review in database
     await createPost(data);
     await fetchReviews();
+    await fecthAccount();
     await updateRating(title);
 
     // create a security check of this account in localStorage
     createSecurity(title, user);
-    //add a new review of this film after user submit his/her review
     //set the post input blank
     setPost("");
     //set error message blank
@@ -90,7 +97,7 @@ function Review() {
         <div className="review-film">{title}</div>
         <div>
           {/*check if a guest or a logged in user looking at review of a film*/}
-          {user !== null ? (
+          {user !== null && account && account.isBlocked === false ? (
             <div>
               <div className="review-info">
                 {/*announce that you are  viewing the feedback as a logged in user */}
@@ -162,10 +169,19 @@ function Review() {
             </div>
           ) : (
             <div className="review-info">
-              {/*announce that you are  viewing the feedback as a guest */}
-              <p>
-                You review as <span>Guest</span>
-              </p>
+              {!user ? (
+                <div>
+                  <p>
+                    You review as <span>Guest</span>
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  <p>
+                    Your account has been <span>BLOCKED</span>
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>

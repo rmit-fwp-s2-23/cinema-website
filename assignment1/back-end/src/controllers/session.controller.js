@@ -46,6 +46,7 @@ exports.updateSlot = async (req, res) => {
   return res.json(session);
 };
 
+// select session based on title and session
 exports.findSession = async (req, res) => {
   const film = await db.film.findOne({ where: { title: req.params.id } });
   const session = await db.session.findOne({

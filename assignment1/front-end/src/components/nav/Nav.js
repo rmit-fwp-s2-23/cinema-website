@@ -5,7 +5,6 @@ import { getUser, removeUser } from "../../Repository/user";
 import { getFilms } from "../../Repository/film";
 
 const NavigationBar = () => {
-  const mounted = useRef(true);
   const data = getUser();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");

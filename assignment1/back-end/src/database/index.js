@@ -18,7 +18,7 @@ db.film = require("./models/film.js")(db.sequelize, DataTypes);
 db.ticket = require("./models/ticket.js")(db.sequelize, DataTypes);
 db.session = require("./models/session.js")(db.sequelize, DataTypes);
 
-// Relate post and user.
+// Relate tables.
 db.post.belongsTo(db.user, {
   foreignKey: { name: "user_id", allowNull: false },
 });
@@ -40,15 +40,11 @@ db.film.hasMany(db.session, { as: "sessions" });
 db.user.hasMany(db.post, { as: "posts", onDelete: "CASCADE" });
 db.user.hasMany(db.ticket, { as: "tickets", onDelete: "CASCADE" });
 db.session.hasMany(db.ticket, { as: "tickets" });
-// Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
 // Include a sync option with seed data logic included.
 db.sync = async () => {
   // Sync schema.
   await db.sequelize.sync();
-
-  // Can sync with force if the schema has become out of date - note that syncing with force is a destructive operation.
-  // await db.sequelize.sync({ force: true });
 
   await seedData();
 };
@@ -68,6 +64,7 @@ async function seedData() {
     password_hash: hash,
     email: "mbolger@gmail.com",
     date: "11/20/2020",
+    isBlocked: false,
   });
 
   hash = await argon2.hash("def456", { type: argon2.argon2id });
@@ -76,6 +73,7 @@ async function seedData() {
     password_hash: hash,
     email: "shekhar@gmail.com",
     date: "11/20/2020",
+    isBlocked: false,
   });
 
   if (count_film > 0) return;
@@ -91,7 +89,7 @@ async function seedData() {
   });
 
   const film_2 = await db.film.create({
-    title: "The Mokey King 3",
+    title: "The Monkey King 3",
     rating: 0,
     releaseDate: "2023 - 01 - 01",
     description:
