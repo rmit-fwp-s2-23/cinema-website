@@ -52,6 +52,7 @@ function AdminReviews() {
   return (
     // <Center h="100vh" flexDirection="column" alignItems="flex-start">
     <Flex direction="column" h="100vh">
+      < NavigationBar />
       <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md" width="100%">
 
         <h1>Admin Reviews Management</h1>

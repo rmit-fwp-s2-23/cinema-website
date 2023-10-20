@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Button, Center, Flex, SimpleGrid, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getUsers, blockUser, unblockUser } from "../../repository/user";
+import NavigationBar from "../../components/Nav/Nav";
 // Define your GraphQL query to fetch user data
 // const GET_USERS = yourGraphQLQueryHere;
 
@@ -32,6 +33,7 @@ function AdminUsers() {
   return (
     // <Center h="100vh" flexDirection="column">
     <Flex direction="column" h="100vh">
+      < NavigationBar />
       <Box p={4} shadow="lg" borderWidth="1px" borderRadius="md" width="100%">
         <h1>Admin User Management</h1>
       </Box>
