@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { getFilms } from "../../repository/film";
 import { useState, useEffect } from "react";
+import NavigationBar from "../../components/Nav/Nav";
 
 function Films() {
   const navigate = useNavigate();
@@ -28,7 +29,8 @@ function Films() {
   }
   return (
     <ChakraProvider>
-      <Flex direction="column" h="100vh">
+        < NavigationBar />
+      <Flex direction="column" h="120vh">
         <Box p={4}>
           <Text fontSize="3xl" fontWeight="bold" mb={4} color="white">
             Movie List
