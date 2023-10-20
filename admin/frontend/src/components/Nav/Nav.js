@@ -9,7 +9,7 @@ const NavigationBar = () => {
   return (
     <nav className="navigation-bar">
       <a href="/dashboard" className="logo">
-        Dashbord
+        Dashboard
       </a>
       
     </nav>

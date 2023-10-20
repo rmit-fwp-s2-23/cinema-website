@@ -93,7 +93,7 @@ async function seedData() {
   });
 
   const film_2 = await db.film.create({
-    title: "The Mokey King 3",
+    title: "The Monkey King 3",
     rating: 0,
     releaseDate: "2023 - 01 - 01",
     description:
