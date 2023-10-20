@@ -8,14 +8,15 @@ import {
   Input,
   VStack,
   HStack,
-} from '@chakra-ui/react';
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react'; // Importing necessary components from Chakra UI for styling.
+import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation with React Router.
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initializing a navigation function for use with React Router.
 
+  // Function to handle the login process.
   const handleLogin = () => {
     if (username === 'admin' && password === 'admin') {
       // Authentication successful
@@ -62,4 +63,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Login; // Exporting the Login component for use in other parts of the application.
