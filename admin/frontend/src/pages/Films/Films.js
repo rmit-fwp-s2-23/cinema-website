@@ -28,7 +28,7 @@ function Films() {
   }
   return (
     <ChakraProvider>
-      <Flex direction="column" h="100vh">
+      <Flex direction="column" h="120vh">
         <Box p={4}>
           <Text fontSize="3xl" fontWeight="bold" mb={4} color="white">
             Movie List
